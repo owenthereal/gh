@@ -1,7 +1,12 @@
 package main
 
 import (
+	"io/ioutil"
 	"log"
+	"os"
+	"os/exec"
+	"path/filepath"
+	"regexp"
 )
 
 var cmdPullRequest = &Command{
@@ -28,13 +33,49 @@ of title you can paste a full URL to an issue on GitHub.
 var flagPullRequestBase, flagPullRequestHead string
 
 func init() {
-	// TODO: make base default as USER:master, head default as USER:HEAD
-	cmdPullRequest.Flag.StringVar(&flagPullRequestBase, "b", "master", "BASE")
-	cmdPullRequest.Flag.StringVar(&flagPullRequestHead, "h", "HEAD", "HEAD")
+	// TODO: delay calculation of owner and current branch until being used
+	cmdPullRequest.Flag.StringVar(&flagPullRequestBase, "b", git.Owner()+":master", "BASE")
+	cmdPullRequest.Flag.StringVar(&flagPullRequestHead, "h", git.Owner()+":"+git.CurrentBranch(), "HEAD")
 }
 
 func pullRequest(cmd *Command, args []string) {
-	log.Println(args)
-	log.Println(flagPullRequestBase)
-	log.Println(flagPullRequestHead)
+	message := []byte("#\n# Changes:\n#")
+	messageFile := filepath.Join(git.Dir(), "PULLREQ_EDITMSG")
+	err := ioutil.WriteFile(messageFile, message, 0644)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	editCmd := make([]string, 0)
+	gitEditor := git.Editor()
+	editCmd = append(editCmd, gitEditor)
+	r := regexp.MustCompile("^[mg]?vim$")
+	if r.MatchString(gitEditor) {
+		editCmd = append(editCmd, "-c")
+		editCmd = append(editCmd, "set ft=gitcommit")
+	}
+	editCmd = append(editCmd, messageFile)
+	execCmd(editCmd)
+	message, err = ioutil.ReadFile(messageFile)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	params := PullRequestParams{"title", string(message), flagPullRequestBase, flagPullRequestHead}
+	err = gh.CreatePullRequest(git.Owner(), git.Repo(), params)
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+
+func execCmd(command []string) {
+	cmd := exec.Command(command[0], command[1:]...)
+	cmd.Stdin = os.Stdin
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+
+	err := cmd.Run()
+	if err != nil {
+		log.Fatal(err)
+	}
 }
