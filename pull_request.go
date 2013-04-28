@@ -1,7 +1,15 @@
 package main
 
 import (
+	"bufio"
+	"fmt"
+	"io/ioutil"
 	"log"
+	"os"
+	"os/exec"
+	"path/filepath"
+	"regexp"
+	"strings"
 )
 
 var cmdPullRequest = &Command{
@@ -28,13 +36,132 @@ of title you can paste a full URL to an issue on GitHub.
 var flagPullRequestBase, flagPullRequestHead string
 
 func init() {
-	// TODO: make base default as USER:master, head default as USER:HEAD
-	cmdPullRequest.Flag.StringVar(&flagPullRequestBase, "b", "master", "BASE")
-	cmdPullRequest.Flag.StringVar(&flagPullRequestHead, "h", "HEAD", "HEAD")
+	// TODO: delay calculation of owner and current branch until being used
+	cmdPullRequest.Flag.StringVar(&flagPullRequestBase, "b", git.Owner()+":master", "BASE")
+	cmdPullRequest.Flag.StringVar(&flagPullRequestHead, "h", git.Owner()+":"+git.CurrentBranch(), "HEAD")
 }
 
 func pullRequest(cmd *Command, args []string) {
-	log.Println(args)
-	log.Println(flagPullRequestBase)
-	log.Println(flagPullRequestHead)
+	messageFile := filepath.Join(git.Dir(), "PULLREQ_EDITMSG")
+
+	writePullRequestChanges(messageFile, flagPullRequestBase, flagPullRequestHead)
+
+	editCmd := buildEditCommand(messageFile)
+	err := execCmd(editCmd)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	title, body, err := readTitleAndBodyFromFile(messageFile)
+	if err != nil {
+		log.Fatal(err)
+	}
+	if len(title) == 0 {
+		log.Fatal("Aborting due to empty pull request title")
+	}
+
+	params := PullRequestParams{title, body, flagPullRequestBase, flagPullRequestHead}
+	err = gh.CreatePullRequest(git.Owner(), git.Repo(), params)
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+
+func writePullRequestChanges(messageFile, base, head string) {
+	message := `
+# Requesting a pull to %s from %s
+#
+# Write a message for this pull reuqest. The first block
+# of the text is the title and the rest is description.
+#
+# Changes:
+#
+%s
+`
+	startRegexp := regexp.MustCompilePOSIX("^")
+	endRegexp := regexp.MustCompilePOSIX(" +$")
+
+	commitLogs := git.CommitLogs("master", "pull_request")
+	commitLogs = startRegexp.ReplaceAllString(commitLogs, "# ")
+	commitLogs = endRegexp.ReplaceAllString(commitLogs, "")
+
+	message = fmt.Sprintf(message, base, head, commitLogs)
+	err := ioutil.WriteFile(messageFile, []byte(message), 0644)
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+
+func buildEditCommand(messageFile string) []string {
+	editCmd := make([]string, 0)
+	gitEditor := git.Editor()
+	editCmd = append(editCmd, gitEditor)
+	r := regexp.MustCompile("^[mg]?vim$")
+	if r.MatchString(gitEditor) {
+		editCmd = append(editCmd, "-c")
+		editCmd = append(editCmd, "set ft=gitcommit")
+	}
+	editCmd = append(editCmd, messageFile)
+
+	return editCmd
+}
+
+func execCmd(command []string) error {
+	cmd := exec.Command(command[0], command[1:]...)
+	cmd.Stdin = os.Stdin
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+
+	err := cmd.Run()
+	return err
+}
+
+func readTitleAndBodyFromFile(messageFile string) (title, body string, err error) {
+	f, err := os.Open(messageFile)
+	defer f.Close()
+	if err != nil {
+		return "", "", err
+	}
+
+	reader := bufio.NewReader(f)
+	return readTitleAndBody(reader)
+}
+
+func readTitleAndBody(reader *bufio.Reader) (title, body string, err error) {
+	r := regexp.MustCompile("\\S")
+	var titleParts, bodyParts []string
+
+	line, err := readln(reader)
+	for err == nil {
+		if strings.HasPrefix(line, "#") {
+			break
+		}
+		if len(bodyParts) == 0 && r.MatchString(line) {
+			titleParts = append(titleParts, line)
+		} else {
+			bodyParts = append(bodyParts, line)
+		}
+		line, err = readln(reader)
+	}
+
+	title = strings.Join(titleParts, " ")
+	title = strings.TrimSpace(title)
+
+	body = strings.Join(bodyParts, "\n")
+	body = strings.TrimSpace(body)
+
+	return title, body, nil
+}
+
+func readln(r *bufio.Reader) (string, error) {
+	var (
+		isPrefix bool  = true
+		err      error = nil
+		line, ln []byte
+	)
+	for isPrefix && err == nil {
+		line, isPrefix, err = r.ReadLine()
+		ln = append(ln, line...)
+	}
+	return string(ln), err
 }
