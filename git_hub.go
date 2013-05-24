@@ -6,7 +6,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com/howeyc/gopass"
+	"github.com/jingweno/gopass"
 	"io/ioutil"
 	"net/http"
 )
