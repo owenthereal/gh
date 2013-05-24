@@ -24,9 +24,8 @@ gh is fully implemented in the Go language with no external dependencies and is 
 
 ## Installation
 
-We intend to provide compiled binary forms of gh for easy installation,
-but we only have [pre-compiled binaries for Linux](https://drone.io/github.com/jingweno/gh/files) at the moment.
-You need to have a [Go development environment](http://golang.org/doc/install) to install gh on other platforms.
+There are [compiled binary forms of gh](https://drone.io/github.com/jingweno/gh/files) for Darwin, Linux and Windows.
+To build and install gh locally, you need to have a [Go development environment](http://golang.org/doc/install) and run:
 
     $ go get github.com/jingweno/gh
 
