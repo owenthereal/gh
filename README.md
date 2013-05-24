@@ -38,8 +38,8 @@ You need to have a [Go development environment](http://golang.org/doc/install) t
     Commands:
 
         pull-request      Open a pull request on GitHub
-        help              show help
-        version           show gh version
+        help              Show help
+        version           Show gh version
 
     See 'gh help [command]' for more information about a command.
 
