@@ -35,9 +35,14 @@ To install gh on OSX with [Homebrew](https://github.com/mxcl/homebrew), you need
 
     $ brew install https://raw.github.com/jingweno/gh/master/homebrew/gh.rb
 
-To build and install gh from source, you need to have a [Go development environment](http://golang.org/doc/install) and run:
+## Compilation
+
+To compile gh from source, you need to have a [Go development environment](http://golang.org/doc/install) and run:
 
     $ go get github.com/jingweno/gh
+
+Note that `go get` will pull down sources from various VCS.
+Please make sure you have git and hg installed.
 
 ## Usage
     
