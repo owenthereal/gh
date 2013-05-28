@@ -25,7 +25,7 @@ gh is fully implemented in the Go language with no external dependencies and is 
 
 **Easy installation**
 
-There're no pre-requirements to run gh. Download the binary and go!
+There're no pre-requirements to run gh. Download the [binary](https://drone.io/github.com/jingweno/gh/files) and go!
 
 ## Installation
 
@@ -35,7 +35,7 @@ To install gh on OSX with [Homebrew](https://github.com/mxcl/homebrew), you need
 
     $ brew install https://raw.github.com/jingweno/gh/master/homebrew/gh.rb
 
-To build and install gh locally, you need to have a [Go development environment](http://golang.org/doc/install) and run:
+To build and install gh from source, you need to have a [Go development environment](http://golang.org/doc/install) and run:
 
     $ go get github.com/jingweno/gh
 
