@@ -25,6 +25,11 @@ gh is fully implemented in the Go language with no external dependencies and is 
 ## Installation
 
 There are [compiled binary forms of gh](https://drone.io/github.com/jingweno/gh/files) for Darwin, Linux and Windows.
+
+To install gh on OSX with [Homebrew](https://github.com/mxcl/homebrew), you need to run:
+
+    $ brew install https://raw.github.com/jingweno/gh/master/homebrew/gh.rb
+
 To build and install gh locally, you need to have a [Go development environment](http://golang.org/doc/install) and run:
 
     $ go get github.com/jingweno/gh
@@ -71,4 +76,3 @@ Implementing all features from [hub](https://github.com/defunkt/hub):
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
-
