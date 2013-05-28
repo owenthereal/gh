@@ -1,4 +1,4 @@
-# gh
+# g + h = github
 
 [![Build Status](https://drone.io/github.com/jingweno/gh/status.png)](https://drone.io/github.com/jingweno/gh/latest)
 
@@ -6,7 +6,8 @@ Fast GitHub command line client.
 
 ## Overview
 
-gh is a command line client to GitHub similar to [hub](https://github.com/defunkt/hub), but designed to be as fast as possible.
+gh is a command line client to GitHub. It's designed to run as fast as possible with easy installation across operating systems.
+If you like gh, please also take a look at [hub](https://github.com/defunkt/hub). Hub is a reference implementation to gh.
 
 ## Motivation
 
@@ -21,6 +22,10 @@ gh is a command line client to GitHub similar to [hub](https://github.com/defunk
 **Muti-platforms**
 
 gh is fully implemented in the Go language with no external dependencies and is designed to run across operating systems.
+
+**Easy installation**
+
+There're no pre-requirements to run gh. Download the binary and go!
 
 ## Installation
 
@@ -49,25 +54,23 @@ To build and install gh locally, you need to have a [Go development environment]
 
 ## Roadmap
 
-Implementing all features from [hub](https://github.com/defunkt/hub):
-
 * authentication (done)
-* hub pull-request (done)
-* hub ci-status (in progress)
-* hub clone
-* hub remote add
-* hub fetch
-* hub cherry-pick
-* hub am, hub apply
-* hub fork
-* hub check
-* hub merge
-* hub create
-* hub init
-* hub push
-* hub browse
-* hub compare
-* hub submodule
+* gh pull-request (done)
+* gh ci-status (in progress)
+* gh clone
+* gh remote add
+* gh fetch
+* gh cherry-pick
+* gh am, hub apply
+* gh fork
+* gh check
+* gh merge
+* gh create
+* gh init
+* gh push
+* gh browse
+* gh compare
+* gh submodule
 
 ## Contributing
 
