@@ -1,4 +1,4 @@
-package main
+package github
 
 import (
 	"bytes"
@@ -7,6 +7,7 @@ import (
 	"errors"
 	"fmt"
 	"github.com/howeyc/gopass"
+	"github.com/jingweno/gh/config"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -46,30 +47,21 @@ type Authorization struct {
 	NoteUrl string   `josn:"note_url"`
 }
 
-func NewGitHub() *GitHub {
-	config, _ := LoadConfig(ConfigFile)
+func New() *GitHub {
+	project := CurrentProject()
+	config, err := config.Load(project.Owner)
 
 	var user, auth string
-	if config != nil {
+	if err == nil {
 		user = config.User
 		auth = config.Token
 	}
 
-	if len(user) == 0 {
-		owner, err := git.Owner()
-		if err != nil {
-			// prompt for user
-			log.Fatal(err)
-		}
-
-		user = owner
+	if auth != "" {
+		auth = fmt.Sprintf("token %s", auth)
 	}
 
-	if len(auth) > 0 {
-		auth = "token " + auth
-	}
-
-	return &GitHub{&http.Client{}, user, "", auth}
+	return &GitHub{&http.Client{}, user, "", auth, project}
 }
 
 func hashAuth(u, p string) string {
@@ -82,10 +74,21 @@ type GitHub struct {
 	User          string
 	Password      string
 	Authorization string
+	Project       *Project
 }
 
 func (gh *GitHub) performBasicAuth() error {
-	msg := fmt.Sprintf("%s password for %s (never stored): ", GitHubHost, gh.User)
+	user := gh.User
+	if user == "" {
+		user = CurrentProject().Owner
+		gh.User = user
+	}
+	if user == "" {
+		// TODO: prompt user
+		log.Fatal("TODO: prompt user for basic auth")
+	}
+
+	msg := fmt.Sprintf("%s password for %s (never stored): ", GitHubHost, user)
 	fmt.Print(msg)
 
 	pass := gopass.GetPasswd()
@@ -131,7 +134,7 @@ func (gh *GitHub) obtainOAuthTokenWithBasicAuth() error {
 		token = auth.Token
 	}
 
-	SaveConfig(ConfigFile, Config{gh.User, token})
+	config.Save(config.Config{gh.User, token})
 
 	gh.Authorization = "token " + token
 
@@ -291,14 +294,14 @@ type PullRequestResponse struct {
 	IssueUrl string `json:"issue_url"`
 }
 
-func (gh *GitHub) CreatePullRequest(owner, repo string, params PullRequestParams) (*PullRequestResponse, error) {
+func (gh *GitHub) CreatePullRequest(project *Project, params PullRequestParams) (*PullRequestResponse, error) {
 	b, err := json.Marshal(params)
 	if err != nil {
 		return nil, err
 	}
 
 	buffer := bytes.NewBuffer(b)
-	url := fmt.Sprintf("/repos/%s/%s/pulls", owner, repo)
+	url := fmt.Sprintf("/repos/%s/%s/pulls", project.Owner, project.Name)
 	response, err := gh.httpPost(url, nil, buffer)
 	if err != nil {
 		return nil, err
