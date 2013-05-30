@@ -52,6 +52,7 @@ Please make sure you have git and hg installed.
     Commands:
 
         pull-request      Open a pull request on GitHub
+        ci-status         Show CI status of a commit
         help              Show help
         version           Show gh version
 
@@ -61,7 +62,8 @@ Please make sure you have git and hg installed.
 
 * authentication (done)
 * gh pull-request (done)
-* gh ci-status (in progress)
+* gh ci-status (done)
+* gh browse (in progress)
 * gh clone
 * gh remote add
 * gh fetch
@@ -73,7 +75,6 @@ Please make sure you have git and hg installed.
 * gh create
 * gh init
 * gh push
-* gh browse
 * gh compare
 * gh submodule
 
