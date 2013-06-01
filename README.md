@@ -19,6 +19,12 @@ If you like gh, please also take a look at [hub](https://github.com/defunkt/hub)
     $ time gh version > /dev/null
     gh version > /dev/null  0.01s user 0.01s system 85% cpu 0.022 total
 
+    $ time hub browse > /dev/null
+    hub browse > /dev/null  0.07s user 0.04s system 87% cpu 0.130 total
+
+    $ time gh browse > /dev/null
+    gh browse > /dev/null  0.03s user 0.02s system 87% cpu 0.059 total
+
 **Muti-platforms**
 
 gh is fully implemented in the Go language with no external dependencies and is designed to run across operating systems.
