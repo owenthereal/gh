@@ -85,6 +85,10 @@ Please make sure you have git and hg installed.
 * gh push
 * gh submodule
 
+## License
+
+gh is released under the MIT license. See LICENSE.md.
+
 ## Contributing
 
 1. Fork it
