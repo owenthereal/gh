@@ -27,7 +27,7 @@ If you like gh, please also take a look at [hub](https://github.com/defunkt/hub)
 
 **Muti-platforms**
 
-gh is fully implemented in the Go language with no external dependencies and is designed to run across operating systems.
+gh is fully implemented in the Go language and is designed to run across operating systems.
 
 **Easy installation**
 
