@@ -33,6 +33,10 @@ gh is fully implemented in the Go language with no external dependencies and is 
 
 There're no pre-requirements to run gh. Download the [binary](https://drone.io/github.com/jingweno/gh/files) and go!
 
+**Unix**
+
+gh commands are single, unhyphenated words that map to their Unix ancestors’ names and flags where applicable.
+
 ## Installation
 
 There are [compiled binary forms of gh](https://drone.io/github.com/jingweno/gh/files) for Darwin, Linux and Windows.
