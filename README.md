@@ -37,7 +37,7 @@ There're no pre-requirements to run gh. Download the [binary](https://drone.io/g
 
 There are [compiled binary forms of gh](https://drone.io/github.com/jingweno/gh/files) for Darwin, Linux and Windows.
 
-To install gh on OSX with [Homebrew](https://github.com/mxcl/homebrew), you need to run:
+To install gh on OSX with [Homebrew](https://github.com/mxcl/homebrew), run:
 
     $ brew install https://raw.github.com/jingweno/gh/master/homebrew/gh.rb
 
@@ -49,6 +49,20 @@ To compile gh from source, you need to have a [Go development environment](http:
 
 Note that `go get` will pull down sources from various VCS.
 Please make sure you have git and hg installed.
+
+## Upgrade
+
+Since gh is under heavy development, we roll out new releases often.
+Take a look at our [CI server](https://drone.io/github.com/jingweno/gh/files) for the latest built binaries.
+We plan to implement automatic upgrade in the future.
+
+To upgrade gh on OSX with Homebrew, run:
+
+    $ brew upgrade https://raw.github.com/jingweno/gh/master/homebrew/gh.rb
+
+To upgrade gh from source, run:
+
+    $ go get -u github.com/jingweno/gh
 
 ## Usage
     
