@@ -94,7 +94,7 @@ To upgrade gh from source, run:
 * gh remote add
 * gh fetch
 * gh cherry-pick
-* gh am, hub apply
+* gh am, gh apply
 * gh fork
 * gh check
 * gh merge
