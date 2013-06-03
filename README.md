@@ -2,7 +2,7 @@
 
 [![Build Status](https://drone.io/github.com/jingweno/gh/status.png)](https://drone.io/github.com/jingweno/gh/latest)
 
-Fast GitHub command line client.
+Fast GitHub command line client. Current version is [0.4.0](https://drone.io/github.com/jingweno/gh/files).
 
 ## Overview
 
@@ -57,7 +57,7 @@ Please make sure you have git and hg installed.
 ## Upgrade
 
 Since gh is under heavy development, we roll out new releases often.
-Take a look at our [CI server](https://drone.io/github.com/jingweno/gh/files) for the latest built binaries.
+Please take a look at our [CI server](https://drone.io/github.com/jingweno/gh/files) for the latest built binaries.
 We plan to implement automatic upgrade in the future.
 
 To upgrade gh on OSX with Homebrew, run:
@@ -78,6 +78,7 @@ To upgrade gh from source, run:
         pull-request      Open a pull request on GitHub
         ci-status         Show CI status of a commit
         browse            Open a GitHub page in the default browser
+        compare           Open a compare page on GitHub
         help              Show help
         version           Show gh version
 
