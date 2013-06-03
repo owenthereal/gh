@@ -66,7 +66,7 @@ namespace :release do
           current_version = vf.current_version!
           vf.bump_version!(type)
           vf.save!
-          puts "Successfully updated #{file} from #{current_version} to #{vf.current_version!}"
+          puts "Successfully bump #{file} from #{current_version} to #{vf.current_version!}"
         rescue => e
           puts e
         end
