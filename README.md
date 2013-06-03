@@ -90,13 +90,13 @@ To upgrade gh from source, run:
 * gh pull-request (done)
 * gh ci-status (done)
 * gh browse (done)
-* gh compare (in progress)
+* gh compare (done)
+* gh fork (in progress)
 * gh clone
 * gh remote add
 * gh fetch
 * gh cherry-pick
 * gh am, gh apply
-* gh fork
 * gh check
 * gh merge
 * gh create
