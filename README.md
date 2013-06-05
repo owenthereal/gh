@@ -75,8 +75,8 @@ To upgrade gh from source, run:
 
     Commands:
 
-        pull-request      Open a pull request on GitHub
-        ci-status         Show CI status of a commit
+        pull              Open a pull request on GitHub
+        ci                Show CI status of a commit
         browse            Open a GitHub page in the default browser
         compare           Open a compare page on GitHub
         help              Show help
