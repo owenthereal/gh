@@ -2,7 +2,7 @@
 
 [![Build Status](https://drone.io/github.com/jingweno/gh/status.png)](https://drone.io/github.com/jingweno/gh/latest)
 
-Fast GitHub command line client. Current version is [0.4.1](https://drone.io/github.com/jingweno/gh/files).
+Fast GitHub command line client. Current version is [0.5.0](https://drone.io/github.com/jingweno/gh/files).
 
 ## Overview
 
