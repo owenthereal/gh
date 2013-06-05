@@ -17,7 +17,11 @@ class VersionedFile
                when :patch
                  2
                end
-    @current_version = current_version!.split('.').tap { |v| v[position] = v[position].to_i + 1 }.join('.')
+    @current_version = current_version!.split('.').tap do |v|
+      v[position] = v[position].to_i + 1
+      # Reset consequent numbers
+      ((position + 1)..2).each { |p| v[p] = 0 }
+    end.join('.')
   end
 
   def save!
