@@ -1,6 +1,6 @@
 # g + h = github [![Build Status](https://drone.io/github.com/jingweno/gh/status.png)](https://drone.io/github.com/jingweno/gh/latest)
 
-![gh](http://octodex.github.com/images/gangnamtocat.png)
+![gh](http://owenou.com/gh/images/gangnamtocat.png)
 
 Fast GitHub command line client. Current version is [0.5.0](https://drone.io/github.com/jingweno/gh/files).
 
