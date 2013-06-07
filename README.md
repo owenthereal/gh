@@ -69,6 +69,8 @@ To upgrade gh from source, run:
     $ go get -u github.com/jingweno/gh
 
 ## Usage
+
+### gh help
     
     $ gh help
     Usage: gh [command] [options] [arguments]
@@ -83,6 +85,70 @@ To upgrade gh from source, run:
         version           Show gh version
 
     See 'gh help [command]' for more information about a command.
+
+### gh pull
+
+    # while on a topic branch called "feature":
+    $ gh pull
+    [ opens text editor to edit title & body for the request ]
+    [ opened pull request on GitHub for "YOUR_USER:feature" ]
+
+    # explicit pull base & head:
+    $ gh pull -b jingweno:master -h jingweno:feature
+
+    $ gh pull -i 123
+    [ attached pull request to issue #123 ]
+
+### gh ci
+
+    $ gh ci
+    > (prints CI state of HEAD and exits with appropriate code)
+    > One of: success (0), error (1), failure (1), pending (2), no
+    > status (3)
+
+    $ gh ci BRANCH
+    > (prints CI state of BRANCH and exits with appropriate code)
+    > One of: success (0), error (1), failure (1), pending (2), no
+    > status (3)
+
+    $ gh ci SHA
+    > (prints CI state of SHA and exits with appropriate code)
+    > One of: success (0), error (1), failure (1), pending (2), no
+    > status (3)
+
+### gh browse
+
+    gh browse
+    > open https://github.com/YOUR_USER/CURRENT_REPO
+
+    $ gh browse commit/SHA
+    > open https://github.com/YOUR_USER/CURRENT_REPO/commit/SHA
+
+    $ gh browse issues
+    > open https://github.com/YOUR_USER/CURRENT_REPO/issues
+
+    $ gh browse -u jingweno -r gh
+    > open https://github.com/jingweno/gh
+
+    $ gh browse -u jingweno -r gh commit/SHA
+    > open https://github.com/jingweno/gh/commit/SHA
+
+    $ git browse -r resque
+    > open https://github.com/YOUR_USER/resque
+
+    $ git browse -r resque network
+    > open https://github.com/YOUR_USER/resque/network
+
+### gh compare
+
+    $ gh compare refactor
+    > open https://github.com/CURRENT_REPO/compare/refactor
+
+    $ gh compare 1.0..1.1
+    > open https://github.com/CURRENT_REPO/compare/1.0...1.1
+
+    $ gh compare -u other-user patch
+    > open https://github.com/other-user/REPO/compare/patch
 
 ## Roadmap
 
