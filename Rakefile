@@ -43,28 +43,28 @@ class VersionedFile
   end
 end
 
+def fullpath(file)
+  File.expand_path(file, File.dirname(__FILE__))
+end
+
+VERSION_FILES = {
+  fullpath('commands/version.go') => /^const Version = "(\d+.\d+.\d+)"$/,
+  fullpath('README.md')           => /Current version is \[(\d+.\d+.\d+)\]/,
+  fullpath('.goxc.json')          => /"PackageVersion": "(\d+.\d+.\d+)"/,
+  fullpath('homebrew/gh.rb')      => /VERSION = '(\d+.\d+.\d+)'/
+}
+
 namespace :release do
+  desc "Current released version"
+  task :current do
+    vf = VersionedFile.new(*VERSION_FILES.first)
+    puts vf.current_version!
+  end
+
   [:major, :minor, :patch].each do |type|
     desc "Release #{type} version"
     task type do
-      version_file = File.expand_path('commands/version.go', File.dirname(__FILE__))
-      version_regex = /^const Version = "(\d+.\d+.\d+)"$/
-
-      readme_file = File.expand_path('README.md', File.dirname(__FILE__))
-      readme_regex = /Current version is \[(\d+.\d+.\d+)\]/
-
-      goxc_file = File.expand_path('.goxc.json', File.dirname(__FILE__))
-      goxc_regex = /"PackageVersion": "(\d+.\d+.\d+)"/
-
-      homebrew_file = File.expand_path('homebrew/gh.rb', File.dirname(__FILE__))
-      homebrew_regex = /VERSION = '(\d+.\d+.\d+)'/
-
-      {
-        readme_file => readme_regex,
-        goxc_file => goxc_regex,
-        homebrew_file => homebrew_regex,
-        version_file => version_regex
-      }.each do |file, regex|
+      VERSION_FILES.each do |file, regex|
         begin
           vf = VersionedFile.new(file, regex)
           current_version = vf.current_version!
