@@ -54,6 +54,26 @@ VERSION_FILES = {
   fullpath('homebrew/gh.rb')      => /VERSION = '(\d+.\d+.\d+)'/
 }
 
+class Git
+  class << self
+    def dirty?
+      !`git status -s`.empty?
+    end
+
+    def checkout
+      `git checkout .`
+    end
+
+    def commit_all(msg)
+      `git commit -am "#{msg}"`
+    end
+
+    def create_tag(tag, msg)
+      `git tag -a #{tag} -m "#{msg}"`
+    end
+  end
+end
+
 namespace :release do
   desc "Current released version"
   task :current do
@@ -64,17 +84,35 @@ namespace :release do
   [:major, :minor, :patch].each do |type|
     desc "Release #{type} version"
     task type do
-      VERSION_FILES.each do |file, regex|
+      if Git.dirty?
+        puts "Please commit all changes first"
+        exit 1
+      end
+
+      new_versions = VERSION_FILES.map do |file, regex|
         begin
           vf = VersionedFile.new(file, regex)
           current_version = vf.current_version!
           vf.bump_version!(type)
           vf.save!
           puts "Successfully bump #{file} from #{current_version} to #{vf.current_version!}"
+          vf.current_version!
         rescue => e
-          puts e
+          Git.checkout
+          raise e
         end
       end
+
+      require 'set'
+      new_versions = new_versions.to_set
+      if new_versions.size != 1
+        raise "More than one version found among #{VERSION_FILES}"
+      end
+
+      new_version = new_versions.first
+      msg = "Bump version to #{new_version}"
+      Git.commit_all(msg)
+      Git.create_tag(new_version, msg)
     end
   end
 end
