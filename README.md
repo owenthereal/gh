@@ -150,6 +150,25 @@ To upgrade gh from source, run:
     $ gh compare -u other-user patch
     > open https://github.com/other-user/REPO/compare/patch
 
+## Release Notes
+
+* **0.5.1** June 7, 2013
+  * Remove `-p` flag from `browse`
+* **0.5.0** June 5, 2013
+  * Rename `pull-request` to `pull`
+  * Rename `ci-status` to `ci`
+* **0.4.1** June 2, 2013
+  * Add Rake task to bump version
+* **0.4.0** June 2, 2013
+  * Implement `compare`
+  * Fix bugs on `browse`
+* **0.0.3** June 1, 2013
+  * Implement `browse`
+* **0.0.2** May 29, 2013
+  * Implement `ci`
+* **0.0.1** May 22, 2013
+  * Implement `pull-request`
+
 ## Roadmap
 
 * authentication (done)
@@ -170,10 +189,6 @@ To upgrade gh from source, run:
 * gh push
 * gh submodule
 
-## License
-
-gh is released under the MIT license. See LICENSE.md.
-
 ## Contributing
 
 1. Fork it
@@ -181,3 +196,7 @@ gh is released under the MIT license. See LICENSE.md.
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
+
+## License
+
+gh is released under the MIT license. See LICENSE.md.
