@@ -56,7 +56,7 @@ Please make sure you have git and hg installed.
 
 ## Upgrade
 
-Since gh is under heavy development, we roll out new releases often.
+Since gh is under heavy development, I roll out new releases often.
 Please take a look at our [CI server](https://drone.io/github.com/jingweno/gh/files) for the latest built binaries.
 We plan to implement automatic upgrade in the future.
 
@@ -153,7 +153,7 @@ To upgrade gh from source, run:
 ## Release Notes
 
 * **0.5.2** June 8, 2013
-  * Extra GitHub API related code to [`octokat`](https://github.com/jingweno/octokat)
+  * Extract GitHub API related code to [`octokat`](https://github.com/jingweno/octokat)
 * **0.5.1** June 7, 2013
   * Remove `-p` flag from `browse`
 * **0.5.0** June 5, 2013
