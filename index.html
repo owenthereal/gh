@@ -4,40 +4,30 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <title>gh by jingweno</title>
+
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script src="javascripts/respond.js"></script>
-    <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <!--[if lt IE 8]>
-    <link rel="stylesheet" href="stylesheets/ie.css">
-    <![endif]-->
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
   </head>
   <body>
-      <div id="header">
-        <nav>
-          <li class="fork"><a href="https://github.com/jingweno/gh">View On GitHub</a></li>
-          <li class="downloads"><a href="https://github.com/jingweno/gh/zipball/master">ZIP</a></li>
-          <li class="downloads"><a href="https://github.com/jingweno/gh/tarball/master">TAR</a></li>
-          <li class="title">DOWNLOADS</li>
-        </nav>
-      </div><!-- end header -->
-
     <div class="wrapper">
+      <header>
+        <h1>gh</h1>
+        <p>Fast GitHub command line client.</p>
 
+        <p class="view"><a href="https://github.com/jingweno/gh">View the Project on GitHub <small>jingweno/gh</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/jingweno/gh/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/jingweno/gh/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/jingweno/gh">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
       <section>
-        <div id="title">
-          <h1>gh</h1>
-          <p>Fast GitHub command line client.</p>
-          <hr>
-          <span class="credits left">Project maintained by <a href="https://github.com/jingweno">jingweno</a></span>
-          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="http://twitter.com/#!/michigangraham">mattgraham</a></span>
-        </div>
-
         <h2>
 <a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
 
@@ -52,17 +42,11 @@
 <a name="upgrade" class="anchor" href="#upgrade"><span class="octicon octicon-link"></span></a>Upgrade</h2>
 
 <p>Since gh is under heavy development, I roll out new releases often.
-Please take a look at our <a href="https://drone.io/github.com/jingweno/gh/files">CI server</a> for the latest built binaries.
-We plan to implement automatic upgrade in the future.</p>
+Please take a look at our <a href="https://drone.io/github.com/jingweno/gh/files">CI server</a> for the latest built binaries. We plan to implement automatic upgrade in the future.</p>
 
 <p>To upgrade gh on OSX with Homebrew, run:</p>
 
 <pre><code>$ brew upgrade https://raw.github.com/jingweno/gh/master/homebrew/gh.rb
-</code></pre>
-
-<p>To upgrade gh from source, run:</p>
-
-<pre><code>$ go get -u github.com/jingweno/gh
 </code></pre>
 
 <h2>
@@ -158,9 +142,12 @@ $ gh compare -u other-user patch
 &gt; open https://github.com/other-user/REPO/compare/patch
 </code></pre>
       </section>
-
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/jingweno">jingweno</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
     </div>
-    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    <script src="javascripts/scale.fix.js"></script>
               <script type="text/javascript">
             var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
             document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
