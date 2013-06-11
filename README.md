@@ -190,8 +190,8 @@ To upgrade gh from source, run:
 * gh ci-status (done)
 * gh browse (done)
 * gh compare (done)
-* gh fork (in progress)
-* gh clone
+* gh fork (done)
+* gh clone (in progress)
 * gh remote add
 * gh fetch
 * gh cherry-pick
