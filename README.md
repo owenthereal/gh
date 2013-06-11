@@ -213,4 +213,4 @@ To upgrade gh from source, run:
 
 ## License
 
-gh is released under the MIT license. See LICENSE.md.
+gh is released under the MIT license. See [LICENSE.md](https://github.com/jingweno/gh/blob/master/LICENSE.md).
