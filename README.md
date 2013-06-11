@@ -2,7 +2,7 @@
 
 ![gh](http://owenou.com/gh/images/gangnamtocat.png)
 
-Fast GitHub command line client. Current version is [0.5.2](https://drone.io/github.com/jingweno/gh/files).
+Fast GitHub command line client. Current version is [0.6.0](https://drone.io/github.com/jingweno/gh/files).
 
 ## Overview
 
