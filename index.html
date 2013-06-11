@@ -22,8 +22,57 @@
           <h2>Fast GitHub command line client.</h2>
         </header>
 
+        <section id="downloads" class="clearfix">
+          <a href="https://github.com/jingweno/gh/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
+          <a href="https://github.com/jingweno/gh/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
+          <a href="https://github.com/jingweno/gh" id="view-on-github" class="button"><span>View on GitHub</span></a>
+        </section>
+
+        <hr>
+
         <section id="main_content">
-          <h2>
+          <h1>
+<a name="g--h--github" class="anchor" href="#g--h--github"><span class="octicon octicon-link"></span></a>g + h = github</h1>
+
+<p>Fast GitHub command line client. Current version is <a href="https://drone.io/github.com/jingweno/gh/files">0.6.0</a>.</p>
+
+<h2>
+<a name="overview" class="anchor" href="#overview"><span class="octicon octicon-link"></span></a>Overview</h2>
+
+<p>gh is a command line client to GitHub. It's designed to run as fast as possible with easy installation across operating systems.
+If you like gh, please also take a look at <a href="https://github.com/defunkt/hub">hub</a>. Hub is a reference implementation to gh.</p>
+
+<h2>
+<a name="motivation" class="anchor" href="#motivation"><span class="octicon octicon-link"></span></a>Motivation</h2>
+
+<p><strong>Fast</strong> </p>
+
+<pre><code>$ time hub version &gt; /dev/null
+hub version &gt; /dev/null  0.03s user 0.01s system 93% cpu 0.047 total
+
+$ time gh version &gt; /dev/null
+gh version &gt; /dev/null  0.01s user 0.01s system 85% cpu 0.022 total
+
+$ time hub browse &gt; /dev/null
+hub browse &gt; /dev/null  0.07s user 0.04s system 87% cpu 0.130 total
+
+$ time gh browse &gt; /dev/null
+gh browse &gt; /dev/null  0.03s user 0.02s system 87% cpu 0.059 total
+</code></pre>
+
+<p><strong>Muti-platforms</strong></p>
+
+<p>gh is fully implemented in the Go language and is designed to run across operating systems.</p>
+
+<p><strong>Easy installation</strong></p>
+
+<p>There're no pre-requirements to run gh. Download the <a href="https://drone.io/github.com/jingweno/gh/files">binary</a> and go!</p>
+
+<p><strong>Unix</strong></p>
+
+<p>gh commands are single, unhyphenated words that map to their Unix ancestors’ names and flags where applicable.</p>
+
+<h2>
 <a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
 
 <p>There are <a href="https://drone.io/github.com/jingweno/gh/files">compiled binary forms of gh</a> for Darwin, Linux and Windows.</p>
@@ -34,14 +83,31 @@
 </code></pre>
 
 <h2>
+<a name="compilation" class="anchor" href="#compilation"><span class="octicon octicon-link"></span></a>Compilation</h2>
+
+<p>To compile gh from source, you need to have a <a href="http://golang.org/doc/install">Go development environment</a> and run:</p>
+
+<pre><code>$ go get github.com/jingweno/gh
+</code></pre>
+
+<p>Note that <code>go get</code> will pull down sources from various VCS.
+Please make sure you have git and hg installed.</p>
+
+<h2>
 <a name="upgrade" class="anchor" href="#upgrade"><span class="octicon octicon-link"></span></a>Upgrade</h2>
 
 <p>Since gh is under heavy development, I roll out new releases often.
-Please take a look at our <a href="https://drone.io/github.com/jingweno/gh/files">CI server</a> for the latest built binaries. We plan to implement automatic upgrade in the future.</p>
+Please take a look at our <a href="https://drone.io/github.com/jingweno/gh/files">CI server</a> for the latest built binaries.
+We plan to implement automatic upgrade in the future.</p>
 
 <p>To upgrade gh on OSX with Homebrew, run:</p>
 
 <pre><code>$ brew upgrade https://raw.github.com/jingweno/gh/master/homebrew/gh.rb
+</code></pre>
+
+<p>To upgrade gh from source, run:</p>
+
+<pre><code>$ go get -u github.com/jingweno/gh
 </code></pre>
 
 <h2>
@@ -56,6 +122,7 @@ Usage: gh [command] [options] [arguments]
 Commands:
 
     pull              Open a pull request on GitHub
+    fork              Make a fork of a remote repository on GitHub and add as remote
     ci                Show CI status of a commit
     browse            Open a GitHub page in the default browser
     compare           Open a compare page on GitHub
@@ -78,6 +145,17 @@ $ gh pull -b jingweno:master -h jingweno:feature
 
 $ gh pull -i 123
 [ attached pull request to issue #123 ]
+</code></pre>
+
+<h3>
+<a name="gh-fork" class="anchor" href="#gh-fork"><span class="octicon octicon-link"></span></a>gh fork</h3>
+
+<pre><code>$ gh fork
+[ repo forked on GitHub ]
+&gt; git remote add -f YOUR_USER git@github.com:YOUR_USER/CURRENT_REPO.git
+
+$ gh fork --no-remote
+[ repo forked on GitHub ]
 </code></pre>
 
 <h3>
@@ -136,13 +214,126 @@ $ gh compare 1.0..1.1
 $ gh compare -u other-user patch
 &gt; open https://github.com/other-user/REPO/compare/patch
 </code></pre>
+
+<h2>
+<a name="release-notes" class="anchor" href="#release-notes"><span class="octicon octicon-link"></span></a>Release Notes</h2>
+
+<ul>
+<li>
+<strong>0.6.0</strong> June 11, 2013
+
+<ul>
+<li>Implement <code>fork</code>
+</li>
+</ul>
+</li>
+<li>
+<strong>0.5.2</strong> June 8, 2013
+
+<ul>
+<li>Extract GitHub API related code to <a href="https://github.com/jingweno/octokat"><code>octokat</code></a>
+</li>
+</ul>
+</li>
+<li>
+<strong>0.5.1</strong> June 7, 2013
+
+<ul>
+<li>Remove <code>-p</code> flag from <code>browse</code>
+</li>
+</ul>
+</li>
+<li>
+<strong>0.5.0</strong> June 5, 2013
+
+<ul>
+<li>Rename <code>pull-request</code> to <code>pull</code>
+</li>
+<li>Rename <code>ci-status</code> to <code>ci</code>
+</li>
+</ul>
+</li>
+<li>
+<strong>0.4.1</strong> June 2, 2013
+
+<ul>
+<li>Add Rake task to bump version</li>
+</ul>
+</li>
+<li>
+<strong>0.4.0</strong> June 2, 2013
+
+<ul>
+<li>Implement <code>compare</code>
+</li>
+<li>Fix bugs on <code>browse</code>
+</li>
+</ul>
+</li>
+<li>
+<strong>0.0.3</strong> June 1, 2013
+
+<ul>
+<li>Implement <code>browse</code>
+</li>
+</ul>
+</li>
+<li>
+<strong>0.0.2</strong> May 29, 2013
+
+<ul>
+<li>Implement <code>ci</code>
+</li>
+</ul>
+</li>
+<li>
+<strong>0.0.1</strong> May 22, 2013
+
+<ul>
+<li>Implement <code>pull-request</code>
+</li>
+</ul>
+</li>
+</ul><h2>
+<a name="roadmap" class="anchor" href="#roadmap"><span class="octicon octicon-link"></span></a>Roadmap</h2>
+
+<ul>
+<li>authentication (done)</li>
+<li>gh pull-request (done)</li>
+<li>gh ci-status (done)</li>
+<li>gh browse (done)</li>
+<li>gh compare (done)</li>
+<li>gh fork (in progress)</li>
+<li>gh clone</li>
+<li>gh remote add</li>
+<li>gh fetch</li>
+<li>gh cherry-pick</li>
+<li>gh am, gh apply</li>
+<li>gh check</li>
+<li>gh merge</li>
+<li>gh create</li>
+<li>gh init</li>
+<li>gh push</li>
+<li>gh submodule</li>
+</ul><h2>
+<a name="contributing" class="anchor" href="#contributing"><span class="octicon octicon-link"></span></a>Contributing</h2>
+
+<ol>
+<li>Fork it</li>
+<li>Create your feature branch (<code>git checkout -b my-new-feature</code>)</li>
+<li>Commit your changes (<code>git commit -am 'Add some feature'</code>)</li>
+<li>Push to the branch (<code>git push origin my-new-feature</code>)</li>
+<li>Create new Pull Request</li>
+</ol><h2>
+<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
+
+<p>gh is released under the MIT license. See LICENSE.md.</p>
         </section>
 
         <footer>
-          gh is maintained by <a href="https://github.com/jingweno">Jingwen Owen Ou</a><br>
+          gh is maintained by <a href="https://github.com/jingweno">jingweno</a><br>
+          This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="http://twitter.com/jasonlong">Jason Long</a>.
         </footer>
-
-        <a href="https://github.com/jingweno/gh"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
 
                   <script type="text/javascript">
             var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
