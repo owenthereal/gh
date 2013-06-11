@@ -57,8 +57,8 @@ Please make sure you have git and hg installed.
 ## Upgrade
 
 Since gh is under heavy development, I roll out new releases often.
-Please take a look at our [CI server](https://drone.io/github.com/jingweno/gh/files) for the latest built binaries.
-We plan to implement automatic upgrade in the future.
+Please take a look at the [CI server](https://drone.io/github.com/jingweno/gh/files) for the latest built binaries.
+I plan to implement automatic upgrade in the future.
 
 To upgrade gh on OSX with Homebrew, run:
 
