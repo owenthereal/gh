@@ -78,6 +78,7 @@ To upgrade gh from source, run:
     Commands:
 
         pull              Open a pull request on GitHub
+        fork              Make a fork of a remote repository on GitHub and add as remote
         ci                Show CI status of a commit
         browse            Open a GitHub page in the default browser
         compare           Open a compare page on GitHub
@@ -98,6 +99,15 @@ To upgrade gh from source, run:
 
     $ gh pull -i 123
     [ attached pull request to issue #123 ]
+
+### gh fork
+
+    $ gh fork
+    [ repo forked on GitHub ]
+    > git remote add -f YOUR_USER git@github.com:YOUR_USER/CURRENT_REPO.git
+
+    $ gh fork --no-remote
+    [ repo forked on GitHub ]
 
 ### gh ci
 
@@ -152,6 +162,8 @@ To upgrade gh from source, run:
 
 ## Release Notes
 
+* **0.6.0** June 11, 2013
+  * Implement `fork`
 * **0.5.2** June 8, 2013
   * Extract GitHub API related code to [`octokat`](https://github.com/jingweno/octokat)
 * **0.5.1** June 7, 2013
