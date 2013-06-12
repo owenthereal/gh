@@ -162,6 +162,8 @@ To upgrade gh from source, run:
 
 ## Release Notes
 
+* **0.6.1** June 12, 2013
+  * Allow optional `.git` as Git url
 * **0.6.0** June 11, 2013
   * Implement `fork`
 * **0.5.2** June 8, 2013
