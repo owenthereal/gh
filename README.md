@@ -213,6 +213,16 @@ To upgrade gh from source, run:
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
 
+## Contributors
+
+Names in no particular order:
+
+* [jingweno](https://github.com/jingweno)
+* [tgkokk] (https://github.com/tgkokk)
+* [dwb](https://github.com/dwb)
+* [jgable](https://github.com/jgable)
+* [jroes](https://github.com/jroes)
+
 ## License
 
 gh is released under the MIT license. See [LICENSE.md](https://github.com/jingweno/gh/blob/master/LICENSE.md).
