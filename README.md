@@ -174,6 +174,8 @@ To upgrade gh from source, run:
 
 ## Release Notes
 
+* **0.7.0** June 12, 2013
+  * Implement `gh remote`
 * **0.6.1** June 12, 2013
   * Allow optional `.git` as Git url
 * **0.6.0** June 11, 2013
