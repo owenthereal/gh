@@ -80,6 +80,7 @@ To upgrade gh from source, run:
         pull              Open a pull request on GitHub
         fork              Make a fork of a remote repository on GitHub and add as remote
         ci                Show CI status of a commit
+        remote            Add remote from GitHub repository
         browse            Open a GitHub page in the default browser
         compare           Open a compare page on GitHub
         help              Show help
@@ -125,10 +126,21 @@ To upgrade gh from source, run:
     > (prints CI state of SHA and exits with appropriate code)
     > One of: success (0), error (1), failure (1), pending (2), no
     > status (3)
+    
+### gh remote
+
+    $ gh remote add jingweno
+    > git remote add -f jingweno git://github.com/jingweno/CURRENT_REPO.git
+
+    $ gh remote add -p jingweno
+    > git remote add -f jingweno git@github.com:jingweno/CURRENT_REPO.git
+
+    $ gh remote add origin
+    > git remote add -f YOUR_USER git://github.com/YOUR_USER/CURRENT_REPO.git    
 
 ### gh browse
 
-    gh browse
+    $ gh browse
     > open https://github.com/YOUR_USER/CURRENT_REPO
 
     $ gh browse commit/SHA
