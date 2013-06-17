@@ -75,18 +75,29 @@ To upgrade gh from source, run:
     $ gh help
     Usage: gh [command] [options] [arguments]
 
-    Commands:
+    Remote Commands:
+        remote            View and manage a set of remote repositories
 
+    GitHub Commands:
         pull              Open a pull request on GitHub
         fork              Make a fork of a remote repository on GitHub and add as remote
         ci                Show CI status of a commit
-        remote            Add remote from GitHub repository
         browse            Open a GitHub page in the default browser
         compare           Open a compare page on GitHub
-        help              Show help
         version           Show gh version
 
     See 'gh help [command]' for more information about a command.
+
+### gh remote
+
+    $ gh remote add jingweno
+    > git remote add -f jingweno git://github.com/jingweno/CURRENT_REPO.git
+
+    $ gh remote add -p jingweno
+    > git remote add -f jingweno git@github.com:jingweno/CURRENT_REPO.git
+
+    $ gh remote add origin
+    > git remote add -f YOUR_USER git://github.com/YOUR_USER/CURRENT_REPO.git    
 
 ### gh pull
 
@@ -127,17 +138,6 @@ To upgrade gh from source, run:
     > One of: success (0), error (1), failure (1), pending (2), no
     > status (3)
     
-### gh remote
-
-    $ gh remote add jingweno
-    > git remote add -f jingweno git://github.com/jingweno/CURRENT_REPO.git
-
-    $ gh remote add -p jingweno
-    > git remote add -f jingweno git@github.com:jingweno/CURRENT_REPO.git
-
-    $ gh remote add origin
-    > git remote add -f YOUR_USER git://github.com/YOUR_USER/CURRENT_REPO.git    
-
 ### gh browse
 
     $ gh browse
