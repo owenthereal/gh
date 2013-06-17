@@ -34,7 +34,7 @@
           <h1>
 <a name="g--h--github" class="anchor" href="#g--h--github"><span class="octicon octicon-link"></span></a>g + h = github</h1>
 
-<p>Fast GitHub command line client. Current version is <a href="https://drone.io/github.com/jingweno/gh/files">0.6.1</a>.</p>
+<p>Fast GitHub command line client. Current version is <a href="https://drone.io/github.com/jingweno/gh/files">0.7.0</a>.</p>
 
 <h2>
 <a name="overview" class="anchor" href="#overview"><span class="octicon octicon-link"></span></a>Overview</h2>
@@ -124,6 +124,7 @@ Commands:
     pull              Open a pull request on GitHub
     fork              Make a fork of a remote repository on GitHub and add as remote
     ci                Show CI status of a commit
+    remote            Add remote from GitHub repository
     browse            Open a GitHub page in the default browser
     compare           Open a compare page on GitHub
     help              Show help
@@ -178,9 +179,22 @@ $ gh ci SHA
 </code></pre>
 
 <h3>
+<a name="gh-remote" class="anchor" href="#gh-remote"><span class="octicon octicon-link"></span></a>gh remote</h3>
+
+<pre><code>$ gh remote add jingweno
+&gt; git remote add -f jingweno git://github.com/jingweno/CURRENT_REPO.git
+
+$ gh remote add -p jingweno
+&gt; git remote add -f jingweno git@github.com:jingweno/CURRENT_REPO.git
+
+$ gh remote add origin
+&gt; git remote add -f YOUR_USER git://github.com/YOUR_USER/CURRENT_REPO.git    
+</code></pre>
+
+<h3>
 <a name="gh-browse" class="anchor" href="#gh-browse"><span class="octicon octicon-link"></span></a>gh browse</h3>
 
-<pre><code>gh browse
+<pre><code>$ gh browse
 &gt; open https://github.com/YOUR_USER/CURRENT_REPO
 
 $ gh browse commit/SHA
@@ -219,6 +233,14 @@ $ gh compare -u other-user patch
 <a name="release-notes" class="anchor" href="#release-notes"><span class="octicon octicon-link"></span></a>Release Notes</h2>
 
 <ul>
+<li>
+<strong>0.7.0</strong> June 12, 2013
+
+<ul>
+<li>Implement <code>gh remote</code>
+</li>
+</ul>
+</li>
 <li>
 <strong>0.6.1</strong> June 12, 2013
 
@@ -332,6 +354,17 @@ $ gh compare -u other-user patch
 <li>Push to the branch (<code>git push origin my-new-feature</code>)</li>
 <li>Create new Pull Request</li>
 </ol><h2>
+<a name="contributors" class="anchor" href="#contributors"><span class="octicon octicon-link"></span></a>Contributors</h2>
+
+<p>Names in no particular order:</p>
+
+<ul>
+<li><a href="https://github.com/jingweno">jingweno</a></li>
+<li><a href="https://github.com/tgkokk">tgkokk</a></li>
+<li><a href="https://github.com/dwb">dwb</a></li>
+<li><a href="https://github.com/jgable">jgable</a></li>
+<li><a href="https://github.com/jroes">jroes</a></li>
+</ul><h2>
 <a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
 
 <p>gh is released under the MIT license. See <a href="https://github.com/jingweno/gh/blob/master/LICENSE.md">LICENSE.md</a>.</p>
