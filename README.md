@@ -207,8 +207,8 @@ To upgrade gh from source, run:
 * gh browse (done)
 * gh compare (done)
 * gh fork (done)
+* gh remote add (done)
 * gh clone (in progress)
-* gh remote add
 * gh fetch
 * gh cherry-pick
 * gh am, gh apply
