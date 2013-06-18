@@ -155,10 +155,10 @@ To upgrade gh from source, run:
     $ gh browse -u jingweno -r gh commit/SHA
     > open https://github.com/jingweno/gh/commit/SHA
 
-    $ git browse -r resque
+    $ gh browse -r resque
     > open https://github.com/YOUR_USER/resque
 
-    $ git browse -r resque network
+    $ gh browse -r resque network
     > open https://github.com/YOUR_USER/resque/network
 
 ### gh compare
