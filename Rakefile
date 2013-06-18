@@ -132,9 +132,7 @@ module OS
     end
 
     def dropbox_dir
-      if darwin?
-        File.join ENV['HOME'], 'Dropbox'
-      elsif linux?
+      if darwin? || linux?
         File.join ENV['HOME'], 'Dropbox'
       elsif windows?
         File.join ENV['HOME'], 'Dropbox'
