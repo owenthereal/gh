@@ -116,3 +116,68 @@ namespace :release do
     end
   end
 end
+
+module OS
+  class << self
+    def type
+      if darwin?
+        'darwin'
+      elsif linux?
+        'linux'
+      elsif windows?
+        'windows'
+      else
+        raise "Unknown OS type #{RUBY_PLATFORM}"
+      end
+    end
+
+    def dropbox_dir
+      if darwin?
+        File.join ENV['HOME'], 'Dropbox'
+      elsif linux?
+        File.join ENV['HOME'], 'Dropbox'
+      elsif windows?
+        File.join ENV['HOME'], 'Dropbox'
+      else
+        raise "Unknown OS type #{RUBY_PLATFORM}"
+      end
+    end
+
+    def windows?
+      (/cygwin|mswin|mingw|bccwin|wince|emx/ =~ RUBY_PLATFORM) != nil
+    end
+
+    def darwin?
+      (/darwin/ =~ RUBY_PLATFORM) != nil
+    end
+
+    def linux?
+      (/linux/ =~ RUBY_PLATFORM) != nil
+    end
+  end
+end
+
+namespace :build do
+  desc 'Build for current operating system'
+  task :current => [:update_goxc, :build_gh, :move_to_dropbox]
+
+  task :update_goxc do
+    puts 'Updating goxc...'
+    result = system 'go get -d github.com/laher/goxc'
+    raise 'Fail to update goxc' unless result
+  end
+
+  task :build_gh do
+    puts "Building for #{OS.type}..."
+    puts `goxc -wd=. -os=#{OS.type}`
+  end
+
+  task :move_to_dropbox do
+    vf = VersionedFile.new(*VERSION_FILES.first)
+    build_dir = fullpath("target/#{vf.current_version!}-snapshot")
+    dropbox_dir = File.join(OS.dropbox_dir, 'gh')
+
+    require 'fileutils'
+    FileUtils.cp_r build_dir, dropbox_dir, :verbose => true
+  end
+end
