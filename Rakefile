@@ -173,7 +173,7 @@ namespace :build do
   task :move_to_dropbox do
     vf = VersionedFile.new(*VERSION_FILES.first)
     build_dir = fullpath("target/#{vf.current_version!}-snapshot")
-    dropbox_dir = File.join(OS.dropbox_dir, 'gh')
+    dropbox_dir = File.join(OS.dropbox_dir, 'Public', 'gh')
 
     require 'fileutils'
     FileUtils.cp_r build_dir, dropbox_dir, :verbose => true
