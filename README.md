@@ -2,7 +2,7 @@
 
 ![gh](http://owenou.com/gh/images/gangnamtocat.png)
 
-Fast GitHub command line client. Current version is [0.7.0](https://drone.io/github.com/jingweno/gh/files).
+Fast GitHub command line client. Current version is [0.7.0](http://bit.ly/go-gh).
 
 ## Overview
 
@@ -31,7 +31,7 @@ gh is fully implemented in the Go language and is designed to run across operati
 
 **Easy installation**
 
-There're no pre-requirements to run gh. Download the [binary](https://drone.io/github.com/jingweno/gh/files) and go!
+There're no pre-requirements to run gh. Download the [binary](http://bit.ly/go-gh) and go!
 
 **Unix**
 
@@ -39,7 +39,7 @@ gh commands are single, unhyphenated words that map to their Unix ancestors’ n
 
 ## Installation
 
-There are [compiled binary forms of gh](https://drone.io/github.com/jingweno/gh/files) for Darwin, Linux and Windows.
+There are [compiled binary forms of gh](http://bit.ly/go-gh) for Darwin, Linux and Windows.
 
 To install gh on OSX with [Homebrew](https://github.com/mxcl/homebrew), run:
 
@@ -57,7 +57,7 @@ Please make sure you have git and hg installed.
 ## Upgrade
 
 Since gh is under heavy development, I roll out new releases often.
-Please take a look at the [CI server](https://drone.io/github.com/jingweno/gh/files) for the latest built binaries.
+Please take a look at the [built binaries](http://bit.ly/go-gh) for the latest built binaries.
 I plan to implement automatic upgrade in the future.
 
 To upgrade gh on OSX with Homebrew, run:
