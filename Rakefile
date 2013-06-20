@@ -137,7 +137,7 @@ module OS
       if darwin? || linux?
         File.join ENV["HOME"], "Dropbox"
       elsif windows?
-        File.join ENV["HOME"], "Dropbox"
+        File.join ENV["DROPBOX_DIR"]
       else
         raise "Unknown OS type #{RUBY_PLATFORM}"
       end
