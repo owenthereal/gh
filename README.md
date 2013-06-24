@@ -2,7 +2,7 @@
 
 ![gh](http://owenou.com/gh/images/gangnamtocat.png)
 
-Fast GitHub command line client. Current version is [0.7.0](http://bit.ly/go-gh).
+Fast GitHub command line client. Current version is [0.8.0](http://bit.ly/go-gh).
 
 ## Overview
 
