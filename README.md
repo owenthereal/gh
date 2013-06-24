@@ -174,6 +174,8 @@ To upgrade gh from source, run:
 
 ## Release Notes
 
+* **0.8.0** June 24, 2013
+  * Implement `gh checkout`
 * **0.7.0** June 12, 2013
   * Implement `gh remote`
 * **0.6.1** June 12, 2013
@@ -208,11 +210,11 @@ To upgrade gh from source, run:
 * gh compare (done)
 * gh fork (done)
 * gh remote add (done)
+* gh checkout (done)
 * gh clone (in progress)
 * gh fetch
 * gh cherry-pick
 * gh am, gh apply
-* gh check
 * gh merge
 * gh create
 * gh init
