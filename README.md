@@ -88,6 +88,14 @@ To upgrade gh from source, run:
 
     See 'gh help [command]' for more information about a command.
 
+### gh checkout
+
+    $ gh checkout https://github.com/jingweno/gh/pull/35
+    > git remote add -f -t feature git://github:com/foo/gh.git
+    > git checkout --track -B foo-feature foo/feature
+
+    $ gh checkout https://github.com/jingweno/gh/pull/35 custom-branch-name
+
 ### gh remote
 
     $ gh remote add jingweno
@@ -174,32 +182,7 @@ To upgrade gh from source, run:
 
 ## Release Notes
 
-* **0.8.0** June 24, 2013
-  * Implement `gh checkout`
-* **0.7.0** June 12, 2013
-  * Implement `gh remote`
-* **0.6.1** June 12, 2013
-  * Allow optional `.git` as Git url
-* **0.6.0** June 11, 2013
-  * Implement `fork`
-* **0.5.2** June 8, 2013
-  * Extract GitHub API related code to [`octokat`](https://github.com/jingweno/octokat)
-* **0.5.1** June 7, 2013
-  * Remove `-p` flag from `browse`
-* **0.5.0** June 5, 2013
-  * Rename `pull-request` to `pull`
-  * Rename `ci-status` to `ci`
-* **0.4.1** June 2, 2013
-  * Add Rake task to bump version
-* **0.4.0** June 2, 2013
-  * Implement `compare`
-  * Fix bugs on `browse`
-* **0.0.3** June 1, 2013
-  * Implement `browse`
-* **0.0.2** May 29, 2013
-  * Implement `ci`
-* **0.0.1** May 22, 2013
-  * Implement `pull-request`
+See [RELEASE_NOTES.md](https://github.com/jingweno/gh/blob/master/RELEASE_NOTES.md).
 
 ## Roadmap
 
