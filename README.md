@@ -107,17 +107,17 @@ To upgrade gh from source, run:
     $ gh remote add origin
     > git remote add -f YOUR_USER git://github.com/YOUR_USER/CURRENT_REPO.git    
 
-### gh pull
+### gh pr
 
     # while on a topic branch called "feature":
-    $ gh pull
+    $ gh pr
     [ opens text editor to edit title & body for the request ]
     [ opened pull request on GitHub for "YOUR_USER:feature" ]
 
     # explicit pull base & head:
-    $ gh pull -b jingweno:master -h jingweno:feature
+    $ gh pr -b jingweno:master -h jingweno:feature
 
-    $ gh pull -i 123
+    $ gh pr -i 123
     [ attached pull request to issue #123 ]
 
 ### gh fork
