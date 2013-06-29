@@ -33,10 +33,6 @@ gh is fully implemented in the Go language and is designed to run across operati
 
 There're no pre-requirements to run gh. Download the [binary](http://bit.ly/go-gh) and go!
 
-**Unix**
-
-gh commands are single, unhyphenated words that map to their Unix ancestors’ names and flags where applicable.
-
 ## Installation
 
 
@@ -100,16 +96,18 @@ For more details, run `gh help alias`.
     $ gh help
     Usage: gh [command] [options] [arguments]
 
+    Branching Commands:
+        checkout          Switch the active branch to another branch
+
     Remote Commands:
         remote            View and manage a set of remote repositories
 
     GitHub Commands:
-        pull              Open a pull request on GitHub
+        pull-request      Open a pull request on GitHub
         fork              Make a fork of a remote repository on GitHub and add as remote
-        ci                Show CI status of a commit
+        ci-status         Show CI status of a commit
         browse            Open a GitHub page in the default browser
         compare           Open a compare page on GitHub
-        version           Show gh version
 
     See 'gh help [command]' for more information about a command.
 
@@ -132,17 +130,17 @@ For more details, run `gh help alias`.
     $ gh remote add origin
     > git remote add -f YOUR_USER git://github.com/YOUR_USER/CURRENT_REPO.git    
 
-### gh pr
+### gh pull-request
 
     # while on a topic branch called "feature":
-    $ gh pr
+    $ gh pull-request
     [ opens text editor to edit title & body for the request ]
     [ opened pull request on GitHub for "YOUR_USER:feature" ]
 
     # explicit pull base & head:
-    $ gh pr -b jingweno:master -h jingweno:feature
+    $ gh pull-request -b jingweno:master -h jingweno:feature
 
-    $ gh pr -i 123
+    $ gh pull-request -i 123
     [ attached pull request to issue #123 ]
 
 ### gh fork
@@ -154,19 +152,19 @@ For more details, run `gh help alias`.
     $ gh fork --no-remote
     [ repo forked on GitHub ]
 
-### gh ci
+### gh ci-status
 
-    $ gh ci
+    $ gh ci-status
     > (prints CI state of HEAD and exits with appropriate code)
     > One of: success (0), error (1), failure (1), pending (2), no
     > status (3)
 
-    $ gh ci BRANCH
+    $ gh ci-status BRANCH
     > (prints CI state of BRANCH and exits with appropriate code)
     > One of: success (0), error (1), failure (1), pending (2), no
     > status (3)
 
-    $ gh ci SHA
+    $ gh ci-status SHA
     > (prints CI state of SHA and exits with appropriate code)
     > One of: success (0), error (1), failure (1), pending (2), no
     > status (3)
