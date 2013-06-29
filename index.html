@@ -68,10 +68,6 @@ gh browse &gt; /dev/null  0.03s user 0.02s system 87% cpu 0.059 total
 
 <p>There're no pre-requirements to run gh. Download the <a href="http://bit.ly/go-gh">binary</a> and go!</p>
 
-<p><strong>Unix</strong></p>
-
-<p>gh commands are single, unhyphenated words that map to their Unix ancestors’ names and flags where applicable.</p>
-
 <h2>
 <a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
 
@@ -149,16 +145,18 @@ script:</p>
 <pre><code>$ gh help
 Usage: gh [command] [options] [arguments]
 
+Branching Commands:
+    checkout          Switch the active branch to another branch
+
 Remote Commands:
     remote            View and manage a set of remote repositories
 
 GitHub Commands:
-    pull              Open a pull request on GitHub
+    pull-request      Open a pull request on GitHub
     fork              Make a fork of a remote repository on GitHub and add as remote
-    ci                Show CI status of a commit
+    ci-status         Show CI status of a commit
     browse            Open a GitHub page in the default browser
     compare           Open a compare page on GitHub
-    version           Show gh version
 
 See 'gh help [command]' for more information about a command.
 </code></pre>
@@ -187,17 +185,17 @@ $ gh remote add origin
 </code></pre>
 
 <h3>
-<a name="gh-pr" class="anchor" href="#gh-pr"><span class="octicon octicon-link"></span></a>gh pr</h3>
+<a name="gh-pull-request" class="anchor" href="#gh-pull-request"><span class="octicon octicon-link"></span></a>gh pull-request</h3>
 
 <pre><code># while on a topic branch called "feature":
-$ gh pr
+$ gh pull-request
 [ opens text editor to edit title &amp; body for the request ]
 [ opened pull request on GitHub for "YOUR_USER:feature" ]
 
 # explicit pull base &amp; head:
-$ gh pr -b jingweno:master -h jingweno:feature
+$ gh pull-request -b jingweno:master -h jingweno:feature
 
-$ gh pr -i 123
+$ gh pull-request -i 123
 [ attached pull request to issue #123 ]
 </code></pre>
 
@@ -213,19 +211,19 @@ $ gh fork --no-remote
 </code></pre>
 
 <h3>
-<a name="gh-ci" class="anchor" href="#gh-ci"><span class="octicon octicon-link"></span></a>gh ci</h3>
+<a name="gh-ci-status" class="anchor" href="#gh-ci-status"><span class="octicon octicon-link"></span></a>gh ci-status</h3>
 
-<pre><code>$ gh ci
+<pre><code>$ gh ci-status
 &gt; (prints CI state of HEAD and exits with appropriate code)
 &gt; One of: success (0), error (1), failure (1), pending (2), no
 &gt; status (3)
 
-$ gh ci BRANCH
+$ gh ci-status BRANCH
 &gt; (prints CI state of BRANCH and exits with appropriate code)
 &gt; One of: success (0), error (1), failure (1), pending (2), no
 &gt; status (3)
 
-$ gh ci SHA
+$ gh ci-status SHA
 &gt; (prints CI state of SHA and exits with appropriate code)
 &gt; One of: success (0), error (1), failure (1), pending (2), no
 &gt; status (3)
