@@ -34,7 +34,7 @@
           <h1>
 <a name="g--h--github" class="anchor" href="#g--h--github"><span class="octicon octicon-link"></span></a>g + h = github</h1>
 
-<p>Fast GitHub command line client. Current version is <a href="http://bit.ly/go-gh">0.8.0</a>.</p>
+<p>Fast GitHub command line client implemented in Go. Current version is <a href="http://bit.ly/go-gh">0.9.0</a>.</p>
 
 <h2>
 <a name="overview" class="anchor" href="#overview"><span class="octicon octicon-link"></span></a>Overview</h2>
@@ -75,15 +75,22 @@ gh browse &gt; /dev/null  0.03s user 0.02s system 87% cpu 0.059 total
 <h2>
 <a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
 
-<p>There are <a href="http://bit.ly/go-gh">compiled binary forms of gh</a> for Darwin, Linux and Windows.</p>
+<h3>
+<a name="homebrew" class="anchor" href="#homebrew"><span class="octicon octicon-link"></span></a>Homebrew</h3>
 
-<p>To install gh on OSX with <a href="https://github.com/mxcl/homebrew">Homebrew</a>, run:</p>
+<p>Installing on OSX is easiest with <a href="https://github.com/mxcl/homebrew">Homebrew</a>:</p>
 
 <pre><code>$ brew install https://raw.github.com/jingweno/gh/master/homebrew/gh.rb
 </code></pre>
 
-<h2>
-<a name="compilation" class="anchor" href="#compilation"><span class="octicon octicon-link"></span></a>Compilation</h2>
+<h3>
+<a name="standalone" class="anchor" href="#standalone"><span class="octicon octicon-link"></span></a>Standalone</h3>
+
+<p><code>gh</code> is easily installed as an executable.
+Download the <a href="http://bit.ly/go-gh">compiled binary forms of gh</a> for Darwin, Linux and Windows.</p>
+
+<h3>
+<a name="source" class="anchor" href="#source"><span class="octicon octicon-link"></span></a>Source</h3>
 
 <p>To compile gh from source, you need to have a <a href="http://golang.org/doc/install">Go development environment</a>, version 1.1 or better, and run:</p>
 
@@ -100,15 +107,38 @@ Please make sure you have git and hg installed.</p>
 Please take a look at the <a href="http://bit.ly/go-gh">built binaries</a> for the latest built binaries.
 I plan to implement automatic upgrade in the future.</p>
 
+<h3>
+<a name="homebrew-1" class="anchor" href="#homebrew-1"><span class="octicon octicon-link"></span></a>Homebrew</h3>
+
 <p>To upgrade gh on OSX with Homebrew, run:</p>
 
 <pre><code>$ brew upgrade https://raw.github.com/jingweno/gh/master/homebrew/gh.rb
 </code></pre>
 
+<h3>
+<a name="source-1" class="anchor" href="#source-1"><span class="octicon octicon-link"></span></a>Source</h3>
+
 <p>To upgrade gh from source, run:</p>
 
 <pre><code>$ go get -u github.com/jingweno/gh
 </code></pre>
+
+<h2>
+<a name="aliasing" class="anchor" href="#aliasing"><span class="octicon octicon-link"></span></a>Aliasing</h2>
+
+<p>It's best to use <code>gh</code> by aliasing it to <code>git</code>.
+All git commands will still work with <code>gh</code> adding some sugar.</p>
+
+<p><code>gh alias</code> displays instructions for the current shell. With the <code>-s</code> flag,
+it outputs a script suitable for <code>eval</code>.</p>
+
+<p>You should place this command in your <code>.bash_profile</code> or other startup
+script:</p>
+
+<pre><code>eval "$(hub alias -s)"
+</code></pre>
+
+<p>For more details, run <code>gh help alias</code>.</p>
 
 <h2>
 <a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
@@ -157,17 +187,17 @@ $ gh remote add origin
 </code></pre>
 
 <h3>
-<a name="gh-pull" class="anchor" href="#gh-pull"><span class="octicon octicon-link"></span></a>gh pull</h3>
+<a name="gh-pr" class="anchor" href="#gh-pr"><span class="octicon octicon-link"></span></a>gh pr</h3>
 
 <pre><code># while on a topic branch called "feature":
-$ gh pull
+$ gh pr
 [ opens text editor to edit title &amp; body for the request ]
 [ opened pull request on GitHub for "YOUR_USER:feature" ]
 
 # explicit pull base &amp; head:
-$ gh pull -b jingweno:master -h jingweno:feature
+$ gh pr -b jingweno:master -h jingweno:feature
 
-$ gh pull -i 123
+$ gh pr -i 123
 [ attached pull request to issue #123 ]
 </code></pre>
 
