@@ -39,13 +39,19 @@ gh commands are single, unhyphenated words that map to their Unix ancestors’ n
 
 ## Installation
 
-There are [compiled binary forms of gh](http://bit.ly/go-gh) for Darwin, Linux and Windows.
 
-To install gh on OSX with [Homebrew](https://github.com/mxcl/homebrew), run:
+### Homebrew
+
+Installing on OSX is easiest with [Homebrew](https://github.com/mxcl/homebrew):
 
     $ brew install https://raw.github.com/jingweno/gh/master/homebrew/gh.rb
 
-## Compilation
+### Standalone
+
+`gh` is easily installed as an executable.
+Download the [compiled binary forms of gh](http://bit.ly/go-gh) for Darwin, Linux and Windows.
+
+### Source
 
 To compile gh from source, you need to have a [Go development environment](http://golang.org/doc/install), version 1.1 or better, and run:
 
@@ -60,13 +66,32 @@ Since gh is under heavy development, I roll out new releases often.
 Please take a look at the [built binaries](http://bit.ly/go-gh) for the latest built binaries.
 I plan to implement automatic upgrade in the future.
 
+### Homebrew
+
 To upgrade gh on OSX with Homebrew, run:
 
     $ brew upgrade https://raw.github.com/jingweno/gh/master/homebrew/gh.rb
 
+### Source
+
 To upgrade gh from source, run:
 
     $ go get -u github.com/jingweno/gh
+
+## Aliasing
+
+It's best to use `gh` by aliasing it to `git`.
+All git commands will still work with `gh` adding some sugar.
+
+`gh alias` displays instructions for the current shell. With the `-s` flag,
+it outputs a script suitable for `eval`.
+
+You should place this command in your `.bash_profile` or other startup
+script:
+
+    eval "$(hub alias -s)"
+
+For more details, run `gh help alias`.
 
 ## Usage
 
