@@ -95,6 +95,19 @@ func (gh *GitHub) ExpandRemoteUrl(owner string, isSSH bool) (url string) {
 	return project.GitURL("", owner, isSSH)
 }
 
+func (gh *GitHub) CloneURL(name, owner string, isSSH bool) (url string) {
+	project := gh.Project
+	project.Name = name
+	if owner != "" {
+		project.Owner = owner
+	} else {
+		config := gh.config
+		project.Owner = config.FetchUser()
+	}
+	
+	return project.GitURL("", "", isSSH)
+}
+
 func (gh *GitHub) repo() octokat.Repo {
 	project := gh.Project
 	return octokat.Repo{project.Name, project.Owner}
