@@ -171,3 +171,11 @@ func New() *GitHub {
 
 	return &GitHub{project, &c}
 }
+
+func NewBlank() *GitHub {
+	project := Project{}
+	c, _ := loadConfig()
+	c.FetchUser()
+
+	return &GitHub{&project, &c}
+}
