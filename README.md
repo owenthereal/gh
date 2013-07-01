@@ -85,7 +85,7 @@ it outputs a script suitable for `eval`.
 You should place this command in your `.bash_profile` or other startup
 script:
 
-    eval "$(hub alias -s)"
+    eval "$(gh alias -s)"
 
 For more details, run `gh help alias`.
 
