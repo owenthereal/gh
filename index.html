@@ -34,7 +34,7 @@
           <h1>
 <a name="g--h--github" class="anchor" href="#g--h--github"><span class="octicon octicon-link"></span></a>g + h = github</h1>
 
-<p>Fast GitHub command line client implemented in Go. Current version is <a href="http://bit.ly/go-gh">0.9.0</a>.</p>
+<p>Fast GitHub command line client implemented in Go. Current version is <a href="http://bit.ly/go-gh">0.10.0</a>.</p>
 
 <h2>
 <a name="overview" class="anchor" href="#overview"><span class="octicon octicon-link"></span></a>Overview</h2>
@@ -131,7 +131,7 @@ it outputs a script suitable for <code>eval</code>.</p>
 <p>You should place this command in your <code>.bash_profile</code> or other startup
 script:</p>
 
-<pre><code>eval "$(hub alias -s)"
+<pre><code>eval "$(gh alias -s)"
 </code></pre>
 
 <p>For more details, run <code>gh help alias</code>.</p>
@@ -169,6 +169,22 @@ See 'gh help [command]' for more information about a command.
 &gt; git checkout --track -B foo-feature foo/feature
 
 $ gh checkout https://github.com/jingweno/gh/pull/35 custom-branch-name
+</code></pre>
+
+<h3>
+<a name="gh-clone" class="anchor" href="#gh-clone"><span class="octicon octicon-link"></span></a>gh clone</h3>
+
+<pre><code>$ gh clone jingweno/gh
+&gt; git clone git://github.com/jingweno/gh
+
+$ gh clone -p jingweno/gh
+&gt; git clone git@github.com:jingweno/gh.git
+
+$ gh clone jekyll_and_hype
+&gt; git clone git://github.com/YOUR_LOGIN/jekyll_and_hype.
+
+$ gh clone -p jekyll_and_hype
+&gt; git clone git@github.com:YOUR_LOGIN/jekyll_and_hype.git
 </code></pre>
 
 <h3>
@@ -281,11 +297,11 @@ $ gh compare -u other-user patch
 <li>gh fork (done)</li>
 <li>gh remote add (done)</li>
 <li>gh checkout (done)</li>
-<li>gh clone (in progress)</li>
+<li>gh clone (done)</li>
+<li>gh merge (in progress)</li>
 <li>gh fetch</li>
 <li>gh cherry-pick</li>
 <li>gh am, gh apply</li>
-<li>gh merge</li>
 <li>gh create</li>
 <li>gh init</li>
 <li>gh push</li>
