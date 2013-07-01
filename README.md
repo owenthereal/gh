@@ -100,6 +100,7 @@ For more details, run `gh help alias`.
         checkout          Switch the active branch to another branch
 
     Remote Commands:
+        clone             Clone a remote repository into a new directory
         remote            View and manage a set of remote repositories
 
     GitHub Commands:
