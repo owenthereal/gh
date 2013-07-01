@@ -119,6 +119,20 @@ For more details, run `gh help alias`.
 
     $ gh checkout https://github.com/jingweno/gh/pull/35 custom-branch-name
 
+### gh clone
+
+    $ gh clone jingweno/gh
+    > git clone git://github.com/jingweno/gh
+
+    $ gh clone -p jingweno/gh
+    > git clone git@github.com:jingweno/gh.git
+
+    $ gh clone jekyll_and_hype
+    > git clone git://github.com/YOUR_LOGIN/jekyll_and_hype.
+
+    $ gh clone -p jekyll_and_hype
+    > git clone git@github.com:YOUR_LOGIN/jekyll_and_hype.git
+
 ### gh remote
 
     $ gh remote add jingweno
