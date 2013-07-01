@@ -1,7 +1,6 @@
 package commands
 
 import (
-	"log"
 	"strings"
 	"github.com/jingweno/gh/github"
 )
@@ -25,23 +24,28 @@ var cmdClone = &Command{
 **/
 
 func clone(command *Command, args *Args) {
+	transformCloneArgs(args)
+}
+
+func transformCloneArgs(args *Args) {
 	isSSH := parseClonePrivateFlag(args)
 	ownerName := strings.Split(args.First(),"/")
 
-	if len(ownerName) <= 2 && len(ownerName) >= 1 {
+	if len(ownerName) == 1 || len(ownerName) == 2 {
 		   if len(ownerName) == 1 {
 			isSSH = true
 			ownerName = append(ownerName, ownerName[0])
 			ownerName[0] = ""
 		   }
 		   owner, name := ownerName[0], ownerName[1]
-		   url := cloneUrl(name, owner, isSSH)
+		   url := cloneURL(name, owner, isSSH)
 		   args.Remove(0)
 		   args.Append(url)
 	}
+
 }
 
-func cloneUrl(name, owner string, isSSH bool) string {
+func cloneURL(name, owner string, isSSH bool) string {
 	gh := github.NewBlank()
 	return gh.CloneURL(name, owner, isSSH)
 }
