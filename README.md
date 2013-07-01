@@ -214,11 +214,11 @@ See [RELEASE_NOTES.md](https://github.com/jingweno/gh/blob/master/RELEASE_NOTES.
 * gh fork (done)
 * gh remote add (done)
 * gh checkout (done)
-* gh clone (in progress)
+* gh clone (done)
+* gh merge (in progress)
 * gh fetch
 * gh cherry-pick
 * gh am, gh apply
-* gh merge
 * gh create
 * gh init
 * gh push
