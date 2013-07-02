@@ -34,7 +34,7 @@
           <h1>
 <a name="g--h--github" class="anchor" href="#g--h--github"><span class="octicon octicon-link"></span></a>g + h = github</h1>
 
-<p>Fast GitHub command line client implemented in Go. Current version is <a href="http://bit.ly/go-gh">0.10.0</a>.</p>
+<p>Fast GitHub command line client implemented in Go. Current version is <a href="http://bit.ly/go-gh">0.11.0</a>.</p>
 
 <h2>
 <a name="overview" class="anchor" href="#overview"><span class="octicon octicon-link"></span></a>Overview</h2>
@@ -147,6 +147,7 @@ Usage: gh [command] [options] [arguments]
 
 Branching Commands:
     checkout          Switch the active branch to another branch
+    merge             Join two or more development histories (branches) together
 
 Remote Commands:
     clone             Clone a remote repository into a new directory
@@ -170,6 +171,14 @@ See 'gh help [command]' for more information about a command.
 &gt; git checkout --track -B foo-feature foo/feature
 
 $ gh checkout https://github.com/jingweno/gh/pull/35 custom-branch-name
+</code></pre>
+
+<h3>
+<a name="gh-merge" class="anchor" href="#gh-merge"><span class="octicon octicon-link"></span></a>gh merge</h3>
+
+<pre><code>$ gh merge https://github.com/jingweno/gh/pull/73
+&gt; git fetch git://github.com/jingweno/gh.git +refs/heads/feature:refs/remotes/jingweno/feature
+&gt; git merge jingweno/feature --no-ff -m 'Merge pull request #73 from jingweno/feature...'
 </code></pre>
 
 <h3>
@@ -299,12 +308,12 @@ $ gh compare -u other-user patch
 <li>gh remote add (done)</li>
 <li>gh checkout (done)</li>
 <li>gh clone (done)</li>
-<li>gh merge (in progress)</li>
+<li>gh merge (done)</li>
+<li>gh init (in progress)</li>
 <li>gh fetch</li>
 <li>gh cherry-pick</li>
 <li>gh am, gh apply</li>
 <li>gh create</li>
-<li>gh init</li>
 <li>gh push</li>
 <li>gh submodule</li>
 </ul><h2>
@@ -319,7 +328,7 @@ $ gh compare -u other-user patch
 </ol><h2>
 <a name="contributors" class="anchor" href="#contributors"><span class="octicon octicon-link"></span></a>Contributors</h2>
 
-<p>See <a href="https://github.com/jingweno/gh/blob/master/CONTRIBUTORS.md">CONTRIBUTORS.md</a>.</p>
+<p>See <a href="https://github.com/jingweno/gh/graphs/contributors">Contributors</a>.</p>
 
 <h2>
 <a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
