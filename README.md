@@ -98,6 +98,7 @@ For more details, run `gh help alias`.
 
     Branching Commands:
         checkout          Switch the active branch to another branch
+        merge             Join two or more development histories (branches) together
 
     Remote Commands:
         clone             Clone a remote repository into a new directory
@@ -119,6 +120,12 @@ For more details, run `gh help alias`.
     > git checkout --track -B foo-feature foo/feature
 
     $ gh checkout https://github.com/jingweno/gh/pull/35 custom-branch-name
+
+### gh merge
+
+    $ gh merge https://github.com/jingweno/gh/pull/73
+    > git fetch git://github.com/jingweno/gh.git +refs/heads/feature:refs/remotes/jingweno/feature
+    > git merge jingweno/feature --no-ff -m 'Merge pull request #73 from jingweno/feature...'
 
 ### gh clone
 
@@ -230,12 +237,12 @@ See [RELEASE_NOTES.md](https://github.com/jingweno/gh/blob/master/RELEASE_NOTES.
 * gh remote add (done)
 * gh checkout (done)
 * gh clone (done)
-* gh merge (in progress)
+* gh merge (done)
+* gh init (in progress)
 * gh fetch
 * gh cherry-pick
 * gh am, gh apply
 * gh create
-* gh init
 * gh push
 * gh submodule
 
@@ -249,7 +256,7 @@ See [RELEASE_NOTES.md](https://github.com/jingweno/gh/blob/master/RELEASE_NOTES.
 
 ## Contributors
 
-See [CONTRIBUTORS.md](https://github.com/jingweno/gh/blob/master/CONTRIBUTORS.md).
+See [Contributors](https://github.com/jingweno/gh/graphs/contributors).
 
 ## License
 
