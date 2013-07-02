@@ -2,7 +2,7 @@
 
 ![gh](http://owenou.com/gh/images/gangnamtocat.png)
 
-Fast GitHub command line client implemented in Go. Current version is [0.10.0](http://bit.ly/go-gh).
+Fast GitHub command line client implemented in Go. Current version is [0.11.0](http://bit.ly/go-gh).
 
 ## Overview
 
