@@ -111,7 +111,7 @@ namespace :release do
         raise "More than one version found among #{VERSION_FILES}"
       end
 
-      new_version = new_versions.first
+      new_version = "v#{new_versions.first}"
       msg = "Bump version to #{new_version}"
       Git.commit_all(msg)
       Git.create_tag(new_version, msg)
