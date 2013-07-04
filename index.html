@@ -34,7 +34,7 @@
           <h1>
 <a name="g--h--github" class="anchor" href="#g--h--github"><span class="octicon octicon-link"></span></a>g + h = github</h1>
 
-<p>Fast GitHub command line client implemented in Go. Current version is <a href="http://bit.ly/go-gh">0.11.0</a>.</p>
+<p>Fast GitHub command line client implemented in Go. Current version is <a href="http://bit.ly/go-gh">0.12.0</a>.</p>
 
 <h2>
 <a name="overview" class="anchor" href="#overview"><span class="octicon octicon-link"></span></a>Overview</h2>
@@ -146,6 +146,9 @@ script:</p>
 Usage: gh [command] [options] [arguments]
 
 Branching Commands:
+    init              Create an empty git repository or reinitialize an existing one
+
+Branching Commands:
     checkout          Switch the active branch to another branch
     merge             Join two or more development histories (branches) together
 
@@ -161,6 +164,14 @@ GitHub Commands:
     compare           Open a compare page on GitHub
 
 See 'gh help [command]' for more information about a command.
+</code></pre>
+
+<h3>
+<a name="git-init" class="anchor" href="#git-init"><span class="octicon octicon-link"></span></a>git init</h3>
+
+<pre><code>$ gh init -g
+&gt; git init
+&gt; git remote add origin git@github.com:YOUR_USER/REPO.git
 </code></pre>
 
 <h3>
@@ -309,8 +320,8 @@ $ gh compare -u other-user patch
 <li>gh checkout (done)</li>
 <li>gh clone (done)</li>
 <li>gh merge (done)</li>
-<li>gh init (in progress)</li>
-<li>gh fetch</li>
+<li>gh init (done)</li>
+<li>gh fetch (in progress)</li>
 <li>gh cherry-pick</li>
 <li>gh am, gh apply</li>
 <li>gh create</li>
