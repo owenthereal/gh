@@ -237,23 +237,7 @@ See [Releases](https://github.com/jingweno/gh/releases).
 
 ## Roadmap
 
-* authentication (done)
-* gh pull-request (done)
-* gh ci-status (done)
-* gh browse (done)
-* gh compare (done)
-* gh fork (done)
-* gh remote add (done)
-* gh checkout (done)
-* gh clone (done)
-* gh merge (done)
-* gh init (done)
-* gh fetch (in progress)
-* gh cherry-pick
-* gh am, gh apply
-* gh create
-* gh push
-* gh submodule
+See [Issues](https://github.com/jingweno/gh/issues?labels=feature&page=1&state=open).
 
 ## Contributing
 
