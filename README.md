@@ -2,7 +2,7 @@
 
 ![gh](http://owenou.com/gh/images/gangnamtocat.png)
 
-Fast GitHub command line client implemented in Go. Current version is [0.12.0](http://bit.ly/go-gh).
+Fast GitHub command line client implemented in Go. Current version is [0.11.0](http://bit.ly/go-gh).
 
 ## Overview
 
@@ -96,7 +96,7 @@ For more details, run `gh help alias`.
     $ gh help
     Usage: gh [command] [options] [arguments]
 
-    Branching Commands:
+    Basic Commands:
         init              Create an empty git repository or reinitialize an existing one
 
     Branching Commands:
