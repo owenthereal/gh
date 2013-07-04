@@ -97,6 +97,9 @@ For more details, run `gh help alias`.
     Usage: gh [command] [options] [arguments]
 
     Branching Commands:
+        init              Create an empty git repository or reinitialize an existing one
+
+    Branching Commands:
         checkout          Switch the active branch to another branch
         merge             Join two or more development histories (branches) together
 
@@ -112,6 +115,12 @@ For more details, run `gh help alias`.
         compare           Open a compare page on GitHub
 
     See 'gh help [command]' for more information about a command.
+
+### git init
+
+    $ gh init -g
+    > git init
+    > git remote add origin git@github.com:YOUR_USER/REPO.git
 
 ### gh checkout
 
@@ -238,8 +247,8 @@ See [RELEASE_NOTES.md](https://github.com/jingweno/gh/blob/master/RELEASE_NOTES.
 * gh checkout (done)
 * gh clone (done)
 * gh merge (done)
-* gh init (in progress)
-* gh fetch
+* gh init (done)
+* gh fetch (in progress)
 * gh cherry-pick
 * gh am, gh apply
 * gh create
