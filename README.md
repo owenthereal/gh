@@ -233,7 +233,7 @@ For more details, run `gh help alias`.
 
 ## Release Notes
 
-See [RELEASE_NOTES.md](https://github.com/jingweno/gh/blob/master/RELEASE_NOTES.md).
+See [Releases](https://github.com/jingweno/gh/releases).
 
 ## Roadmap
 
