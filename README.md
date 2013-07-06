@@ -94,27 +94,9 @@ For more details, run `gh help alias`.
 ### gh help
     
     $ gh help
-    Usage: gh [command] [options] [arguments]
-
-    Basic Commands:
-        init              Create an empty git repository or reinitialize an existing one
-
-    Branching Commands:
-        checkout          Switch the active branch to another branch
-        merge             Join two or more development histories (branches) together
-
-    Remote Commands:
-        clone             Clone a remote repository into a new directory
-        remote            View and manage a set of remote repositories
-
-    GitHub Commands:
-        pull-request      Open a pull request on GitHub
-        fork              Make a fork of a remote repository on GitHub and add as remote
-        ci-status         Show CI status of a commit
-        browse            Open a GitHub page in the default browser
-        compare           Open a compare page on GitHub
-
-    See 'gh help [command]' for more information about a command.
+    [display help for all commands]
+    $ gh help pull-request
+    [display help for pull-request]
 
 ### git init
 
