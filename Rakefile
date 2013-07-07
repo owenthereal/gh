@@ -173,7 +173,7 @@ namespace :build do
 
   task :build_gh do
     puts "Building for #{OS.type}..."
-    puts `goxc -wd=. -os=#{OS.type}`
+    puts `goxc -wd=. -os=#{OS.type} -c=#{OS.type}`
   end
 
   task :move_to_dropbox do
