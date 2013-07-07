@@ -163,7 +163,7 @@ namespace :build do
 
   task :update_goxc do
     puts "Updating goxc..."
-    result = system "go get -d github.com/laher/goxc"
+    result = system "go get -u github.com/laher/goxc"
     raise "Fail to update goxc" unless result
   end
 
