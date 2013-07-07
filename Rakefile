@@ -173,11 +173,7 @@ namespace :build do
 
   task :build_gh do
     puts "Building for #{OS.type}..."
-    build_cmd = "goxc -wd=. -os=#{OS.type}"
-    if OS.darwin?
-      build_cmd = "#{build_cmd} -c=#{OS.type}"
-    end
-    puts `#{build_cmd}`
+    puts `goxc -wd=. -os=#{OS.type} -c=#{OS.type}`
   end
 
   task :move_to_dropbox do
