@@ -165,6 +165,23 @@ For more details, run `gh help alias`.
     $ gh fork --no-remote
     [ repo forked on GitHub ]
 
+### gh create
+
+    $ gh create
+    ... create repo on github ...
+    > git remote add -f origin git@github.com:YOUR_USER/CURRENT_REPO.git
+
+    # with description:
+    $ gh create -d 'It shall be mine, all mine!'
+
+    $ gh create recipes
+    [ repo created on GitHub ]
+    > git remote add origin git@github.com:YOUR_USER/recipes.git
+
+    $ gh create sinatra/recipes
+    [ repo created in GitHub organization ]
+    > git remote add origin git@github.com:sinatra/recipes.git
+
 ### gh ci-status
 
     $ gh ci-status
