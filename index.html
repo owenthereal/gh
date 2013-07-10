@@ -34,7 +34,7 @@
           <h1>
 <a name="g--h--github" class="anchor" href="#g--h--github"><span class="octicon octicon-link"></span></a>g + h = github</h1>
 
-<p>Fast GitHub command line client implemented in Go. Current version is <a href="http://bit.ly/go-gh">0.13.1</a>.</p>
+<p>Fast GitHub command line client implemented in Go. Current version is <a href="http://bit.ly/go-gh">0.14.0</a>.</p>
 
 <h2>
 <a name="overview" class="anchor" href="#overview"><span class="octicon octicon-link"></span></a>Overview</h2>
@@ -227,6 +227,25 @@ $ gh pull-request -i 123
 
 $ gh fork --no-remote
 [ repo forked on GitHub ]
+</code></pre>
+
+<h3>
+<a name="gh-create" class="anchor" href="#gh-create"><span class="octicon octicon-link"></span></a>gh create</h3>
+
+<pre><code>$ gh create
+... create repo on github ...
+&gt; git remote add -f origin git@github.com:YOUR_USER/CURRENT_REPO.git
+
+# with description:
+$ gh create -d 'It shall be mine, all mine!'
+
+$ gh create recipes
+[ repo created on GitHub ]
+&gt; git remote add origin git@github.com:YOUR_USER/recipes.git
+
+$ gh create sinatra/recipes
+[ repo created in GitHub organization ]
+&gt; git remote add origin git@github.com:sinatra/recipes.git
 </code></pre>
 
 <h3>
