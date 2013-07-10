@@ -132,6 +132,22 @@ For more details, run `gh help alias`.
     $ gh clone -p jekyll_and_hype
     > git clone git@github.com:YOUR_LOGIN/jekyll_and_hype.git
 
+### gh fetch
+
+    $ gh fetch jingweno
+    > git remote add jingweno git://github.com/jingweno/REPO.git
+    > git fetch jingweno
+
+    $ git fetch jingweno,foo
+    > git remote add jingweno ...
+    > git remote add foo ...
+    > git fetch --multiple jingweno foo
+
+    $ git fetch --multiple jingweno foo
+    > git remote add jingweno ...
+    > git remote add foo ...
+    > git fetch --multiple jingweno foo
+
 ### gh remote
 
     $ gh remote add jingweno
