@@ -34,7 +34,7 @@
           <h1>
 <a name="g--h--github" class="anchor" href="#g--h--github"><span class="octicon octicon-link"></span></a>g + h = github</h1>
 
-<p>Fast GitHub command line client implemented in Go. Current version is <a href="http://bit.ly/go-gh">0.14.0</a>.</p>
+<p>Fast GitHub command line client implemented in Go. Current version is <a href="http://bit.ly/go-gh">0.15.0</a>.</p>
 
 <h2>
 <a name="overview" class="anchor" href="#overview"><span class="octicon octicon-link"></span></a>Overview</h2>
@@ -188,6 +188,24 @@ $ gh clone jekyll_and_hype
 
 $ gh clone -p jekyll_and_hype
 &gt; git clone git@github.com:YOUR_LOGIN/jekyll_and_hype.git
+</code></pre>
+
+<h3>
+<a name="gh-fetch" class="anchor" href="#gh-fetch"><span class="octicon octicon-link"></span></a>gh fetch</h3>
+
+<pre><code>$ gh fetch jingweno
+&gt; git remote add jingweno git://github.com/jingweno/REPO.git
+&gt; git fetch jingweno
+
+$ git fetch jingweno,foo
+&gt; git remote add jingweno ...
+&gt; git remote add foo ...
+&gt; git fetch --multiple jingweno foo
+
+$ git fetch --multiple jingweno foo
+&gt; git remote add jingweno ...
+&gt; git remote add foo ...
+&gt; git fetch --multiple jingweno foo
 </code></pre>
 
 <h3>
