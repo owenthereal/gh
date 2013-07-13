@@ -98,7 +98,7 @@ For more details, run `gh help alias`.
     $ gh help pull-request
     [display help for pull-request]
 
-### git init
+### gh init
 
     $ gh init -g
     > git init
