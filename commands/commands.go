@@ -62,6 +62,7 @@ var Remote = []*Command{
 	cmdFetch,
 	cmdPush,
 	cmdRemote,
+	cmdSubmodule,
 }
 
 var GitHub = []*Command{
