@@ -172,6 +172,20 @@ For more details, run `gh help alias`.
     $ gh pull-request -i 123
     [ attached pull request to issue #123 ]
 
+### gh apply
+
+    $ gh apply https://github.com/jingweno/gh/pull/55
+    > curl https://github.com/jingweno/gh/pull/55.patch -o /tmp/55.patch
+    > git apply /tmp/55.patch
+
+    $ git apply --ignore-whitespace https://github.com/jingweno/gh/commit/fdb9921
+    > curl https://github.com/jingweno/gh/commit/fdb9921.patch -o /tmp/fdb9921.patch
+    > git apply --ignore-whitespace /tmp/fdb9921.patch
+
+    $ git apply https://gist.github.com/8da7fb575debd88c54cf
+    > curl https://gist.github.com/8da7fb575debd88c54cf.txt -o /tmp/gist-8da7fb575debd88c54cf.txt
+    > git apply /tmp/gist-8da7fb575debd88c54cf.txt
+
 ### gh fork
 
     $ gh fork
