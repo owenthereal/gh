@@ -34,7 +34,7 @@
           <h1>
 <a name="g--h--github" class="anchor" href="#g--h--github"><span class="octicon octicon-link"></span></a>g + h = github</h1>
 
-<p>Fast GitHub command line client implemented in Go. Current version is <a href="http://bit.ly/go-gh">0.15.0</a>.</p>
+<p>Fast GitHub command line client implemented in Go. Current version is <a href="http://bit.ly/go-gh">0.17.0</a>.</p>
 
 <h2>
 <a name="overview" class="anchor" href="#overview"><span class="octicon octicon-link"></span></a>Overview</h2>
@@ -149,11 +149,23 @@ $ gh help pull-request
 </code></pre>
 
 <h3>
-<a name="git-init" class="anchor" href="#git-init"><span class="octicon octicon-link"></span></a>git init</h3>
+<a name="gh-init" class="anchor" href="#gh-init"><span class="octicon octicon-link"></span></a>gh init</h3>
 
 <pre><code>$ gh init -g
 &gt; git init
 &gt; git remote add origin git@github.com:YOUR_USER/REPO.git
+</code></pre>
+
+<h3>
+<a name="gh-push" class="anchor" href="#gh-push"><span class="octicon octicon-link"></span></a>gh push</h3>
+
+<pre><code>$ gh push origin,staging,qa bert_timeout
+&gt; git push origin bert_timeout
+&gt; git push staging bert_timeout
+&gt; git push qa bert_timeout
+
+$ gh push origin
+&gt; git push origin HEAD
 </code></pre>
 
 <h3>
@@ -234,6 +246,22 @@ $ gh pull-request -b jingweno:master -h jingweno:feature
 
 $ gh pull-request -i 123
 [ attached pull request to issue #123 ]
+</code></pre>
+
+<h3>
+<a name="gh-apply" class="anchor" href="#gh-apply"><span class="octicon octicon-link"></span></a>gh apply</h3>
+
+<pre><code>$ gh apply https://github.com/jingweno/gh/pull/55
+&gt; curl https://github.com/jingweno/gh/pull/55.patch -o /tmp/55.patch
+&gt; git apply /tmp/55.patch
+
+$ git apply --ignore-whitespace https://github.com/jingweno/gh/commit/fdb9921
+&gt; curl https://github.com/jingweno/gh/commit/fdb9921.patch -o /tmp/fdb9921.patch
+&gt; git apply --ignore-whitespace /tmp/fdb9921.patch
+
+$ git apply https://gist.github.com/8da7fb575debd88c54cf
+&gt; curl https://gist.github.com/8da7fb575debd88c54cf.txt -o /tmp/gist-8da7fb575debd88c54cf.txt
+&gt; git apply /tmp/gist-8da7fb575debd88c54cf.txt
 </code></pre>
 
 <h3>
