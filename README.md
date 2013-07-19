@@ -104,6 +104,16 @@ For more details, run `gh help alias`.
     > git init
     > git remote add origin git@github.com:YOUR_USER/REPO.git
 
+### gh push
+
+    $ gh push origin,staging,qa bert_timeout
+    > git push origin bert_timeout
+    > git push staging bert_timeout
+    > git push qa bert_timeout
+
+    $ gh push origin
+    > git push origin HEAD
+
 ### gh checkout
 
     $ gh checkout https://github.com/jingweno/gh/pull/35
