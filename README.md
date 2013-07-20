@@ -183,6 +183,17 @@ For more details, run `gh help alias`.
     $ gh remote add origin
     > git remote add -f YOUR_USER git://github.com/YOUR_USER/CURRENT_REPO.git    
 
+### gh submodule
+
+    $ gh submodule add jingweno/gh vendor/gh
+    > git submodule add git://github.com/jingweno/gh.git vendor/gh
+
+    $ gh submodule add -p jingweno/gh vendor/gh
+    > git submodule add git@github.com:jingweno/gh.git vendor/gh
+
+    $ gh submodule add -b gh --name gh jingweno/gh vendor/gh
+    > git submodule add -b gh --name gh git://github.com/jingweno/gh.git vendor/gh
+
 ### gh pull-request
 
     # while on a topic branch called "feature":
