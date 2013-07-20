@@ -34,7 +34,7 @@
           <h1>
 <a name="g--h--github" class="anchor" href="#g--h--github"><span class="octicon octicon-link"></span></a>g + h = github</h1>
 
-<p>Fast GitHub command line client implemented in Go. Current version is <a href="http://bit.ly/go-gh">0.18.0</a>.</p>
+<p>Fast GitHub command line client implemented in Go. Current version is <a href="http://bit.ly/go-gh">0.19.0</a>.</p>
 
 <h2>
 <a name="overview" class="anchor" href="#overview"><span class="octicon octicon-link"></span></a>Overview</h2>
@@ -247,6 +247,19 @@ $ gh remote add -p jingweno
 
 $ gh remote add origin
 &gt; git remote add -f YOUR_USER git://github.com/YOUR_USER/CURRENT_REPO.git    
+</code></pre>
+
+<h3>
+<a name="gh-submodule" class="anchor" href="#gh-submodule"><span class="octicon octicon-link"></span></a>gh submodule</h3>
+
+<pre><code>$ gh submodule add jingweno/gh vendor/gh
+&gt; git submodule add git://github.com/jingweno/gh.git vendor/gh
+
+$ gh submodule add -p jingweno/gh vendor/gh
+&gt; git submodule add git@github.com:jingweno/gh.git vendor/gh
+
+$ gh submodule add -b gh --name gh jingweno/gh vendor/gh
+&gt; git submodule add -b gh --name gh git://github.com/jingweno/gh.git vendor/gh
 </code></pre>
 
 <h3>
