@@ -158,6 +158,20 @@ For more details, run `gh help alias`.
     > git remote add foo ...
     > git fetch --multiple jingweno foo
 
+### gh cherry-pick
+
+    $ gh cherry-pick https://github.com/jingweno/gh/commit/a319d88#comments
+    > git remote add -f jingweno git://github.com/jingweno/gh.git
+    > git cherry-pick a319d88
+
+    $ gh cherry-pick jingweno@a319d88
+    > git remote add -f jingweno git://github.com/jingweno/gh.git
+    > git cherry-pick a319d88
+
+    $ gh cherry-pick jingweno@SHA
+    > git fetch jingweno
+    > git cherry-pick SHA
+
 ### gh remote
 
     $ gh remote add jingweno
