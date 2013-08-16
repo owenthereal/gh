@@ -1,4 +1,4 @@
-# g + h = github [![Build Status](https://drone.io/github.com/jingweno/gh/status.png)](https://drone.io/github.com/jingweno/gh/latest)
+# g + h = github [![Build Status](https://travis-ci.org/jingweno/gh.png?branch=master)](https://travis-ci.org/jingweno/gh)
 
 ![gh](http://owenou.com/gh/images/gangnamtocat.png)
 
