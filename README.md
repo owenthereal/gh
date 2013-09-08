@@ -7,7 +7,7 @@ Fast GitHub command line client implemented in Go. Current version is [v0.20.1](
 ## Overview
 
 gh is a command line client to GitHub. It's designed to run as fast as possible with easy installation across operating systems.
-If you like gh, please also take a look at [hub](https://github.com/defunkt/hub). Hub is a reference implementation to gh.
+If you like gh, please also take a look at [hub](https://github.com/github/hub). Hub is a reference implementation to gh.
 
 ## Motivation
 
