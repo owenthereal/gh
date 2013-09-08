@@ -2,7 +2,7 @@
 
 ![gh](http://owenou.com/gh/images/gangnamtocat.png)
 
-Fast GitHub command line client implemented in Go. Current version is [0.20.1](http://bit.ly/go-gh).
+Fast GitHub command line client implemented in Go. Current version is [v0.20.1](https://github.com/jingweno/gh/releases/tag/v0.20.1).
 
 ## Overview
 
@@ -31,7 +31,7 @@ gh is fully implemented in the Go language and is designed to run across operati
 
 **Easy installation**
 
-There're no pre-requirements to run gh. Download the [binary](http://bit.ly/go-gh) and go!
+There're no pre-requirements to install gh. Download the [binary](https://github.com/jingweno/gh/releases) and go!
 
 ## Installation
 
@@ -45,7 +45,7 @@ Installing on OSX is easiest with [Homebrew](https://github.com/mxcl/homebrew):
 ### Standalone
 
 `gh` is easily installed as an executable.
-Download the [compiled binary forms of gh](http://bit.ly/go-gh) for Darwin, Linux and Windows.
+Download the [compiled binary forms of gh](https://github.com/jingweno/gh/releases) for Darwin, Linux and Windows.
 
 ### Source
 
@@ -59,7 +59,7 @@ Please make sure you have git and hg installed.
 ## Upgrade
 
 Since gh is under heavy development, I roll out new releases often.
-Please take a look at the [built binaries](http://bit.ly/go-gh) for the latest built binaries.
+Please take a look at the [built binaries](https://github.com/jingweno/gh/releases) for the latest built binaries.
 I plan to implement automatic upgrade in the future.
 
 ### Homebrew
