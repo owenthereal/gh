@@ -295,6 +295,11 @@ For more details, run `gh help alias`.
     $ gh compare -u other-user patch
     > open https://github.com/other-user/REPO/compare/patch
 
+### gh release (beta)
+
+    $ gh release
+    > (prints a list of releases of YOUR_USER/CURRENT_REPO)
+
 ## Release Notes
 
 See [Releases](https://github.com/jingweno/gh/releases).
