@@ -35,7 +35,6 @@ There're no pre-requirements to install gh. Download the [binary](https://github
 
 ## Installation
 
-
 ### Homebrew
 
 Installing on OSX is easiest with [Homebrew](https://github.com/mxcl/homebrew):
@@ -310,11 +309,23 @@ See [Issues](https://github.com/jingweno/gh/issues?labels=feature&page=1&state=o
 
 ## Contributing
 
-1. Fork it
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
+### Bootstrap
+
+```
+$ ./script/bootstrap
+```
+
+### Build
+
+```
+$ ./script/build
+```
+
+### Test
+
+```
+$ ./script/test
+```
 
 ## Contributors
 
