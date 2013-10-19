@@ -201,7 +201,7 @@ For more details, run `gh help alias`.
     [ opened pull request on GitHub for "YOUR_USER:feature" ]
 
     # explicit pull base & head:
-    $ gh pull-request -b jingweno:master -h jingweno:feature
+    $ gh pull-request -b jingweno:master -d jingweno:feature
 
     $ gh pull-request -i 123
     [ attached pull request to issue #123 ]
