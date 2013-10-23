@@ -330,7 +330,7 @@ This script will build gh. It will also perform script/bootstrap, which gets all
 $ ./script/build
 ```
 
-## script/Test
+## script/test
 
 For your convenience, there is a script to run the tests.
 
