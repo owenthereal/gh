@@ -299,6 +299,13 @@ For more details, run `gh help alias`.
     $ gh release
     > (prints a list of releases of YOUR_USER/CURRENT_REPO)
 
+
+### gh issues (beta)
+
+    $ gh issues
+    > (prints a list of issues for YOUR_USER/CURRENT_REPO)
+
+
 ## Release Notes
 
 See [Releases](https://github.com/jingweno/gh/releases).
