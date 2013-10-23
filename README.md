@@ -307,21 +307,25 @@ See [Releases](https://github.com/jingweno/gh/releases).
 
 See [Issues](https://github.com/jingweno/gh/issues?labels=feature&page=1&state=open).
 
-## Contributing
+## script/bootstrap
 
-### Bootstrap
+This script will get all the dependencies ready so you can start hacking on gh.
 
 ```
 $ ./script/bootstrap
 ```
 
-### Build
+## script/build
+
+This script will build gh. It will also perform script/bootstrap, which gets all dependencies and all that jazz.
 
 ```
 $ ./script/build
 ```
 
-### Test
+## script/Test
+
+For your convenience, there is a script to run the tests.
 
 ```
 $ ./script/test
