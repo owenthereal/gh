@@ -384,6 +384,13 @@ $ gh compare -u other-user patch
 &gt; (prints a list of releases of YOUR_USER/CURRENT_REPO)
 </code></pre>
 
+<h3>
+<a name="gh-issues-beta" class="anchor" href="#gh-issues-beta"><span class="octicon octicon-link"></span></a>gh issues (beta)</h3>
+
+<pre><code>$ gh issues
+&gt; (prints a list of issues for YOUR_USER/CURRENT_REPO)
+</code></pre>
+
 <h2>
 <a name="release-notes" class="anchor" href="#release-notes"><span class="octicon octicon-link"></span></a>Release Notes</h2>
 
@@ -395,22 +402,25 @@ $ gh compare -u other-user patch
 <p>See <a href="https://github.com/jingweno/gh/issues?labels=feature&amp;page=1&amp;state=open">Issues</a>.</p>
 
 <h2>
-<a name="contributing" class="anchor" href="#contributing"><span class="octicon octicon-link"></span></a>Contributing</h2>
+<a name="scriptbootstrap" class="anchor" href="#scriptbootstrap"><span class="octicon octicon-link"></span></a>script/bootstrap</h2>
 
-<h3>
-<a name="bootstrap" class="anchor" href="#bootstrap"><span class="octicon octicon-link"></span></a>Bootstrap</h3>
+<p>This script will get all the dependencies ready so you can start hacking on gh.</p>
 
 <pre><code>$ ./script/bootstrap
 </code></pre>
 
-<h3>
-<a name="build" class="anchor" href="#build"><span class="octicon octicon-link"></span></a>Build</h3>
+<h2>
+<a name="scriptbuild" class="anchor" href="#scriptbuild"><span class="octicon octicon-link"></span></a>script/build</h2>
+
+<p>This script will build gh. It will also perform script/bootstrap, which gets all dependencies and all that jazz.</p>
 
 <pre><code>$ ./script/build
 </code></pre>
 
-<h3>
-<a name="test" class="anchor" href="#test"><span class="octicon octicon-link"></span></a>Test</h3>
+<h2>
+<a name="scripttest" class="anchor" href="#scripttest"><span class="octicon octicon-link"></span></a>script/test</h2>
+
+<p>For your convenience, there is a script to run the tests.</p>
 
 <pre><code>$ ./script/test
 </code></pre>
