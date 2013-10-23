@@ -332,7 +332,7 @@ $ ./script/build
 
 ## script/release
 
-This script will cross-compile gh for current release.
+This script will cross-compile gh and prepare for release.
 
 ```
 $ ./script/release
