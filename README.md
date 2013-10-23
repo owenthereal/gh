@@ -330,6 +330,14 @@ This script will build gh. It will also perform script/bootstrap, which gets all
 $ ./script/build
 ```
 
+## script/release
+
+This script will cross-compile gh for current release.
+
+```
+$ ./script/release
+```
+
 ## script/test
 
 For your convenience, there is a script to run the tests.
