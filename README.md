@@ -46,6 +46,10 @@ Installing on OSX is easiest with [Homebrew](https://github.com/mxcl/homebrew):
 `gh` is easily installed as an executable.
 Download the [compiled binary forms of gh](https://github.com/jingweno/gh/releases) for Darwin, Linux and Windows.
 
+### Boxen
+
+If you're using [boxen](http://boxen.github.com/), there's a [puppet-gh](https://github.com/jingweno/puppet-gh) module to install and set up `gh`.
+
 ### Source
 
 To compile gh from source, you need to have a [Go development environment](http://golang.org/doc/install), version 1.1 or better, and run:
