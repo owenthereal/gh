@@ -48,7 +48,7 @@ Download the [compiled binary forms of gh](https://github.com/jingweno/gh/releas
 
 ### Boxen
 
-If you're using [boxen](http://boxen.github.com/), there's a [puppet-gh](https://github.com/jingweno/puppet-gh) module to install and set up `gh`.
+If you're using [boxen](http://boxen.github.com/), there's a [puppet-gh](https://github.com/boxen/puppet-gh) module to install and set up `gh`.
 
 ### Source
 
