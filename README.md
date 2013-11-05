@@ -151,12 +151,12 @@ For more details, run `gh help alias`.
     > git remote add jingweno git://github.com/jingweno/REPO.git
     > git fetch jingweno
 
-    $ git fetch jingweno,foo
+    $ gh fetch jingweno,foo
     > git remote add jingweno ...
     > git remote add foo ...
     > git fetch --multiple jingweno foo
 
-    $ git fetch --multiple jingweno foo
+    $ gh fetch --multiple jingweno foo
     > git remote add jingweno ...
     > git remote add foo ...
     > git fetch --multiple jingweno foo
@@ -216,11 +216,11 @@ For more details, run `gh help alias`.
     > curl https://github.com/jingweno/gh/pull/55.patch -o /tmp/55.patch
     > git apply /tmp/55.patch
 
-    $ git apply --ignore-whitespace https://github.com/jingweno/gh/commit/fdb9921
+    $ gh apply --ignore-whitespace https://github.com/jingweno/gh/commit/fdb9921
     > curl https://github.com/jingweno/gh/commit/fdb9921.patch -o /tmp/fdb9921.patch
     > git apply --ignore-whitespace /tmp/fdb9921.patch
 
-    $ git apply https://gist.github.com/8da7fb575debd88c54cf
+    $ gh apply https://gist.github.com/8da7fb575debd88c54cf
     > curl https://gist.github.com/8da7fb575debd88c54cf.txt -o /tmp/gist-8da7fb575debd88c54cf.txt
     > git apply /tmp/gist-8da7fb575debd88c54cf.txt
 
