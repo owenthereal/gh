@@ -215,12 +215,12 @@ $ gh clone -p jekyll_and_hype
 &gt; git remote add jingweno git://github.com/jingweno/REPO.git
 &gt; git fetch jingweno
 
-$ git fetch jingweno,foo
+$ gh fetch jingweno,foo
 &gt; git remote add jingweno ...
 &gt; git remote add foo ...
 &gt; git fetch --multiple jingweno foo
 
-$ git fetch --multiple jingweno foo
+$ gh fetch --multiple jingweno foo
 &gt; git remote add jingweno ...
 &gt; git remote add foo ...
 &gt; git fetch --multiple jingweno foo
@@ -290,11 +290,11 @@ $ gh pull-request -i 123
 &gt; curl https://github.com/jingweno/gh/pull/55.patch -o /tmp/55.patch
 &gt; git apply /tmp/55.patch
 
-$ git apply --ignore-whitespace https://github.com/jingweno/gh/commit/fdb9921
+$ gh apply --ignore-whitespace https://github.com/jingweno/gh/commit/fdb9921
 &gt; curl https://github.com/jingweno/gh/commit/fdb9921.patch -o /tmp/fdb9921.patch
 &gt; git apply --ignore-whitespace /tmp/fdb9921.patch
 
-$ git apply https://gist.github.com/8da7fb575debd88c54cf
+$ gh apply https://gist.github.com/8da7fb575debd88c54cf
 &gt; curl https://gist.github.com/8da7fb575debd88c54cf.txt -o /tmp/gist-8da7fb575debd88c54cf.txt
 &gt; git apply /tmp/gist-8da7fb575debd88c54cf.txt
 </code></pre>
