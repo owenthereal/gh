@@ -12,15 +12,20 @@ import (
 	"regexp"
 )
 
+var (
+	GitHubHost string = "github.com"
+)
+
 type Config struct {
 	User  string `json:"user"`
 	Token string `json:"token"`
+	Host  string `json:"host"`
 }
 
 func (c *Config) FetchUser() string {
 	if c.User == "" {
 		var user string
-		msg := fmt.Sprintf("%s username: ", GitHubHost)
+		msg := fmt.Sprintf("%s username: ", c.Host)
 		fmt.Print(msg)
 		fmt.Scanln(&user)
 		c.User = user
@@ -30,7 +35,7 @@ func (c *Config) FetchUser() string {
 }
 
 func (c *Config) FetchPassword() string {
-	msg := fmt.Sprintf("%s password for %s (never stored): ", GitHubHost, c.User)
+	msg := fmt.Sprintf("%s password for %s (never stored): ", c.Host, c.User)
 	fmt.Print(msg)
 
 	pass := gopass.GetPasswd()

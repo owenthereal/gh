@@ -6,7 +6,6 @@ import (
 )
 
 const (
-	GitHubHost  string = "github.com"
 	OAuthAppURL string = "http://owenou.com/gh"
 )
 
