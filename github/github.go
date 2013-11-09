@@ -19,7 +19,7 @@ func (gh *GitHub) PullRequest(id string) (pr *octokit.PullRequest, err error) {
 	client := gh.octokit()
 	prService, err := client.PullRequests(&octokit.PullRequestsURL, octokit.M{"owner": gh.Project.Owner, "repo": gh.Project.Name, "number": id})
 	if err != nil {
-		return
+		return nil, err
 	}
 
 	pr, result := prService.Get()
@@ -27,14 +27,14 @@ func (gh *GitHub) PullRequest(id string) (pr *octokit.PullRequest, err error) {
 		err = result.Err
 	}
 
-	return
+	return pr, nil
 }
 
 func (gh *GitHub) CreatePullRequest(base, head, title, body string) (pr *octokit.PullRequest, err error) {
 	client := gh.octokit()
 	prService, err := client.PullRequests(&octokit.PullRequestsURL, octokit.M{"owner": gh.Project.Owner, "repo": gh.Project.Name})
 	if err != nil {
-		return
+		return nil, err
 	}
 
 	params := octokit.PullRequestParams{Base: base, Head: head, Title: title, Body: body}
@@ -43,14 +43,14 @@ func (gh *GitHub) CreatePullRequest(base, head, title, body string) (pr *octokit
 		err = result.Err
 	}
 
-	return
+	return pr, nil
 }
 
 func (gh *GitHub) CreatePullRequestForIssue(base, head, issue string) (pr *octokit.PullRequest, err error) {
 	client := gh.octokit()
 	prService, err := client.PullRequests(&octokit.PullRequestsURL, octokit.M{"owner": gh.Project.Owner, "repo": gh.Project.Name})
 	if err != nil {
-		return
+		return nil, err
 	}
 
 	params := octokit.PullRequestForIssueParams{Base: base, Head: head, Issue: issue}
@@ -59,14 +59,14 @@ func (gh *GitHub) CreatePullRequestForIssue(base, head, issue string) (pr *octok
 		err = result.Err
 	}
 
-	return
+	return pr, nil
 }
 
 func (gh *GitHub) Repository(project Project) (repo *octokit.Repository, err error) {
 	client := gh.octokit()
 	repoService, err := client.Repositories(&octokit.RepositoryURL, octokit.M{"owner": project.Owner, "repo": project.Name})
 	if err != nil {
-		return
+		return nil, err
 	}
 
 	repo, result := repoService.Get()
@@ -74,7 +74,7 @@ func (gh *GitHub) Repository(project Project) (repo *octokit.Repository, err err
 		err = result.Err
 	}
 
-	return
+	return repo, nil
 }
 
 // TODO: detach GitHub from Project
@@ -95,7 +95,7 @@ func (gh *GitHub) CreateRepository(project Project, description, homepage string
 	client := gh.octokit()
 	repoService, err := client.Repositories(&repoURL, octokit.M{"org": project.Owner})
 	if err != nil {
-		return
+		return nil, err
 	}
 
 	params := octokit.Repository{Name: project.Name, Description: description, Homepage: homepage, Private: isPrivate}
@@ -104,23 +104,23 @@ func (gh *GitHub) CreateRepository(project Project, description, homepage string
 		err = result.Err
 	}
 
-	return
+	return repo, nil
 }
 
 func (gh *GitHub) Releases() (releases []octokit.Release, err error) {
 	client := gh.octokit()
 	releasesService, err := client.Releases(nil, octokit.M{"owner": gh.Project.Owner, "repo": gh.Project.Name})
 	if err != nil {
-		return
+		return nil, err
 	}
 
 	releases, result := releasesService.GetAll()
 	if result.HasError() {
 		err = result.Err
-		return
+		return nil, err
 	}
 
-	return
+	return releases, nil
 }
 
 func (gh *GitHub) CIStatus(sha string) (status *octokit.Status, err error) {
@@ -130,14 +130,14 @@ func (gh *GitHub) CIStatus(sha string) (status *octokit.Status, err error) {
 	statuses, result := statusesService.GetAll()
 	if result.HasError() {
 		err = result.Err
-		return
+		return nil, err
 	}
 
 	if len(statuses) > 0 {
 		status = &statuses[0]
 	}
 
-	return
+	return status, nil
 }
 
 func (gh *GitHub) ForkRepository(name, owner string, noRemote bool) (repo *octokit.Repository, err error) {
@@ -146,7 +146,7 @@ func (gh *GitHub) ForkRepository(name, owner string, noRemote bool) (repo *octok
 	r, err := gh.Repository(project)
 	if err == nil && r != nil {
 		err = fmt.Errorf("Error creating fork: %s exists on %s", r.FullName, GitHubHost)
-		return
+		return nil, err
 	}
 
 	client := gh.octokit()
@@ -154,25 +154,26 @@ func (gh *GitHub) ForkRepository(name, owner string, noRemote bool) (repo *octok
 	repo, result := repoService.Create(nil)
 	if result.HasError() {
 		err = result.Err
+		return nil, err
 	}
 
-	return
+	return repo, nil
 }
 
 func (gh *GitHub) Issues() (issues []octokit.Issue, err error) {
 	client := gh.octokit()
 	issuesService, err := client.Issues(&octokit.RepoIssuesURL, octokit.M{"owner": gh.Project.Owner, "repo": gh.Project.Name})
 	if err != nil {
-		return
+		return nil, err
 	}
 
 	issues, result := issuesService.GetAll()
 	if result.HasError() {
 		err = result.Err
-		return
+		return nil, err
 	}
 
-	return
+	return issues, nil
 }
 
 func (gh *GitHub) ExpandRemoteUrl(owner, name string, isSSH bool) (url string) {
@@ -190,13 +191,13 @@ func findOrCreateToken(user, password, twoFactorCode string) (token string, err 
 	client := octokit.NewClient(basicAuth)
 	authsService, err := client.Authorizations(nil, nil)
 	if err != nil {
-		return
+		return "", err
 	}
 
 	auths, result := authsService.GetAll()
 	if result.HasError() {
 		err = result.Err
-		return
+		return "", err
 	}
 
 	for _, auth := range auths {
@@ -215,13 +216,13 @@ func findOrCreateToken(user, password, twoFactorCode string) (token string, err 
 		auth, result := authsService.Create(authParam)
 		if result.HasError() {
 			err = result.Err
-			return
+			return "", err
 		}
 
 		token = auth.Token
 	}
 
-	return
+	return token, nil
 }
 
 func (gh *GitHub) octokit() *octokit.Client {
