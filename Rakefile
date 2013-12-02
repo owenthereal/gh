@@ -50,10 +50,10 @@ def fullpath(file)
 end
 
 VERSION_FILES = {
-  fullpath("commands/version.go") => /^const Version = "(\d+.\d+.\d+)"$/,
   fullpath("README.md")           => /v(\d+.\d+.\d+)/,
+  fullpath("commands/version.go") => /^const Version = "(\d+.\d+.\d+)"$/,
   fullpath(".goxc.json")          => /"PackageVersion": "(\d+.\d+.\d+)"/,
-  fullpath("homebrew/gh.rb")      => /VERSION = "(\d+.\d+.\d+)"/
+  fullpath("homebrew-gh/gh.rb")   => /VERSION = "(\d+.\d+.\d+)"/
 }
 
 class Git
