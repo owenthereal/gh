@@ -1,0 +1,3 @@
+[submodule "homebrew-gh"]
+	path = homebrew-gh
+	url = https://github.com/jingweno/homebrew-gh.git
