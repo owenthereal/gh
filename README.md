@@ -37,14 +37,16 @@ There're no pre-requirements to install gh. Download the [binary](https://github
 
 ### Homebrew
 
-Installing on OSX is easiest with [Homebrew](https://github.com/mxcl/homebrew):
+The easiest way to install `gh` on OSX is through [Homebrew](https://github.com/mxcl/homebrew).
+You can add the [gh Homebrew repository](https://github.com/jingweno/homebrew-gh) with [`brew tap`](https://github.com/mxcl/homebrew/wiki/brew-tap):
 
-    $ brew install https://raw.github.com/jingweno/gh/master/homebrew/gh.rb
+    $ brew tap jingweno/gh
+    $ brew install gh
 
 ### Standalone
 
-`gh` is easily installed as an executable.
-Download the [compiled binary forms of gh](https://github.com/jingweno/gh/releases) for Darwin, Linux and Windows.
+`gh` can be easily installed as an executable.
+Download the latest [compiled binary forms of gh](https://github.com/jingweno/gh/releases) for Darwin, Linux and Windows.
 
 ### Boxen
 
@@ -67,9 +69,9 @@ I plan to implement automatic upgrade in the future.
 
 ### Homebrew
 
-To upgrade gh on OSX with Homebrew, run:
+If you installed `gh` with `brew tap jingweno/gh`, you can upgrade it with:
 
-    $ brew upgrade https://raw.github.com/jingweno/gh/master/homebrew/gh.rb
+    $ brew upgrade gh
 
 ### Source
 
