@@ -35,7 +35,6 @@ Feature: hub pull-request
     Given the GitHub API server:
       """
       post('/repos/mislav/coral/pulls') {
-        halt 400 if request.content_charset != 'utf-8'
         assert :title => 'ăéñøü'
         json :html_url => "the://url"
       }
