@@ -73,12 +73,11 @@ Feature: hub pull-request
       Are you sure that github.com/origin/coral exists?
       """
 
-  @wip
   Scenario: Supplies User-Agent string to API calls
     Given the GitHub API server:
       """
       post('/repos/mislav/coral/pulls') {
-        halt 400 unless request.user_agent.include?('Hub')
+        halt 400 unless request.user_agent.include?('Octokit')
         json :html_url => "the://url"
       }
       """
@@ -333,8 +332,7 @@ Feature: hub pull-request
     When I run `hub pull-request -m message`
     Then the stderr should contain exactly:
       """
-      Error creating pull request: Unprocessable Entity (HTTP 422)
-      I haz fail!\n
+      422 - I haz fail!\n
       """
 
   Scenario: Convert issue to pull request
