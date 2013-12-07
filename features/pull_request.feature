@@ -112,17 +112,21 @@ Feature: hub pull-request
     Given the GitHub API server:
       """
       post('/repos/mislav/coral/pulls') {
-        halt 422 if params[:title].include?("fail")
-        assert :body => "This title will fail",
-               :title => "But this title will prevail"
-        json :html_url => "https://github.com/mislav/coral/pull/12"
+        if params[:title].include?("fail")
+          status 422
+          json(:message => "I haz fail!")
+        else
+          assert :body => "This title will fail",
+                 :title => "But this title will prevail"
+          json :html_url => "https://github.com/mislav/coral/pull/12"
+        end
       }
       """
     When I run `hub pull-request`
     Then the exit status should be 1
     And the stderr should contain exactly:
       """
-      Error creating pull request: Unprocessable Entity (HTTP 422)\n
+      422 - I haz fail!\n
       """
     Given the text editor adds:
       """
