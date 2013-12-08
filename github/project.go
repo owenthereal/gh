@@ -123,23 +123,20 @@ func parseOwnerAndName(remote string) (owner string, name string) {
 	return url[1], url[2]
 }
 
-func MatchURL(url string) []string {
-	host := regexp.MustCompile("\\.").ReplaceAllString(url, "\\.")
-	expr := fmt.Sprintf("%s/(.+)/(.+?)(\\.git|$)", host)
-
-	httpRegex := regexp.MustCompile(fmt.Sprintf("https://%s", expr))
-	if httpRegex.MatchString(url) {
-		return httpRegex.FindStringSubmatch(url)
+func MatchURL(matchUrl string) []string {
+	httpRegex := regexp.MustCompile("https://[^/]+/(.+)/(.+?)(\\.git|$)")
+	if httpRegex.MatchString(matchUrl) {
+		return httpRegex.FindStringSubmatch(matchUrl)
 	}
 
-	readOnlyRegex := regexp.MustCompile(fmt.Sprintf("git://.*%s", expr))
-	if readOnlyRegex.MatchString(url) {
-		return readOnlyRegex.FindStringSubmatch(url)
+	readOnlyRegex := regexp.MustCompile("git://[^/]+/(.+)/(.+?)(\\.git|$)")
+	if readOnlyRegex.MatchString(matchUrl) {
+		return readOnlyRegex.FindStringSubmatch(matchUrl)
 	}
 
-	sshRegex := regexp.MustCompile(fmt.Sprintf("git@%s", expr))
-	if sshRegex.MatchString(url) {
-		return sshRegex.FindStringSubmatch(url)
+	sshRegex := regexp.MustCompile("git@[^:]+:(.+)/(.+?)(\\.git|$)")
+	if sshRegex.MatchString(matchUrl) {
+		return sshRegex.FindStringSubmatch(matchUrl)
 	}
 
 	return nil
