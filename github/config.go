@@ -7,25 +7,27 @@ import (
 	"fmt"
 	"github.com/howeyc/gopass"
 	"github.com/jingweno/gh/utils"
+	"net/url"
 	"os"
 	"path/filepath"
 	"regexp"
 )
 
-var (
-	GitHubHost string = "github.com"
+const (
+	GitHubApiUrl     = "https://api.github.com"
+	githubEntApiPath = "/api/v3"
 )
 
 type Config struct {
 	User  string `json:"user"`
 	Token string `json:"token"`
-	Host  string `json:"host"`
+	Url   string `json:"url"`
 }
 
 func (c *Config) FetchUser() string {
 	if c.User == "" {
 		var user string
-		msg := fmt.Sprintf("%s username: ", c.FetchHost())
+		msg := fmt.Sprintf("%s username: ", c.FetchUrl())
 		fmt.Print(msg)
 		fmt.Scanln(&user)
 		c.User = user
@@ -35,7 +37,7 @@ func (c *Config) FetchUser() string {
 }
 
 func (c *Config) FetchPassword() string {
-	msg := fmt.Sprintf("%s password for %s (never stored): ", c.Host, c.User)
+	msg := fmt.Sprintf("%s password for %s (never stored): ", c.Url, c.User)
 	fmt.Print(msg)
 
 	pass := gopass.GetPasswd()
@@ -46,16 +48,16 @@ func (c *Config) FetchPassword() string {
 	return string(pass)
 }
 
-func (c *Config) FetchHost() string {
-	msg := fmt.Sprintf("host (%s): ", GitHubHost)
-	fmt.Print(msg)
-	fmt.Scanln(&c.Host)
+func (c *Config) FetchUrl() string {
+	if c.Url == "" {
+		msg := fmt.Sprintf("url (%s): ", GitHubApiUrl)
+		fmt.Print(msg)
+		fmt.Scanln(&c.Url)
 
-	if c.Host == "" {
-		c.Host = GitHubHost
+		c.Url = formatGitHubUrl(c.Url)
 	}
 
-	return c.Host
+	return c.Url
 }
 
 func (c *Config) FetchTwoFactorCode() string {
@@ -67,11 +69,12 @@ func (c *Config) FetchTwoFactorCode() string {
 }
 
 func (c *Config) FetchCredentials() {
-	if c.Host == "" {
-		c.FetchHost()
+	var changed bool
+	if c.Url == "" {
+		c.FetchUrl()
+		changed = true
 	}
 
-	var changed bool
 	if c.User == "" {
 		c.FetchUser()
 		changed = true
@@ -99,6 +102,32 @@ func (c *Config) FetchCredentials() {
 		err := SaveConfig(c)
 		utils.Check(err)
 	}
+}
+
+func (c *Config) ApiUrl() (url string) {
+	url = c.Url
+	if url != GitHubApiUrl {
+		url = fmt.Sprintf("%s%s", url, githubEntApiPath)
+	}
+	return
+}
+
+func (c *Config) Host() string {
+	_, host, _ := c.parseUrl()
+	return host
+}
+
+func (c *Config) WebUrl() string {
+	scheme, host, _ := c.parseUrl()
+	return fmt.Sprintf("%s://%s", scheme, host)
+}
+
+func (c *Config) parseUrl() (string, string, string) {
+	url, _ := url.Parse(c.Url)
+	if url.Host == "api.github.com" {
+		url.Host = "github.com"
+	}
+	return url.Scheme, url.Host, url.Path
 }
 
 var (
@@ -169,9 +198,31 @@ func doSaveTo(f *os.File, config *Config) error {
 }
 
 func NewConfigWithUrl(user, token, url string) Config {
-	return Config{user, token, url}
+	return initConfig(user, token, url)
 }
 
 func NewConfig(user, token string) Config {
-	return Config{user, token, ""}
+	return initConfig(user, token, "")
+}
+
+func initConfig(user, token, url string) Config {
+	c := Config{user, token, url}
+	c.Url = formatGitHubUrl(url)
+	return c
+}
+
+func formatGitHubUrl(configUrl string) string {
+	if configUrl == "" {
+		configUrl = GitHubApiUrl
+	} else {
+		u, err := url.Parse(configUrl)
+		utils.Check(err)
+
+		if u.Scheme == "" {
+			u.Scheme = "https"
+			configUrl = u.String()
+		}
+	}
+
+	return configUrl
 }

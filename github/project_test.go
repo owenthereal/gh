@@ -7,11 +7,16 @@ import (
 	"testing"
 )
 
-func TestNewProjectOwnerAndName(t *testing.T) {
-	DefaultConfigFile = "./test_support/clone_gh"
+func initTestConfig() (path string) {
+	defaultConfigFile := "./test_support/clone_gh"
 	config := NewConfig("jingweno", "123")
+	config.Token = "345"
 	SaveConfig(&config)
-	defer os.RemoveAll(filepath.Dir(DefaultConfigFile))
+	return defaultConfigFile
+}
+
+func TestNewProjectOwnerAndName(t *testing.T) {
+	defer os.RemoveAll(filepath.Dir(initTestConfig()))
 
 	project := NewProjectFromNameAndOwner("", "jingweno/gh")
 
@@ -30,6 +35,8 @@ func TestNewProjectOwnerAndName(t *testing.T) {
 }
 
 func TestWebURL(t *testing.T) {
+	defer os.RemoveAll(filepath.Dir(initTestConfig()))
+
 	project := Project{"foo", "bar"}
 	url := project.WebURL("", "", "baz")
 	assert.Equal(t, "https://github.com/bar/foo/baz", url)

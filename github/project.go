@@ -27,7 +27,7 @@ func (p *Project) WebURL(name, owner, path string) string {
 		name = p.Name
 	}
 
-	url := fmt.Sprintf("https://%s", utils.ConcatPaths(CurrentConfig().FetchHost(), owner, name))
+	url := utils.ConcatPaths(CurrentConfig().WebUrl(), owner, name)
 	if path != "" {
 		url = utils.ConcatPaths(url, path)
 	}
@@ -43,7 +43,7 @@ func (p *Project) GitURL(name, owner string, isSSH bool) (url string) {
 		owner = p.Owner
 	}
 
-	host := CurrentConfig().FetchHost()
+	host := CurrentConfig().Host()
 
 	if isSSH {
 		url = fmt.Sprintf("git@%s:%s/%s.git", host, owner, name)
@@ -81,7 +81,7 @@ func CurrentProject() *Project {
 }
 
 func NewProjectFromURL(url *url.URL) (*Project, error) {
-	if url.Host != CurrentConfig().FetchHost() || url.Scheme != "https" {
+	if url.Host != CurrentConfig().Host() {
 		return nil, fmt.Errorf("Invalid GitHub URL: %s", url)
 	}
 

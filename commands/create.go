@@ -64,7 +64,7 @@ func create(command *Command, args *Args) {
 	project := github.NewProjectFromNameAndOwner(name, "")
 	gh := github.NewWithoutProject()
 	if gh.IsRepositoryExist(project) {
-		fmt.Printf("%s already exists on %s\n", project, github.GitHubHost)
+		fmt.Printf("%s already exists on %s\n", project, github.CurrentConfig().WebUrl())
 		msg = "set remote origin"
 	} else {
 		if !args.Noop {
