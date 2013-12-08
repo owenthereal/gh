@@ -9,7 +9,7 @@ Given(/^there are no remotes$/) do
 end
 
 Given(/^"([^"]*)" is a whitelisted Enterprise host$/) do |host|
-  run_silent %(git config --global --add hub.host "#{host}")
+  run_silent %(git config --global --add gh.host "#{host}")
 end
 
 Given(/^the "([^"]*)" remote has url "([^"]*)"$/) do |remote_name, url|
@@ -23,9 +23,9 @@ end
 
 Given(/^I am "([^"]*)" on ([\w.-]+)(?: with OAuth token "([^"]*)")?$/) do |name, host, token|
   edit_hub_config do |cfg|
-    entry = {'user' => name}
-    entry['oauth_token'] = token if token
-    cfg[host.downcase] = [entry]
+    entry = {'user' => name, 'host' => host}
+    entry['access_token'] = token if token
+    cfg << entry
   end
 end
 

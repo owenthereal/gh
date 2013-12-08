@@ -133,15 +133,13 @@ World Module.new {
     if File.exist? config
       data = JSON.parse File.read(gh_config)
     else
-      data = {}
+      data = []
     end
 
     yield data
     File.open(config, 'w') { |cfg| cfg << YAML.dump(data) }
     File.open(gh_config, 'w') do |cfg|
-      c = data.values.flatten.first
-      c = { "user" => c["user"], "token" => c["oauth_token"] }
-      cfg << JSON.generate(c)
+      cfg << JSON.generate(data)
     end
   end
 
