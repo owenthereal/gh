@@ -11,12 +11,16 @@ type GitRemote struct {
 }
 
 func Remotes() ([]*GitRemote, error) {
-	r := regexp.MustCompile("(.+)\t(.+github.com.+) \\(push\\)")
 	output, err := execGitCmd("remote", "-v")
 	if err != nil {
 		return nil, errors.New("Can't load git remote")
 	}
 
+	return gitRemotes(output)
+}
+
+func gitRemotes(output []string) ([]*GitRemote, error) {
+	r := regexp.MustCompile("(.+)\t([^\\s]+) \\(push\\)")
 	remotes := make([]*GitRemote, 0)
 	for _, o := range output {
 		if r.MatchString(o) {
