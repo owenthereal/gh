@@ -14,7 +14,7 @@ Feature: hub ci-status
   Scenario: Fetch commit SHA with URL
     Given there is a commit named "the_sha"
     Given the remote commit state of "michiels/pencilbox" "the_sha" is "success"
-    When I run `hub ci-status the_sha -v`
+    When I run `hub ci-status -v the_sha`
     Then the output should contain "success: https://travis-ci.org/michiels/pencilbox/builds/1234567"
     And the exit status should be 0
 
