@@ -9,7 +9,7 @@ import (
 
 func TestNewProjectOwnerAndName(t *testing.T) {
 	DefaultConfigFile = "./test_support/clone_gh"
-	config := Config{User: "jingweno", Token: "123"}
+	config := NewConfig("jingweno", "123")
 	SaveConfig(&config)
 	defer os.RemoveAll(filepath.Dir(DefaultConfigFile))
 

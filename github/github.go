@@ -6,7 +6,6 @@ import (
 )
 
 const (
-	GitHubHost  string = "github.com"
 	OAuthAppURL string = "http://owenou.com/gh"
 )
 
@@ -148,7 +147,7 @@ func (gh *GitHub) ForkRepository(name, owner string, noRemote bool) (repo *octok
 	project := Project{Name: name, Owner: config.User}
 	r, err := gh.Repository(project)
 	if err == nil && r != nil {
-		err = fmt.Errorf("Error creating fork: %s exists on %s", r.FullName, GitHubHost)
+		err = fmt.Errorf("Error creating fork: %s exists on %s", r.FullName, config.Host)
 		return
 	}
 
@@ -237,6 +236,11 @@ func (gh *GitHub) octokit() *octokit.Client {
 	config := gh.Config
 	config.FetchCredentials()
 	tokenAuth := octokit.TokenAuth{AccessToken: config.Token}
+
+	if config.Host != GitHubHost {
+		url := fmt.Sprintf("https://%s/api", config.Host)
+		return octokit.NewClientWith(url, nil, tokenAuth)
+	}
 
 	return octokit.NewClient(tokenAuth)
 }

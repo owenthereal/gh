@@ -27,7 +27,7 @@ func (p *Project) WebURL(name, owner, path string) string {
 		name = p.Name
 	}
 
-	url := fmt.Sprintf("https://%s", utils.ConcatPaths(GitHubHost, owner, name))
+	url := fmt.Sprintf("https://%s", utils.ConcatPaths(CurrentConfig().FetchHost(), owner, name))
 	if path != "" {
 		url = utils.ConcatPaths(url, path)
 	}
@@ -43,10 +43,12 @@ func (p *Project) GitURL(name, owner string, isSSH bool) (url string) {
 		owner = p.Owner
 	}
 
+	host := CurrentConfig().FetchHost()
+
 	if isSSH {
-		url = fmt.Sprintf("git@%s:%s/%s.git", GitHubHost, owner, name)
+		url = fmt.Sprintf("git@%s:%s/%s.git", host, owner, name)
 	} else {
-		url = fmt.Sprintf("git://%s.git", utils.ConcatPaths(GitHubHost, owner, name))
+		url = fmt.Sprintf("git://%s.git", utils.ConcatPaths(host, owner, name))
 	}
 
 	return url
@@ -79,7 +81,7 @@ func CurrentProject() *Project {
 }
 
 func NewProjectFromURL(url *url.URL) (*Project, error) {
-	if url.Host != GitHubHost || url.Scheme != "https" {
+	if url.Host != CurrentConfig().FetchHost() || url.Scheme != "https" {
 		return nil, fmt.Errorf("Invalid GitHub URL: %s", url)
 	}
 
@@ -121,17 +123,20 @@ func parseOwnerAndName(remote string) (owner string, name string) {
 }
 
 func MatchURL(url string) []string {
-	httpRegex := regexp.MustCompile("https://github\\.com/(.+)/(.+?)(\\.git|$)")
+	host := regexp.MustCompile("\\.").ReplaceAllString(url, "\\.")
+	expr := fmt.Sprintf("%s/(.+)/(.+?)(\\.git|$)", host)
+
+	httpRegex := regexp.MustCompile(fmt.Sprintf("https://%s", expr))
 	if httpRegex.MatchString(url) {
 		return httpRegex.FindStringSubmatch(url)
 	}
 
-	readOnlyRegex := regexp.MustCompile("git://.*github\\.com/(.+)/(.+?)(\\.git|$)")
+	readOnlyRegex := regexp.MustCompile(fmt.Sprintf("git://.*%s", expr))
 	if readOnlyRegex.MatchString(url) {
 		return readOnlyRegex.FindStringSubmatch(url)
 	}
 
-	sshRegex := regexp.MustCompile("git@github\\.com:(.+)/(.+?)(\\.git|$)")
+	sshRegex := regexp.MustCompile(fmt.Sprintf("git@%s", expr))
 	if sshRegex.MatchString(url) {
 		return sshRegex.FindStringSubmatch(url)
 	}
