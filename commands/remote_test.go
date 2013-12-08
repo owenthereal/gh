@@ -10,6 +10,8 @@ import (
 )
 
 func TestTransformRemoteArgs(t *testing.T) {
+	defer CleanupTestConfig(InitTestConfig())
+
 	args := NewArgs([]string{"remote", "add", "jingweno"})
 	transformRemoteArgs(args)
 

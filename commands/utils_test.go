@@ -6,6 +6,8 @@ import (
 )
 
 func TestParsePullRequestId(t *testing.T) {
+	defer CleanupTestConfig(InitTestConfig())
+
 	url := "https://github.com/jingweno/gh/pull/73"
 	assert.Equal(t, "73", parsePullRequestId(url))
 

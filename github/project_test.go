@@ -7,7 +7,7 @@ import (
 	"testing"
 )
 
-func initTestConfig() (path string) {
+func InitTestConfig() (path string) {
 	defaultConfigFile := "./test_support/clone_gh"
 	config := NewConfig("jingweno", "123")
 	config.Token = "345"
@@ -15,8 +15,12 @@ func initTestConfig() (path string) {
 	return defaultConfigFile
 }
 
+func CleanupTestConfig(path string) {
+	os.RemoveAll(filepath.Dir(path))
+}
+
 func TestNewProjectOwnerAndName(t *testing.T) {
-	defer os.RemoveAll(filepath.Dir(initTestConfig()))
+	defer CleanupTestConfig(InitTestConfig())
 
 	project := NewProjectFromNameAndOwner("", "jingweno/gh")
 
@@ -35,7 +39,7 @@ func TestNewProjectOwnerAndName(t *testing.T) {
 }
 
 func TestWebURL(t *testing.T) {
-	defer os.RemoveAll(filepath.Dir(initTestConfig()))
+	defer CleanupTestConfig(InitTestConfig())
 
 	project := Project{"foo", "bar"}
 	url := project.WebURL("", "", "baz")

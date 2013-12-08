@@ -2,11 +2,28 @@ package commands
 
 import (
 	"github.com/bmizerany/assert"
+	"github.com/jingweno/gh/github"
 	"github.com/octokit/go-octokit/octokit"
+	"os"
+	"path/filepath"
 	"testing"
 )
 
+func InitTestConfig() (path string) {
+	defaultConfigFile := "./test_support/clone_gh"
+	config := github.NewConfig("jingweno", "123")
+	config.Token = "345"
+	github.SaveConfig(&config)
+	return defaultConfigFile
+}
+
+func CleanupTestConfig(path string) {
+	os.RemoveAll(filepath.Dir(path))
+}
+
 func TestFetchAndMerge(t *testing.T) {
+	defer CleanupTestConfig(InitTestConfig())
+
 	url := "https://github.com/jingweno/gh/pull/73"
 	number := 73
 	title := "title"
