@@ -81,7 +81,8 @@ func CurrentProject() *Project {
 }
 
 func NewProjectFromURL(url *url.URL) (*Project, error) {
-	if url.Host != CurrentConfig().Host() {
+	config := CurrentConfig()
+	if url.Host != config.Host() || url.Scheme != config.Scheme() {
 		return nil, fmt.Errorf("Invalid GitHub URL: %s", url)
 	}
 

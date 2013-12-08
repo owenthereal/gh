@@ -117,6 +117,11 @@ func (c *Config) Host() string {
 	return host
 }
 
+func (c *Config) Scheme() string {
+	scheme, _, _ := c.parseUrl()
+	return scheme
+}
+
 func (c *Config) WebUrl() string {
 	scheme, host, _ := c.parseUrl()
 	return fmt.Sprintf("%s://%s", scheme, host)
