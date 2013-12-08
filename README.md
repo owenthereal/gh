@@ -267,6 +267,10 @@ For more details, run `gh help alias`.
     > (prints CI state of HEAD and exits with appropriate code)
     > One of: success (0), error (1), failure (1), pending (2), no status (3)
 
+    $ gh ci-status -v
+    > (prints CI state of HEAD, the URL to the CI build results and exits with appropriate code)
+    > One of: success (0), error (1), failure (1), pending (2), no status (3)
+
     $ gh ci-status BRANCH
     > (prints CI state of BRANCH and exits with appropriate code)
     > One of: success (0), error (1), failure (1), pending (2), no status (3)
