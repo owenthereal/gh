@@ -1,3 +1,4 @@
+@wip
 Feature: hub remote add
   Background:
     Given I am in "dotfiles" git repo

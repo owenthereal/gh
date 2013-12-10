@@ -1,3 +1,4 @@
+@wip
 Feature: hub browse
   Scenario: Project with owner
     When I successfully run `hub browse mislav/dotfiles`

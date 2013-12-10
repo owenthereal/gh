@@ -1,3 +1,4 @@
+@wip
 Feature: hub browse
   Background:
     Given I am in "git://github.com/mislav/dotfiles.git" git repo

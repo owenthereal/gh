@@ -1,3 +1,4 @@
+@wip
 Feature: hub clone
   Scenario: Clone a public repo
     When I successfully run `hub clone rtomayko/ronn`

@@ -1,3 +1,4 @@
+@wip
 Feature: hub alias
 
   Scenario: bash instructions

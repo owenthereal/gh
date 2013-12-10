@@ -1,3 +1,4 @@
+@wip
 Feature: hub checkout <PULLREQ-URL>
   Background:
     Given I am in "git://github.com/mojombo/jekyll.git" git repo

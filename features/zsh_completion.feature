@@ -1,3 +1,4 @@
+@wip
 @completion
 Feature: zsh tab-completion
 
