@@ -184,3 +184,9 @@ namespace :build do
     FileUtils.cp_r build_dir, dropbox_dir, :verbose => true
   end
 end
+
+desc "Run cucumber feature tests from Hub"
+task :features do
+  features = ENV.fetch("FEATURE", "features")
+  sh "cucumber -f progress -t ~@wip #{features}"
+end

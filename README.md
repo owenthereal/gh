@@ -207,10 +207,19 @@ For more details, run `gh help alias`.
     [ opened pull request on GitHub for "YOUR_USER:feature" ]
 
     # explicit pull base & head:
-    $ gh pull-request -b jingweno:master -d jingweno:feature
+    $ gh pull-request -b jingweno:master -h jingweno:feature
+
+    $ gh pull-request -m "title\n\nbody"
+    [ create pull request with title & body  ]
 
     $ gh pull-request -i 123
     [ attached pull request to issue #123 ]
+
+    $ gh pull-request https://github.com/jingweno/gh/pull/123
+    [ attached pull request to issue #123 ]
+
+    $ gh pull-request -F FILE
+    [ create pull request with title & body from FILE ]
 
 ### gh apply
 
@@ -256,6 +265,10 @@ For more details, run `gh help alias`.
 
     $ gh ci-status
     > (prints CI state of HEAD and exits with appropriate code)
+    > One of: success (0), error (1), failure (1), pending (2), no status (3)
+
+    $ gh ci-status -v
+    > (prints CI state of HEAD, the URL to the CI build results and exits with appropriate code)
     > One of: success (0), error (1), failure (1), pending (2), no status (3)
 
     $ gh ci-status BRANCH
