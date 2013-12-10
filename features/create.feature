@@ -7,7 +7,7 @@ Feature: hub create
     Given the GitHub API server:
       """
       post('/user/repos') {
-        assert :private => false
+        assert :private => nil
         json :full_name => 'mislav/dotfiles'
       }
       """
@@ -48,6 +48,7 @@ Feature: hub create
     Then the url for "origin" should be "git@github.com:acme/dotfiles.git"
     And the output should contain exactly "created repository: acme/dotfiles\n"
 
+  @wip
   Scenario: Creating repo failed
     Given the GitHub API server:
       """
@@ -101,7 +102,7 @@ Feature: hub create
   Scenario: GitHub repo already exists
     Given the GitHub API server:
       """
-      get('/repos/mislav/dotfiles') { status 200 }
+      get('/repos/mislav/dotfiles') { json :url => "foo" }
       """
     When I successfully run `hub create`
     Then the output should contain "mislav/dotfiles already exists on github.com\n"
