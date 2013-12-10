@@ -51,7 +51,7 @@ Before do
     @aruba_io_wait_seconds = 0.02
   end
 
-  raise 'gh build failed' unless system('go build -o hub')
+  raise 'gh build failed' unless system('godep go build -o hub')
 end
 
 After do
