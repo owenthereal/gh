@@ -72,7 +72,7 @@ func RefList(a, b string) ([]string, error) {
 	ref := fmt.Sprintf("%s...%s", a, b)
 	output, err := execGitCmd("rev-list", "--cherry-pick", "--right-only", "--no-merges", ref)
 	if err != nil {
-		return nil, errors.New("Can't load rev-list for %s" + ref)
+		return nil, errors.New("Can't load rev-list for " + ref)
 	}
 
 	return output, nil
@@ -81,7 +81,7 @@ func RefList(a, b string) ([]string, error) {
 func Show(sha string) (string, error) {
 	output, err := execGitCmd("show", "-s", "--format=%w(78,0,0)%s%+b", sha)
 	if err != nil {
-		return "", errors.New("Can't show commit for %s" + sha)
+		return "", errors.New("Can't show commit for " + sha)
 	}
 
 	return output[0], nil
