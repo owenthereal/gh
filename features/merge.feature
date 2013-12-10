@@ -11,7 +11,7 @@ Feature: hub merge
       get('/repos/defunkt/hub/pulls/164') { json \
         :head => {
           :label => 'jfirebaugh:hub_merge',
-          :repo  => {:private => false}
+          :repo  => {:id => 1, :private => false}
         },
         :title => "Add `hub merge` command"
       }
@@ -34,7 +34,7 @@ Feature: hub merge
       get('/repos/defunkt/hub/pulls/164') { json \
         :head => {
           :label => 'jfirebaugh:hub_merge',
-          :repo  => {:private => false}
+          :repo  => {:id => 1, :private => false}
         },
         :title => "Add `hub merge` command"
       }
@@ -55,7 +55,7 @@ Feature: hub merge
       get('/repos/defunkt/hub/pulls/164') { json \
         :head => {
           :label => 'jfirebaugh:hub_merge',
-          :repo  => {:private => true}
+          :repo  => {:id => 1, :private => true}
         },
         :title => "Add `hub merge` command"
       }
