@@ -1,4 +1,3 @@
-@wip
 Feature: hub fetch
   Background:
     Given I am in "dotfiles" git repo
