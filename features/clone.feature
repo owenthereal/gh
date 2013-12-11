@@ -1,4 +1,3 @@
-@wip
 Feature: hub clone
   Scenario: Clone a public repo
     When I successfully run `hub clone rtomayko/ronn`
@@ -62,7 +61,7 @@ Feature: hub clone
     And there should be no output
 
   Scenario: Preview cloning a private repo
-    When I successfully run `hub --noop clone -p rtomayko/ronn`
+    When I successfully run `hub clone -p rtomayko/ronn --noop`
     Then the output should contain exactly "git clone git@github.com:rtomayko/ronn.git\n"
     But "git clone" should not be run
 
@@ -72,13 +71,13 @@ Feature: hub clone
     And there should be no output
 
   Scenario: Clone my repo
-    Given I am "mislav" on GitHub.com
+    Given I am "mislav" on github.com
     When I successfully run `hub clone dotfiles`
     Then it should clone "git@github.com:mislav/dotfiles.git"
     And there should be no output
 
   Scenario: Clone my repo with arguments
-    Given I am "mislav" on GitHub.com
+    Given I am "mislav" on github.com
     When I successfully run `hub clone --bare -o master dotfiles`
     Then "git clone --bare -o master git@github.com:mislav/dotfiles.git" should be run
     And there should be no output
