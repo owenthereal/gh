@@ -1,4 +1,3 @@
-@wip
 Feature: hub checkout <PULLREQ-URL>
   Background:
     Given I am in "git://github.com/mojombo/jekyll.git" git repo
@@ -14,7 +13,7 @@ Feature: hub checkout <PULLREQ-URL>
       get('/repos/mojombo/jekyll/pulls/77') {
         json :head => {
           :label => 'mislav:fixes',
-          :repo => { :private => false }
+          :repo => { :id => 1, :private => false }
         }
       }
       """
@@ -28,7 +27,7 @@ Feature: hub checkout <PULLREQ-URL>
       get('/repos/mojombo/jekyll/pulls/77') {
         json :head => {
           :label => 'mislav:fixes',
-          :repo => { :private => false }
+          :repo => { :id => 1, :private => false }
         }
       }
       """
@@ -42,7 +41,7 @@ Feature: hub checkout <PULLREQ-URL>
       get('/repos/mojombo/jekyll/pulls/77') {
         json :head => {
           :label => 'mislav:fixes',
-          :repo => { :private => true }
+          :repo => { :id => 1, :private => true }
         }
       }
       """
@@ -56,7 +55,7 @@ Feature: hub checkout <PULLREQ-URL>
       get('/repos/mojombo/jekyll/pulls/77') {
         json :head => {
           :label => 'mislav:fixes',
-          :repo => { :private => false }
+          :repo => { :id => 1, :private => false }
         }
       }
       """
@@ -70,7 +69,7 @@ Feature: hub checkout <PULLREQ-URL>
       get('/repos/mojombo/jekyll/pulls/77') {
         json :head => {
           :label => 'mislav:fixes',
-          :repo => { :private => false }
+          :repo => { :id => 1, :private => false }
         }
       }
       """
