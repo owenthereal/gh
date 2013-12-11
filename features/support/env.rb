@@ -8,6 +8,11 @@ lib_dir = File.expand_path('../../../lib', __FILE__)
 bin_dir = File.expand_path('../fakebin', __FILE__)
 gh_dir = File.expand_path('../../../', __FILE__)
 
+raise 'gh build failed' unless system('godep go build -o hub')
+at_exit do
+  FileUtils.rm_f('hub')
+end
+
 Before do
   # don't want hub to run in bundle
   unset_bundler_env_vars
@@ -50,14 +55,11 @@ Before do
   else
     @aruba_io_wait_seconds = 0.02
   end
-
-  raise 'gh build failed' unless system('godep go build -o hub')
 end
 
 After do
   @server.stop if defined? @server and @server
   FileUtils.rm_f("#{bin_dir}/vim")
-  FileUtils.rm_f('hub')
 end
 
 RSpec::Matchers.define :be_successful_command do
@@ -67,7 +69,7 @@ RSpec::Matchers.define :be_successful_command do
 
   failure_message_for_should do |cmd|
     %(command "#{cmd}" exited with status #{cmd.status}:) <<
-      cmd.output.gsub(/^/, ' ' * 2)
+    cmd.output.gsub(/^/, ' ' * 2)
   end
 end
 
@@ -95,7 +97,7 @@ class SimpleCommand
   def run
     @output = `#{@cmd} 2>&1`.chomp
     @status = $?
-    $?.success?
+      $?.success?
   end
 end
 
