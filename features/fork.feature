@@ -1,4 +1,3 @@
-@wip
 Feature: hub fork
   Background:
     Given I am in "dotfiles" git repo
@@ -8,9 +7,21 @@ Feature: hub fork
   Scenario: Fork the repository
     Given the GitHub API server:
       """
-      before { halt 401 unless request.env['HTTP_AUTHORIZATION'] == 'token OTOKEN' }
-      get('/repos/mislav/dotfiles', :host_name => 'api.github.com') { 404 }
-      post('/repos/evilchelu/dotfiles/forks', :host_name => 'api.github.com') { '' }
+      before do
+        unless request.env['HTTP_AUTHORIZATION'] == 'token OTOKEN'
+          status 401
+          json :message => "I haz fail!"
+        end
+      end
+
+      get('/repos/mislav/dotfiles') do
+        status 404
+        json :message => "I haz fail!"
+      end
+
+      post('/repos/evilchelu/dotfiles/forks') do
+        json :html_url => "https://github.com/mislav/coral/pull/12"
+      end
       """
     When I successfully run `hub fork`
     Then the output should contain exactly "new remote: mislav\n"
@@ -20,7 +31,9 @@ Feature: hub fork
   Scenario: --no-remote
     Given the GitHub API server:
       """
-      post('/repos/evilchelu/dotfiles/forks') { '' }
+      post('/repos/evilchelu/dotfiles/forks') do
+        json :repo => "repo"
+      end
       """
     When I successfully run `hub fork --no-remote`
     Then there should be no output
@@ -29,13 +42,16 @@ Feature: hub fork
   Scenario: Fork failed
     Given the GitHub API server:
       """
-      post('/repos/evilchelu/dotfiles/forks') { halt 500 }
+      post('/repos/evilchelu/dotfiles/forks') do
+        status 500
+        json(:error => "I haz fail!")
+      end
       """
     When I run `hub fork`
     Then the exit status should be 1
     And the stderr should contain exactly:
       """
-      Error creating fork: Internal Server Error (HTTP 500)\n
+      500 - Error: I haz fail!\n
       """
     And there should be no "mislav" remote
 
@@ -65,10 +81,21 @@ Scenario: Related fork already exists
     Then the exit status should be 0
     And the url for "mislav" should be "git@github.com:mislav/dotfiles.git"
 
+  @wip
   Scenario: Invalid OAuth token
     Given the GitHub API server:
       """
-      before { halt 401 unless request.env['HTTP_AUTHORIZATION'] == 'token OTOKEN' }
+      before do
+        unless request.env['HTTP_AUTHORIZATION'] == 'token OTOKEN'
+          status 401
+          json :message => "I haz fail!"
+        end
+      end
+
+      get('/repos/mislav/dotfiles') do
+        status 401
+        json :message => "I haz fail!"
+      end
       """
     And I am "mislav" on github.com with OAuth token "WRONGTOKEN"
     When I run `hub fork`
@@ -81,7 +108,7 @@ Scenario: Related fork already exists
   Scenario: HTTPS is preferred
     Given the GitHub API server:
       """
-      post('/repos/evilchelu/dotfiles/forks') { '' }
+      post('/repos/evilchelu/dotfiles/forks') { json :repo => 'repo' }
       """
     And HTTPS is preferred
     When I successfully run `hub fork`
@@ -92,22 +119,27 @@ Scenario: Related fork already exists
     Given the current dir is not a repo
     When I run `hub fork`
     Then the exit status should be 1
-    And the stderr should contain "fatal: Not a git repository"
+    And the stderr should contain "Aborted: the origin remote doesn't point to a GitHub repository"
 
   Scenario: Unknown host
     Given the "origin" remote has url "git@git.my.org:evilchelu/dotfiles.git"
     When I run `hub fork`
     Then the exit status should be 1
-    And the stderr should contain exactly:
+    And the stderr should contain:
       """
-      Error: repository under 'origin' remote is not a GitHub project\n
+      Aborted: the origin remote doesn't point to a GitHub repository
       """
 
   Scenario: Enterprise fork
     Given the GitHub API server:
       """
-      before { halt 401 unless request.env['HTTP_AUTHORIZATION'] == 'token FITOKEN' }
-      post('/api/v3/repos/evilchelu/dotfiles/forks', :host_name => 'git.my.org') { '' }
+      before do
+        unless request.env['HTTP_AUTHORIZATION'] == 'token FITOKEN'
+          status 401 
+          json :error => 'error'
+        end
+      end
+      post('/api/v3/repos/evilchelu/dotfiles/forks') { json :repo => 'repo' }
       """
     And the "origin" remote has url "git@git.my.org:evilchelu/dotfiles.git"
     And I am "mislav" on git.my.org with OAuth token "FITOKEN"
