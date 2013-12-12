@@ -1,4 +1,3 @@
-@wip
 Feature: OAuth authentication
   Background:
     Given I am in "dotfiles" git repo
@@ -7,19 +6,28 @@ Feature: OAuth authentication
     Given the GitHub API server:
       """
       require 'rack/auth/basic'
-      get('/authorizations') { '[]' }
+      get('/authorizations') { json [] }
       post('/authorizations') {
         auth = Rack::Auth::Basic::Request.new(env)
-        halt 401 unless auth.credentials == %w[mislav kitty]
+        unless auth.credentials == %w[mislav kitty]
+          status 401
+          json :error => 'error'
+        end
         assert :scopes => ['repo']
         json :token => 'OTOKEN'
       }
       get('/user') {
-        halt 401 unless request.env['HTTP_AUTHORIZATION'] == 'token OTOKEN'
+        unless request.env['HTTP_AUTHORIZATION'] == 'token OTOKEN'
+          status 401
+          json :error => 'error'
+        end
         json :login => 'MiSlAv'
       }
       post('/user/repos') {
-        halt 401 unless request.env['HTTP_AUTHORIZATION'] == 'token OTOKEN'
+        unless request.env['HTTP_AUTHORIZATION'] == 'token OTOKEN'
+          status 401
+          json :error => 'error'
+        end
         json :full_name => 'mislav/dotfiles'
       }
       """
@@ -29,9 +37,9 @@ Feature: OAuth authentication
     Then the output should contain "github.com username:"
     And the output should contain "github.com password for mislav (never stored):"
     And the exit status should be 0
-    And the file "../home/.config/hub" should contain "user: MiSlAv"
-    And the file "../home/.config/hub" should contain "oauth_token: OTOKEN"
-    And the file "../home/.config/hub" should have mode "0600"
+    And the file "../home/.config/gh" should contain "mislav"
+    And the file "../home/.config/gh" should contain "OTOKEN"
+    And the file "../home/.config/gh" should have mode "0644"
 
   Scenario: Ask for username & password, re-use existing authorization
     Given the GitHub API server:
@@ -39,10 +47,14 @@ Feature: OAuth authentication
       require 'rack/auth/basic'
       get('/authorizations') {
         auth = Rack::Auth::Basic::Request.new(env)
-        halt 401 unless auth.credentials == %w[mislav kitty]
+        unless auth.credentials == %w[mislav kitty]
+          status 401
+          json :error => 'error'
+        end
+
         json [
-          {:token => 'SKIPPD', :app => {:url => 'http://example.com'}},
-          {:token => 'OTOKEN', :app => {:url => 'http://hub.github.com/'}}
+          {:token => 'SKIPPD', :note_url => 'http://example.com'},
+          {:token => 'OTOKEN', :note_url => 'http://owenou.com/gh'}
         ]
       }
       get('/user') {
@@ -57,15 +69,20 @@ Feature: OAuth authentication
     And I type "kitty"
     Then the output should contain "github.com password for mislav (never stored):"
     And the exit status should be 0
-    And the file "../home/.config/hub" should contain "oauth_token: OTOKEN"
+    And the file "../home/.config/gh" should contain "OTOKEN"
 
+  @wip
   Scenario: Credentials from GITHUB_USER & GITHUB_PASSWORD
     Given the GitHub API server:
       """
       require 'rack/auth/basic'
       get('/authorizations') {
         auth = Rack::Auth::Basic::Request.new(env)
-        halt 401 unless auth.credentials == %w[mislav kitty]
+        unless auth.credentials == %w[mislav kitty]
+          status 401
+          json :error => 'error'
+          return
+        end
         json [
           {:token => 'OTOKEN', :app => {:url => 'http://hub.github.com/'}}
         ]
@@ -83,13 +100,17 @@ Feature: OAuth authentication
     Then the output should not contain "github.com password for mislav"
     And the file "../home/.config/hub" should contain "oauth_token: OTOKEN"
 
+  @wip
   Scenario: Wrong password
     Given the GitHub API server:
       """
       require 'rack/auth/basic'
       get('/authorizations') {
         auth = Rack::Auth::Basic::Request.new(env)
-        halt 401 unless auth.credentials == %w[mislav kitty]
+        unless auth.credentials == %w[mislav kitty]
+          status 401
+          json :error => 'error'
+        end
       }
       """
     When I run `hub create` interactively
@@ -97,33 +118,52 @@ Feature: OAuth authentication
     And I type "WRONG"
     Then the stderr should contain "Error creating repository: Unauthorized (HTTP 401)"
     And the exit status should be 1
-    And the file "../home/.config/hub" should not exist
+    And the file "../home/.config/gh" should not exist
 
+  @wip
   Scenario: Two-factor authentication, create authorization
     Given the GitHub API server:
       """
       require 'rack/auth/basic'
       get('/authorizations') {
         auth = Rack::Auth::Basic::Request.new(env)
-        halt 401 unless auth.credentials == %w[mislav kitty]
+        unless auth.credentials == %w[mislav kitty]
+          status 401
+          json :error => 'error'
+          return
+        end
+
         if request.env['HTTP_X_GITHUB_OTP'] != "112233"
           response.headers['X-GitHub-OTP'] = "required;application"
-          halt 401
+          status 401
+          json :error => 'two-factor authentication OTP code'
+          return
         end
+
         json [ ]
       }
       post('/authorizations') {
         auth = Rack::Auth::Basic::Request.new(env)
-        halt 401 unless auth.credentials == %w[mislav kitty]
+        unless auth.credentials == %w[mislav kitty]
+          status 401
+          json :error => 'error'
+          return
+        end
+
         if request.env['HTTP_X_GITHUB_OTP'] != "112233"
           response.headers['X-GitHub-OTP'] = "required;application"
-          halt 401
+          status 401
+          json :error => 'two-factor authentication OTP code'
+          return
         end
+
         json :token => 'OTOKEN'
       }
+
       get('/user') {
         json :login => 'mislav'
       }
+
       post('/user/repos') {
         json :full_name => 'mislav/dotfiles'
       }
@@ -137,6 +177,7 @@ Feature: OAuth authentication
     And the exit status should be 0
     And the file "../home/.config/hub" should contain "oauth_token: OTOKEN"
 
+  @wip
   Scenario: Two-factor authentication, re-use existing authorization
     Given the GitHub API server:
       """
