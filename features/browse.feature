@@ -1,39 +1,41 @@
-@wip
 Feature: hub browse
+  Background:
+    Given I am in "git://github.com/mislav/dotfiles.git" git repo
+
   Scenario: Project with owner
-    When I successfully run `hub browse mislav/dotfiles`
+    When I successfully run `hub browse -p mislav/dotfiles`
     Then there should be no output
     And "open https://github.com/mislav/dotfiles" should be run
 
   Scenario: Project without owner
     Given I am "mislav" on github.com
-    When I successfully run `hub browse dotfiles`
+    When I successfully run `hub browse -p dotfiles`
     Then "open https://github.com/mislav/dotfiles" should be run
 
   Scenario: Explicit project overrides current
     Given I am in "git://github.com/josh/rails-behaviors.git" git repo
     And I am "mislav" on github.com
-    When I successfully run `hub browse dotfiles`
+    When I successfully run `hub browse -p dotfiles`
     Then "open https://github.com/mislav/dotfiles" should be run
 
   Scenario: Project issues
-    When I successfully run `hub browse mislav/dotfiles issues`
+    When I successfully run `hub browse -p mislav/dotfiles issues`
     Then "open https://github.com/mislav/dotfiles/issues" should be run
 
   Scenario: Project wiki
-    When I successfully run `hub browse mislav/dotfiles wiki`
+    When I successfully run `hub browse -p mislav/dotfiles wiki`
     Then "open https://github.com/mislav/dotfiles/wiki" should be run
 
   Scenario: Project commits on master
-    When I successfully run `hub browse mislav/dotfiles commits`
+    When I successfully run `hub browse -p mislav/dotfiles commits`
     Then "open https://github.com/mislav/dotfiles/commits/master" should be run
 
   Scenario: Specific commit in project
-    When I successfully run `hub browse mislav/dotfiles commit/4173c3b`
+    When I successfully run `hub browse -p mislav/dotfiles commit/4173c3b`
     Then "open https://github.com/mislav/dotfiles/commit/4173c3b" should be run
 
   Scenario: Output the URL instead of browse
-    When I successfully run `hub browse -u mislav/dotfiles`
+    When I successfully run `hub browse -u -p mislav/dotfiles`
     Then the output should contain exactly "https://github.com/mislav/dotfiles\n"
     But "open https://github.com/mislav/dotfiles" should not be run
 
@@ -45,7 +47,7 @@ Feature: hub browse
 
   Scenario: Commit in current project
     Given I am in "git://github.com/mislav/dotfiles.git" git repo
-    When I successfully run `hub browse -- commit/abcd1234`
+    When I successfully run `hub browse commit/abcd1234`
     Then "open https://github.com/mislav/dotfiles/commit/abcd1234" should be run
 
   Scenario: Current branch
@@ -61,12 +63,14 @@ Feature: hub browse
     When I successfully run `hub browse`
     Then "open https://github.com/mislav/dotfiles" should be run
 
+  @wip
   Scenario: Current branch, no tracking
     Given I am in "git://github.com/mislav/dotfiles.git" git repo
     And I am on the "feature" branch
     When I successfully run `hub browse`
     Then "open https://github.com/mislav/dotfiles" should be run
 
+  @wip
   Scenario: Current branch with special chars
     Given I am in "git://github.com/mislav/dotfiles.git" git repo
     And I am on the "fix-bug-#123" branch with upstream "origin/fix-bug-#123"
@@ -76,7 +80,7 @@ Feature: hub browse
   Scenario: Commits on current branch
     Given I am in "git://github.com/mislav/dotfiles.git" git repo
     And I am on the "feature" branch with upstream "origin/experimental"
-    When I successfully run `hub browse -- commits`
+    When I successfully run `hub browse commits`
     Then "open https://github.com/mislav/dotfiles/commits/experimental" should be run
 
   Scenario: Complex branch
@@ -92,14 +96,15 @@ Feature: hub browse
 
   Scenario: Wiki commits
     Given I am in "git://github.com/defunkt/hub.wiki.git" git repo
-    When I successfully run `hub browse -- commits`
+    When I successfully run `hub browse commits`
     Then "open https://github.com/defunkt/hub/wiki/_history" should be run
 
   Scenario: Wiki pages
     Given I am in "git://github.com/defunkt/hub.wiki.git" git repo
-    When I successfully run `hub browse -- pages`
+    When I successfully run `hub browse pages`
     Then "open https://github.com/defunkt/hub/wiki/_pages" should be run
 
+  @wip
   Scenario: Deprecated -p flag
     When I successfully run `hub browse -p defunkt/hub`
     Then the stderr should contain exactly:
