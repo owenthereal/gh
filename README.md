@@ -290,16 +290,16 @@ For more details, run `gh help alias`.
     $ gh browse issues
     > open https://github.com/YOUR_USER/CURRENT_REPO/issues
 
-    $ gh browse -u jingweno -r gh
+    $ gh browse -p jingweno/gh
     > open https://github.com/jingweno/gh
 
-    $ gh browse -u jingweno -r gh commit/SHA
+    $ gh browse -p jingweno/gh commit/SHA
     > open https://github.com/jingweno/gh/commit/SHA
 
-    $ gh browse -r resque
+    $ gh browse -p resque
     > open https://github.com/YOUR_USER/resque
 
-    $ gh browse -r resque network
+    $ gh browse -p resque network
     > open https://github.com/YOUR_USER/resque/network
 
 ### gh compare
