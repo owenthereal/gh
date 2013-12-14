@@ -1,4 +1,3 @@
-@wip
 Feature: hub alias
 
   Scenario: bash instructions
@@ -8,7 +7,7 @@ Feature: hub alias
       """
       # Wrap git automatically by adding the following to ~/.bash_profile:
 
-      eval "$(hub alias -s)"\n
+      eval "$(gh alias -s)"\n
       """
 
   Scenario: fish instructions
@@ -18,7 +17,7 @@ Feature: hub alias
       """
       # Wrap git automatically by adding the following to ~/.config/fish/config.fish:
 
-      eval (hub alias -s)\n
+      eval (gh alias -s)\n
       """
 
   Scenario: zsh instructions
@@ -28,7 +27,7 @@ Feature: hub alias
       """
       # Wrap git automatically by adding the following to ~/.zshrc:
 
-      eval "$(hub alias -s)"\n
+      eval "$(gh alias -s)"\n
       """
 
   Scenario: bash code
@@ -36,7 +35,7 @@ Feature: hub alias
     When I successfully run `hub alias -s`
     Then the output should contain exactly:
       """
-      alias git=hub\n
+      alias git=gh\n
       """
 
   Scenario: fish code
@@ -44,7 +43,7 @@ Feature: hub alias
     When I successfully run `hub alias -s`
     Then the output should contain exactly:
       """
-      alias git=hub\n
+      alias git=gh\n
       """
 
   Scenario: zsh code
@@ -52,7 +51,7 @@ Feature: hub alias
     When I successfully run `hub alias -s`
     Then the output should contain exactly:
       """
-      alias git=hub\n
+      alias git=gh\n
       """
 
   Scenario: unsupported shell
@@ -60,7 +59,7 @@ Feature: hub alias
     When I run `hub alias -s`
     Then the output should contain exactly:
       """
-      hub alias: unsupported shell
+      gh alias: unsupported shell
       supported shells: bash zsh sh ksh csh fish\n
       """
     And the exit status should be 1
