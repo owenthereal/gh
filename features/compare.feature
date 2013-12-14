@@ -1,4 +1,3 @@
-@wip
 Feature: hub browse
   Background:
     Given I am in "git://github.com/mislav/dotfiles.git" git repo
@@ -13,7 +12,7 @@ Feature: hub browse
     Then the exit status should be 1
     And the stderr should contain:
       """
-      hub compare [USER] [<START>...]<END>
+      git compare [-u] [USER] [<START>...]<END>
       """
 
   Scenario: Can't compare default branch to self
@@ -23,7 +22,7 @@ Feature: hub browse
     Then the exit status should be 1
     And the stderr should contain:
       """
-      hub compare [USER] [<START>...]<END>
+      git compare [-u] [USER] [<START>...]<END>
       """
 
   Scenario: No args, has upstream branch
