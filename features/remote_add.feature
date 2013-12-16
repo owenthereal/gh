@@ -1,4 +1,3 @@
-@wip
 Feature: hub remote add
   Background:
     Given I am in "dotfiles" git repo
@@ -42,6 +41,7 @@ Feature: hub remote add
     Then the git command should be unchanged
     And there should be no output
 
+  @wip
   Scenario: Add new remote for Enterprise repo
     Given "git.my.org" is a whitelisted Enterprise host
     And the "origin" remote has url "git@git.my.org:mislav/topsekrit.git"
