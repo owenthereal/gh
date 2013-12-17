@@ -1,4 +1,3 @@
-@wip
 Feature: hub submodule add
   Background:
     Given I am in "dotfiles" git repo
