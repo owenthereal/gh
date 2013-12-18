@@ -324,6 +324,28 @@ For more details, run `gh help alias`.
     $ gh issues
     > (prints a list of issues for YOUR_USER/CURRENT_REPO)
 
+## Configuration
+
+### GitHub OAuth authentication
+
+`gh` will prompt for GitHub username & password the first time it needs
+to access the API and exchange it for an OAuth token, which it saves in
+"~/.config/gh".
+
+### HTTPS instead of git protocol
+
+If you prefer using the HTTPS protocol for GitHub repositories instead
+of the git protocol for read and ssh for write, you can set
+"gh.protocol" to "https".
+
+    # default behavior
+    $ git clone jingweno/gh
+    < git clone >
+
+    # opt into HTTPS:
+    $ git config --global gh.protocol https
+    $ git clone jingweno/gh
+    < https clone >
 
 ## Release Notes
 
