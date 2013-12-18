@@ -35,7 +35,7 @@
 <a name="g--h--github-" class="anchor" href="#g--h--github-"><span class="octicon octicon-link"></span></a>g + h = github <a href="https://travis-ci.org/jingweno/gh"><img src="https://travis-ci.org/jingweno/gh.png?branch=master" alt="Build Status"></a>
 </h1>
 
-<p>Fast GitHub command line client implemented in Go. Current version is <a href="https://github.com/jingweno/gh/releases/tag/v0.25.1">v0.25.1</a>.</p>
+<p>Fast GitHub command line client implemented in Go. Current version is <a href="https://github.com/jingweno/gh/releases/tag/v0.26.0">v0.26.0</a>.</p>
 
 <h2>
 <a name="overview" class="anchor" href="#overview"><span class="octicon octicon-link"></span></a>Overview</h2>
@@ -75,16 +75,18 @@ gh browse &gt; /dev/null  0.03s user 0.02s system 87% cpu 0.059 total
 <h3>
 <a name="homebrew" class="anchor" href="#homebrew"><span class="octicon octicon-link"></span></a>Homebrew</h3>
 
-<p>Installing on OSX is easiest with <a href="https://github.com/mxcl/homebrew">Homebrew</a>:</p>
+<p>The easiest way to install <code>gh</code> on OSX is through <a href="https://github.com/mxcl/homebrew">Homebrew</a>.
+You can add the <a href="https://github.com/jingweno/homebrew-gh">gh Homebrew repository</a> with <a href="https://github.com/mxcl/homebrew/wiki/brew-tap"><code>brew tap</code></a>:</p>
 
-<pre><code>$ brew install https://raw.github.com/jingweno/gh/master/homebrew/gh.rb
+<pre><code>$ brew tap jingweno/gh
+$ brew install gh
 </code></pre>
 
 <h3>
 <a name="standalone" class="anchor" href="#standalone"><span class="octicon octicon-link"></span></a>Standalone</h3>
 
-<p><code>gh</code> is easily installed as an executable.
-Download the <a href="https://github.com/jingweno/gh/releases">compiled binary forms of gh</a> for Darwin, Linux and Windows.</p>
+<p><code>gh</code> can be easily installed as an executable.
+Download the latest <a href="https://github.com/jingweno/gh/releases">compiled binary forms of gh</a> for Darwin, Linux and Windows.</p>
 
 <h3>
 <a name="boxen" class="anchor" href="#boxen"><span class="octicon octicon-link"></span></a>Boxen</h3>
@@ -112,9 +114,9 @@ I plan to implement automatic upgrade in the future.</p>
 <h3>
 <a name="homebrew-1" class="anchor" href="#homebrew-1"><span class="octicon octicon-link"></span></a>Homebrew</h3>
 
-<p>To upgrade gh on OSX with Homebrew, run:</p>
+<p>If you installed <code>gh</code> with <code>brew tap jingweno/gh</code>, you can upgrade it with:</p>
 
-<pre><code>$ brew upgrade https://raw.github.com/jingweno/gh/master/homebrew/gh.rb
+<pre><code>$ brew upgrade gh
 </code></pre>
 
 <h3>
@@ -277,10 +279,19 @@ $ gh pull-request
 [ opened pull request on GitHub for "YOUR_USER:feature" ]
 
 # explicit pull base &amp; head:
-$ gh pull-request -b jingweno:master -d jingweno:feature
+$ gh pull-request -b jingweno:master -h jingweno:feature
+
+$ gh pull-request -m "title\n\nbody"
+[ create pull request with title &amp; body  ]
 
 $ gh pull-request -i 123
 [ attached pull request to issue #123 ]
+
+$ gh pull-request https://github.com/jingweno/gh/pull/123
+[ attached pull request to issue #123 ]
+
+$ gh pull-request -F FILE
+[ create pull request with title &amp; body from FILE ]
 </code></pre>
 
 <h3>
@@ -336,6 +347,10 @@ $ gh create sinatra/recipes
 &gt; (prints CI state of HEAD and exits with appropriate code)
 &gt; One of: success (0), error (1), failure (1), pending (2), no status (3)
 
+$ gh ci-status -v
+&gt; (prints CI state of HEAD, the URL to the CI build results and exits with appropriate code)
+&gt; One of: success (0), error (1), failure (1), pending (2), no status (3)
+
 $ gh ci-status BRANCH
 &gt; (prints CI state of BRANCH and exits with appropriate code)
 &gt; One of: success (0), error (1), failure (1), pending (2), no status (3)
@@ -357,16 +372,16 @@ $ gh browse commit/SHA
 $ gh browse issues
 &gt; open https://github.com/YOUR_USER/CURRENT_REPO/issues
 
-$ gh browse -u jingweno -r gh
+$ gh browse -p jingweno/gh
 &gt; open https://github.com/jingweno/gh
 
-$ gh browse -u jingweno -r gh commit/SHA
+$ gh browse -p jingweno/gh commit/SHA
 &gt; open https://github.com/jingweno/gh/commit/SHA
 
-$ gh browse -r resque
+$ gh browse -p resque
 &gt; open https://github.com/YOUR_USER/resque
 
-$ gh browse -r resque network
+$ gh browse -p resque network
 &gt; open https://github.com/YOUR_USER/resque/network
 </code></pre>
 
