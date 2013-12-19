@@ -63,9 +63,9 @@ Please make sure you have git and hg installed.
 
 ## Upgrade
 
-Since gh is under heavy development, I roll out new releases often.
-Please take a look at the [built binaries](https://github.com/jingweno/gh/releases) for the latest built binaries.
-I plan to implement automatic upgrade in the future.
+`gh` comes with a command to self update:
+
+    $ gh update
 
 ### Homebrew
 
