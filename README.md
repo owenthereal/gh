@@ -320,9 +320,11 @@ For more details, run `gh help alias`.
 
 ### gh release (beta)
 
-    $ gh release
+    $ gh releases
     > (prints a list of releases of YOUR_USER/CURRENT_REPO)
 
+    $ gh release TAG
+    > (creates a new release for the given tag)
 
 ### gh issues (beta)
 
