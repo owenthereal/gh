@@ -45,6 +45,8 @@ Before do
   set_env 'GIT_AUTHOR_EMAIL',    author_email
   set_env 'GIT_COMMITTER_EMAIL', author_email
 
+  set_env 'GH_VERSION', 'dev'
+
   FileUtils.mkdir_p ENV['HOME']
 
   # increase process exit timeout from the default of 3 seconds
