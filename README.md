@@ -61,21 +61,26 @@ To compile gh from source, you need to have a [Go development environment](http:
 Note that `go get` will pull down sources from various VCS.
 Please make sure you have git and hg installed.
 
-## Upgrade
+## Update
 
 `gh` comes with a command to self update:
 
     $ gh update
 
+### Autoupdate
+
+`gh` checks every two weeks for newer versions and prompts you for update if there's one.
+A timestamp is stored in `~/.config/gh-update` for the next update time.
+
 ### Homebrew
 
-If you installed `gh` with `brew tap jingweno/gh`, you can upgrade it with:
+If you installed `gh` with `brew tap jingweno/gh`, you can update it with:
 
     $ brew upgrade gh
 
 ### Source
 
-To upgrade gh from source, run:
+To update gh from source, run:
 
     $ go get -u github.com/jingweno/gh
 
