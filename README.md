@@ -346,9 +346,14 @@ This is a list of available settings in `~/.config/gh`:
 {
   "credentials": [
     {
-      "access_token": ACCESS_TOKEN,
-      "user": USER_NAME,
-      "host": HOST
+      "host": "HOST1",
+      "user": "USER_NAME1",
+      "access_token": "ACCESS_TOKEN1"
+    },
+    {
+      "host": "HOST2",
+      "user": "USER_NAME2",
+      "access_token": "ACCESS_TOKEN2"
     }
   ],
   "autoupdate": false
