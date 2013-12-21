@@ -71,6 +71,7 @@ Please make sure you have git and hg installed.
 
 `gh` checks every two weeks for newer versions and prompts you for update if there's one.
 A timestamp is stored in `~/.config/gh-update` for the next update time.
+You can turn off the update prompt and allow `gh` does it automatically by setting "autoupdate" to true in [`~/.config/gh`](https://github.com/jingweno/gh#available-settings).
 
 ### Homebrew
 
@@ -335,7 +336,29 @@ For more details, run `gh help alias`.
 
 `gh` will prompt for GitHub username & password the first time it needs
 to access the API and exchange it for an OAuth token, which it saves in
-"~/.config/gh".
+`~/.config/gh`.
+
+### Available settings
+
+This is a list of available settings in `~/.config/gh`:
+
+```json
+{
+  "credentials": [
+    {
+      "host": "HOST1",
+      "user": "USER_NAME1",
+      "access_token": "ACCESS_TOKEN1"
+    },
+    {
+      "host": "HOST2",
+      "user": "USER_NAME2",
+      "access_token": "ACCESS_TOKEN2"
+    }
+  ],
+  "autoupdate": false
+}
+```
 
 ### HTTPS instead of git protocol
 
