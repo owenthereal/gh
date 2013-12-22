@@ -35,7 +35,7 @@
 <a name="g--h--github-" class="anchor" href="#g--h--github-"><span class="octicon octicon-link"></span></a>g + h = github <a href="https://travis-ci.org/jingweno/gh"><img src="https://travis-ci.org/jingweno/gh.png?branch=master" alt="Build Status"></a>
 </h1>
 
-<p>Fast GitHub command line client implemented in Go. Current version is <a href="https://github.com/jingweno/gh/releases/tag/v0.26.0">v0.26.0</a>.</p>
+<p>Fast GitHub command line client implemented in Go. Current version is <a href="https://github.com/jingweno/gh/releases/tag/v1.0.0">v1.0.0</a>.</p>
 
 <h2>
 <a name="overview" class="anchor" href="#overview"><span class="octicon octicon-link"></span></a>Overview</h2>
@@ -105,16 +105,24 @@ Download the latest <a href="https://github.com/jingweno/gh/releases">compiled b
 Please make sure you have git and hg installed.</p>
 
 <h2>
-<a name="upgrade" class="anchor" href="#upgrade"><span class="octicon octicon-link"></span></a>Upgrade</h2>
+<a name="update" class="anchor" href="#update"><span class="octicon octicon-link"></span></a>Update</h2>
 
-<p>Since gh is under heavy development, I roll out new releases often.
-Please take a look at the <a href="https://github.com/jingweno/gh/releases">built binaries</a> for the latest built binaries.
-I plan to implement automatic upgrade in the future.</p>
+<p><code>gh</code> comes with a command to self update:</p>
+
+<pre><code>$ gh update
+</code></pre>
+
+<h3>
+<a name="autoupdate" class="anchor" href="#autoupdate"><span class="octicon octicon-link"></span></a>Autoupdate</h3>
+
+<p><code>gh</code> checks every two weeks for newer versions and prompts you for update if there's one.
+A timestamp is stored in <code>~/.config/gh-update</code> for the next update time.
+You can turn off the update prompt and allow <code>gh</code> does it automatically by setting "autoupdate" to true in <a href="https://github.com/jingweno/gh#available-settings"><code>~/.config/gh</code></a>.</p>
 
 <h3>
 <a name="homebrew-1" class="anchor" href="#homebrew-1"><span class="octicon octicon-link"></span></a>Homebrew</h3>
 
-<p>If you installed <code>gh</code> with <code>brew tap jingweno/gh</code>, you can upgrade it with:</p>
+<p>If you installed <code>gh</code> with <code>brew tap jingweno/gh</code>, you can update it with:</p>
 
 <pre><code>$ brew upgrade gh
 </code></pre>
@@ -122,7 +130,7 @@ I plan to implement automatic upgrade in the future.</p>
 <h3>
 <a name="source-1" class="anchor" href="#source-1"><span class="octicon octicon-link"></span></a>Source</h3>
 
-<p>To upgrade gh from source, run:</p>
+<p>To update gh from source, run:</p>
 
 <pre><code>$ go get -u github.com/jingweno/gh
 </code></pre>
@@ -410,6 +418,55 @@ $ gh compare -u other-user patch
 
 <pre><code>$ gh issues
 &gt; (prints a list of issues for YOUR_USER/CURRENT_REPO)
+</code></pre>
+
+<h2>
+<a name="configuration" class="anchor" href="#configuration"><span class="octicon octicon-link"></span></a>Configuration</h2>
+
+<h3>
+<a name="github-oauth-authentication" class="anchor" href="#github-oauth-authentication"><span class="octicon octicon-link"></span></a>GitHub OAuth authentication</h3>
+
+<p><code>gh</code> will prompt for GitHub username &amp; password the first time it needs
+to access the API and exchange it for an OAuth token, which it saves in
+<code>~/.config/gh</code>.</p>
+
+<h3>
+<a name="available-settings" class="anchor" href="#available-settings"><span class="octicon octicon-link"></span></a>Available settings</h3>
+
+<p>This is a list of available settings in <code>~/.config/gh</code>:</p>
+
+<div class="highlight highlight-json"><pre><span class="p">{</span>
+  <span class="nt">"credentials"</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="nt">"host"</span><span class="p">:</span> <span class="s2">"HOST1"</span><span class="p">,</span>
+      <span class="nt">"user"</span><span class="p">:</span> <span class="s2">"USER_NAME1"</span><span class="p">,</span>
+      <span class="nt">"access_token"</span><span class="p">:</span> <span class="s2">"ACCESS_TOKEN1"</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="nt">"host"</span><span class="p">:</span> <span class="s2">"HOST2"</span><span class="p">,</span>
+      <span class="nt">"user"</span><span class="p">:</span> <span class="s2">"USER_NAME2"</span><span class="p">,</span>
+      <span class="nt">"access_token"</span><span class="p">:</span> <span class="s2">"ACCESS_TOKEN2"</span>
+    <span class="p">}</span>
+  <span class="p">],</span>
+  <span class="nt">"autoupdate"</span><span class="p">:</span> <span class="kc">false</span>
+<span class="p">}</span>
+</pre></div>
+
+<h3>
+<a name="https-instead-of-git-protocol" class="anchor" href="#https-instead-of-git-protocol"><span class="octicon octicon-link"></span></a>HTTPS instead of git protocol</h3>
+
+<p>If you prefer using the HTTPS protocol for GitHub repositories instead
+of the git protocol for read and ssh for write, you can set
+"gh.protocol" to "https".</p>
+
+<pre><code># default behavior
+$ git clone jingweno/gh
+&lt; git clone &gt;
+
+# opt into HTTPS:
+$ git config --global gh.protocol https
+$ git clone jingweno/gh
+&lt; https clone &gt;
 </code></pre>
 
 <h2>
