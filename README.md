@@ -71,7 +71,7 @@ Please make sure you have git and hg installed.
 
 `gh` checks every two weeks for newer versions and prompts you for update if there's one.
 A timestamp is stored in `~/.config/gh-update` for the next update time.
-You can turn off the update prompt and allow `gh` does it automatically by setting "autoupdate" to true in [`~/.config/gh`](https://github.com/jingweno/gh#available-settings).
+You can turn off the update prompt and allow `gh` to update automatically by setting "autoupdate" to true in [`~/.config/gh`](https://github.com/jingweno/gh#available-settings).
 
 ### Homebrew
 
