@@ -13,7 +13,7 @@ Feature: hub compare
     Then the exit status should be 1
     And the stderr should contain:
       """
-      hub compare [-u] [USER] [<START>...]<END>
+      git compare [-u] [USER] [<START>...]<END>
       """
 
   Scenario: Can't compare default branch to self
@@ -23,7 +23,7 @@ Feature: hub compare
     Then the exit status should be 1
     And the stderr should contain:
       """
-      hub compare [-u] [USER] [<START>...]<END>
+      git compare [-u] [USER] [<START>...]<END>
       """
 
   Scenario: No args, has upstream branch
