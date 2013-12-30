@@ -19,6 +19,7 @@ compare
 ci-status
 release
 issue
+update
 EOF
     __git_list_all_commands_without_hub
   }
