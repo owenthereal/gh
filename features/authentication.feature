@@ -39,6 +39,7 @@ Feature: OAuth authentication
     And the exit status should be 0
     And the file "../home/.config/gh" should contain "mislav"
     And the file "../home/.config/gh" should contain "OTOKEN"
+    #And the file "../home/.config/gh" should have mode "0600"
 
   Scenario: Ask for username & password, re-use existing authorization
     Given the GitHub API server:
@@ -49,11 +50,12 @@ Feature: OAuth authentication
         unless auth.credentials == %w[mislav kitty]
           status 401
           json :error => 'error'
+          return
         end
 
         json [
-          {:token => 'SKIPPD', :note_url => 'http://example.com'},
-          {:token => 'OTOKEN', :note_url => 'http://owenou.com/gh'}
+          {:token => 'SKIPPD', :app => {:url => 'http://example.com'}},
+          {:token => 'OTOKEN', :app => {:url => 'http://owenou.com/gh'}}
         ]
       }
       get('/user') {
@@ -70,7 +72,6 @@ Feature: OAuth authentication
     And the exit status should be 0
     And the file "../home/.config/gh" should contain "OTOKEN"
 
-  @wip
   Scenario: Credentials from GITHUB_USER & GITHUB_PASSWORD
     Given the GitHub API server:
       """
@@ -83,7 +84,7 @@ Feature: OAuth authentication
           return
         end
         json [
-          {:token => 'OTOKEN', :app => {:url => 'http://hub.github.com/'}}
+          {:token => 'OTOKEN', :app => {:url => 'http://owenou.com/gh'}}
         ]
       }
       get('/user') {
@@ -97,9 +98,8 @@ Feature: OAuth authentication
     And $GITHUB_PASSWORD is "kitty"
     When I successfully run `hub create`
     Then the output should not contain "github.com password for mislav"
-    And the file "../home/.config/hub" should contain "oauth_token: OTOKEN"
+    And the file "../home/.config/gh" should contain "OTOKEN"
 
-  @wip
   Scenario: Wrong password
     Given the GitHub API server:
       """
@@ -119,7 +119,6 @@ Feature: OAuth authentication
     And the exit status should be 1
     And the file "../home/.config/gh" should not exist
 
-  @wip
   Scenario: Two-factor authentication, create authorization
     Given the GitHub API server:
       """
@@ -138,13 +137,18 @@ Feature: OAuth authentication
           json :error => 'two-factor authentication OTP code'
           return
         end
-
         json [ ]
       }
       post('/authorizations') {
         auth = Rack::Auth::Basic::Request.new(env)
         unless auth.credentials == %w[mislav kitty]
           status 401
+          json :error => 'error'
+          return
+        end
+
+        unless params[:scopes]
+          status 412
           json :error => 'error'
           return
         end
@@ -176,7 +180,6 @@ Feature: OAuth authentication
     And the exit status should be 0
     And the file "../home/.config/hub" should contain "oauth_token: OTOKEN"
 
-  @wip
   Scenario: Two-factor authentication, re-use existing authorization
     Given the GitHub API server:
       """
@@ -213,7 +216,6 @@ Feature: OAuth authentication
     And the exit status should be 0
     And the file "../home/.config/hub" should contain "oauth_token: OTOKENSMS"
 
-  @wip
   Scenario: Special characters in username & password
     Given the GitHub API server:
       """
