@@ -10,23 +10,20 @@ Feature: OAuth authentication
       post('/authorizations') {
         auth = Rack::Auth::Basic::Request.new(env)
         unless auth.credentials == %w[mislav kitty]
-          status 401
-          json :error => 'error'
+          halt 401, json(:error => 'error')
         end
         assert :scopes => ['repo']
         json :token => 'OTOKEN'
       }
       get('/user') {
         unless request.env['HTTP_AUTHORIZATION'] == 'token OTOKEN'
-          status 401
-          json :error => 'error'
+          halt 401, json(:error => 'error')
         end
         json :login => 'MiSlAv'
       }
       post('/user/repos') {
         unless request.env['HTTP_AUTHORIZATION'] == 'token OTOKEN'
-          status 401
-          json :error => 'error'
+          halt 401, json(:error => 'error')
         end
         json :full_name => 'mislav/dotfiles'
       }
@@ -48,9 +45,7 @@ Feature: OAuth authentication
       get('/authorizations') {
         auth = Rack::Auth::Basic::Request.new(env)
         unless auth.credentials == %w[mislav kitty]
-          status 401
-          json :error => 'error'
-          return
+          halt 401, json(:error => 'error')
         end
 
         json [
@@ -79,9 +74,7 @@ Feature: OAuth authentication
       get('/authorizations') {
         auth = Rack::Auth::Basic::Request.new(env)
         unless auth.credentials == %w[mislav kitty]
-          status 401
-          json :error => 'error'
-          return
+          halt 401, json(:error => 'error')
         end
         json [
           {:token => 'OTOKEN', :app => {:url => 'http://owenou.com/gh'}}
@@ -107,8 +100,7 @@ Feature: OAuth authentication
       get('/authorizations') {
         auth = Rack::Auth::Basic::Request.new(env)
         unless auth.credentials == %w[mislav kitty]
-          status 401
-          json :error => 'auth error'
+          halt 401, json(:error => 'auth error')
         end
       }
       """
@@ -127,13 +119,11 @@ Feature: OAuth authentication
         auth = Rack::Auth::Basic::Request.new(env)
         unless auth.credentials == %w[mislav kitty]
           halt 401, json(:error => 'error')
-          return
         end
 
         if request.env['HTTP_X_GITHUB_OTP'] != "112233"
           response.headers['X-GitHub-OTP'] = "required; application"
           halt 401, json(:error => 'two-factor authorization OTP code')
-          return
         end
 
         json [
@@ -142,22 +132,16 @@ Feature: OAuth authentication
       post('/authorizations') {
         auth = Rack::Auth::Basic::Request.new(env)
         unless auth.credentials == %w[mislav kitty]
-          status 401
-          json :error => 'error'
-          return
+          halt 401, json(:error => 'error')
         end
 
         unless params[:scopes]
-          status 412
-          json :error => 'error'
-          return
+          halt 412, json(:error => 'error')
         end
 
         if request.env['HTTP_X_GITHUB_OTP'] != "112233"
           response.headers['X-GitHub-OTP'] = "required; application"
-          status 401
-          json :error => 'two-factor authentication OTP code'
-          return
+          halt 401, json(:error => 'two-factor authentication OTP code')
         end
 
         json :token => 'OTOKEN'
@@ -187,15 +171,13 @@ Feature: OAuth authentication
       post('/authorizations') {
         assert_basic_auth 'mislav', 'kitty'
         token << 'SMS'
-        status 412
-        json(:error => 'error')
+        halt 412, json(:error => 'error')
       }
       get('/authorizations') {
         assert_basic_auth 'mislav', 'kitty'
         if request.env['HTTP_X_GITHUB_OTP'] != "112233"
           response.headers['X-GitHub-OTP'] = "required; application"
           halt 401, json(:error => 'error')
-          return
         end
         json [ {
           :token => token,
@@ -218,23 +200,29 @@ Feature: OAuth authentication
     And the exit status should be 0
     And the file "../home/.config/gh" should contain "OTOKEN"
 
+  @wip
   Scenario: Special characters in username & password
     Given the GitHub API server:
       """
       get('/authorizations') { json [] }
       post('/authorizations') {
-        assert_basic_auth 'mislav@example.com', 'mypass@phraseok?'
+        assert_basic_auth 'mislav@example.com', 'my pass@phrase ok?'
         json :token => 'OTOKEN'
       }
       get('/user') {
         json :login => 'mislav'
       }
-      get('/repos/mislav/dotfiles') { status 200; json [] }
+      post('/user/repos') {
+        unless request.env['HTTP_AUTHORIZATION'] == 'token OTOKEN'
+          halt 401, json(:error => 'error')
+        end
+        json :full_name => 'mislav/dotfiles'
+      }
       """
     When I run `hub create` interactively
     When I type "mislav@example.com"
-    And I type "mypass@phraseok?"
+    And I type "my pass@phrase ok?"
     Then the output should contain "github.com password for mislav@example.com (never stored):"
     And the exit status should be 0
-    And the file "../home/.config/hub" should contain "user: mislav"
-    And the file "../home/.config/hub" should contain "oauth_token: OTOKEN"
+    And the file "../home/.config/gh" should contain "mislav"
+    And the file "../home/.config/gh" should contain "OTOKEN"
