@@ -64,14 +64,12 @@ Feature: hub browse
     When I successfully run `hub browse`
     Then "open https://github.com/mislav/dotfiles" should be run
 
-  @wip
   Scenario: Current branch, no tracking
     Given I am in "git://github.com/mislav/dotfiles.git" git repo
     And I am on the "feature" branch
     When I successfully run `hub browse`
     Then "open https://github.com/mislav/dotfiles" should be run
 
-  @wip
   Scenario: Current branch with special chars
     Given I am in "git://github.com/mislav/dotfiles.git" git repo
     And I am on the "fix-bug-#123" branch with upstream "origin/fix-bug-#123"
