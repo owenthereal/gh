@@ -144,9 +144,7 @@ World Module.new {
 
     yield data
     File.open(config, 'w') { |cfg| cfg << YAML.dump(data) }
-    File.open(gh_config, 'w') do |cfg|
-      cfg << JSON.generate(data)
-    end
+    File.open(gh_config, 'w') { |cfg| cfg << JSON.generate(data) }
   end
 
   define_method(:text_editor_script) do |bash_code|
