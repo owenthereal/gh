@@ -173,7 +173,7 @@ Given(/^my shell is (\w+)$/) do |shell|
 end
 
 Given(/^I'm using ((?:zsh|git)-distributed) base git completions$/) do |type|
-  link_completion.call(zsh_completion, '_hub')
+  link_completion.call(zsh_completion, '_gh')
   case type
   when 'zsh-distributed'
     raise "this combination makes no sense!" if 'bash' == shell
