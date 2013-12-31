@@ -164,7 +164,7 @@ Feature: hub pull-request
     Given the text editor exits with error status
     And an empty file named ".git/PULLREQ_EDITMSG"
     When I run `hub pull-request`
-    Then the stderr should contain "error using text editor for title/body message"
+    Then the stderr should contain "error using text editor for editing message"
     And the exit status should be 1
     And the file ".git/PULLREQ_EDITMSG" should not exist
 
