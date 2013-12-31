@@ -188,14 +188,13 @@ Feature: OAuth authentication
         assert_basic_auth 'mislav', 'kitty'
         token << 'SMS'
         status 412
-        json :error => 'error'
+        json(:error => 'error')
       }
       get('/authorizations') {
         assert_basic_auth 'mislav', 'kitty'
         if request.env['HTTP_X_GITHUB_OTP'] != "112233"
           response.headers['X-GitHub-OTP'] = "required; application"
-          status 401
-          json :error => 'error'
+          halt 401, json(:error => 'error')
           return
         end
         json [ {
@@ -217,7 +216,7 @@ Feature: OAuth authentication
     Then the output should contain "github.com password for mislav (never stored):"
     Then the output should contain "two-factor authentication code:"
     And the exit status should be 0
-    And the file "../home/.config/hub" should contain "oauth_token: OTOKENSMS"
+    And the file "../home/.config/gh" should contain "OTOKEN"
 
   Scenario: Special characters in username & password
     Given the GitHub API server:
