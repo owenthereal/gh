@@ -16,10 +16,8 @@ Feature: hub submodule add
     When I successfully run `hub submodule add -p mojombo/grit vendor/grit`
     Then the "vendor/grit" submodule url should be "git@github.com:mojombo/grit.git"
 
-  @announce
   Scenario: Add submodule with arguments
-    When I successfully run `git --version`
-    And I successfully run `hub submodule add -b foo --name grit mojombo/grit vendor/grit`
+    When I successfully run `hub submodule add -b foo --name grit mojombo/grit vendor/grit`
     Then "git submodule add -b foo --name grit git://github.com/mojombo/grit.git vendor/grit" should be run
 
   Scenario: Add submodule with branch
