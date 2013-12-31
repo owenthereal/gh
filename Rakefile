@@ -188,5 +188,6 @@ end
 desc "Run cucumber feature tests from Hub"
 task :features do
   features = ENV.fetch("FEATURE", "features")
-  sh "cucumber -f progress -t ~@wip #{features}"
+  profile = ENV.fetch("PROFILE", "default")
+  sh "cucumber -p #{profile} -t ~@wip #{features}"
 end
