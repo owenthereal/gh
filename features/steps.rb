@@ -29,6 +29,7 @@ Given(/^I am "([^"]*)" on ([\w.-]+)(?: with OAuth token "([^"]*)")?$/) do |name,
   edit_hub_config do |cfg|
     entry = {'user' => name, 'host' => host}
     entry['access_token'] = token if token
+    cfg.delete_if { |i| i['user'] == name && i['host'] == host }
     cfg << entry
   end
 end
