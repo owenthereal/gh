@@ -1,4 +1,3 @@
-@wip
 @completion
 Feature: bash tab-completion
 
