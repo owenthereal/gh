@@ -28,6 +28,7 @@ download() {
 }
 
 bundle_path="vendor/bundle"
+TRAVIS_RUBY_VERSION=`ruby -e "print RUBY_VERSION"`
 gemfile_hash="$(compute_md5 <"${BUNDLE_GEMFILE:-Gemfile}.lock")"
 cache_name="${TRAVIS_RUBY_VERSION}-${gemfile_hash}.tgz"
 fetch_url="http://${AMAZON_S3_BUCKET}.s3.amazonaws.com/${TRAVIS_REPO_SLUG}/${cache_name}"
