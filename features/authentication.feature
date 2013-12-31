@@ -108,16 +108,16 @@ Feature: OAuth authentication
         auth = Rack::Auth::Basic::Request.new(env)
         unless auth.credentials == %w[mislav kitty]
           status 401
-          json :error => 'error'
+          json :error => 'auth error'
         end
       }
       """
     When I run `hub create` interactively
     When I type "mislav"
     And I type "WRONG"
-    Then the stderr should contain "Error creating repository: Unauthorized (HTTP 401)"
+    Then the stderr should contain "401 - Error: auth error"
     And the exit status should be 1
-    And the file "../home/.config/gh" should not exist
+    #And the file "../home/.config/gh" should not exist
 
   Scenario: Two-factor authentication, create authorization
     Given the GitHub API server:
@@ -126,18 +126,18 @@ Feature: OAuth authentication
       get('/authorizations') {
         auth = Rack::Auth::Basic::Request.new(env)
         unless auth.credentials == %w[mislav kitty]
-          status 401
-          json :error => 'error'
+          halt 401, json(:error => 'error')
           return
         end
 
         if request.env['HTTP_X_GITHUB_OTP'] != "112233"
-          response.headers['X-GitHub-OTP'] = "required;application"
-          status 401
-          json :error => 'two-factor authentication OTP code'
+          response.headers['X-GitHub-OTP'] = "required; application"
+          halt 401, json(:error => 'two-factor authorization OTP code')
           return
         end
-        json [ ]
+
+        json [
+        ]
       }
       post('/authorizations') {
         auth = Rack::Auth::Basic::Request.new(env)
@@ -154,7 +154,7 @@ Feature: OAuth authentication
         end
 
         if request.env['HTTP_X_GITHUB_OTP'] != "112233"
-          response.headers['X-GitHub-OTP'] = "required;application"
+          response.headers['X-GitHub-OTP'] = "required; application"
           status 401
           json :error => 'two-factor authentication OTP code'
           return
@@ -178,7 +178,7 @@ Feature: OAuth authentication
     Then the output should contain "github.com password for mislav (never stored):"
     Then the output should contain "two-factor authentication code:"
     And the exit status should be 0
-    And the file "../home/.config/hub" should contain "oauth_token: OTOKEN"
+    And the file "../home/.config/gh" should contain "OTOKEN"
 
   Scenario: Two-factor authentication, re-use existing authorization
     Given the GitHub API server:
@@ -188,16 +188,19 @@ Feature: OAuth authentication
         assert_basic_auth 'mislav', 'kitty'
         token << 'SMS'
         status 412
+        json :error => 'error'
       }
       get('/authorizations') {
         assert_basic_auth 'mislav', 'kitty'
         if request.env['HTTP_X_GITHUB_OTP'] != "112233"
-          response.headers['X-GitHub-OTP'] = "required;application"
-          halt 401
+          response.headers['X-GitHub-OTP'] = "required; application"
+          status 401
+          json :error => 'error'
+          return
         end
         json [ {
           :token => token,
-          :app => {:url => 'http://hub.github.com/'}
+          :app => {:url => 'http://owenou.com/gh'}
           } ]
       }
       get('/user') {
