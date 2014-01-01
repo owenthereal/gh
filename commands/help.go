@@ -86,6 +86,7 @@ GitHub Commands:
    ci-status      Show the CI status of a commit
    release        List or create releases (beta)
    issue          List or create issues (beta)
+   gist           Create gist (beta)
 
 See 'git help <command>' for more information on a specific command.
 Run 'git update' to update to the latest version of gh.
