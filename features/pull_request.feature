@@ -16,7 +16,6 @@ Feature: hub pull-request
     Then the stderr should contain "Aborted: the origin remote doesn't point to a GitHub repository.\n"
     And the exit status should be 1
 
-  @wip
   Scenario: Create pull request respecting "insteadOf" configuration
     Given the "origin" remote has url "mygh:Manganeez/repo.git"
     When I successfully run `git config url."git@github.com:".insteadOf mygh:`
@@ -60,18 +59,21 @@ Feature: hub pull-request
       """
     And the stdout should contain exactly "the://url\n"
 
-  @wip
   Scenario: Non-existing base
     Given the GitHub API server:
       """
-      post('/repos/origin/coral/pulls') { 404 }
+      post('/repos/origin/coral/pulls') { halt 404, json(:error => 'error') }
       """
     When I run `hub pull-request -b origin:master -m here`
     Then the exit status should be 1
+    #Then the stderr should contain:
+      #"""
+      #Error creating pull request: Not Found (HTTP 404)
+      #Are you sure that github.com/origin/coral exists?
+      #"""
     Then the stderr should contain:
       """
-      Error creating pull request: Not Found (HTTP 404)
-      Are you sure that github.com/origin/coral exists?
+      404 - Error: error
       """
 
   Scenario: Supplies User-Agent string to API calls
@@ -162,7 +164,7 @@ Feature: hub pull-request
     Given the text editor exits with error status
     And an empty file named ".git/PULLREQ_EDITMSG"
     When I run `hub pull-request`
-    Then the stderr should contain "error using text editor for title/body message"
+    Then the stderr should contain "error using text editor for editing message"
     And the exit status should be 1
     And the file ".git/PULLREQ_EDITMSG" should not exist
 

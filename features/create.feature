@@ -48,7 +48,6 @@ Feature: hub create
     Then the url for "origin" should be "git@github.com:acme/dotfiles.git"
     And the output should contain exactly "created repository: acme/dotfiles\n"
 
-  @wip
   Scenario: Creating repo failed
     Given the GitHub API server:
       """
