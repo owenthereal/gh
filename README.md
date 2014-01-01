@@ -56,7 +56,9 @@ If you're using [boxen](http://boxen.github.com/), there's a [puppet-gh](https:/
 
 To compile gh from source, you need to have a [Go development environment](http://golang.org/doc/install), version 1.1 or better, and run:
 
-    $ go get github.com/jingweno/gh
+    $ git clone https://github.com/jingweno/gh.git
+    $ cd gh
+    $ script/install
 
 Note that `go get` will pull down sources from various VCS.
 Please make sure you have git and hg installed.
@@ -83,7 +85,9 @@ If you installed `gh` with `brew tap jingweno/gh`, you can update it with:
 
 To update gh from source, run:
 
-    $ go get -u github.com/jingweno/gh
+    $ cd GH_SOURCE_DIR
+    $ git pull origin master
+    $ script/install
 
 ## Aliasing
 
