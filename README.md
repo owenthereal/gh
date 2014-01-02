@@ -391,8 +391,8 @@ See [Issues](https://github.com/jingweno/gh/issues?labels=feature&page=1&state=o
 
 ### Development
 
-We're using [godep](https://github.com/kr/godep) to lock down all the
-dependencies. You need to use our wrapper scripts to build/install/test `gh`:
+[Godep](https://github.com/kr/godep) is used to lock down all the
+dependencies. You need to use the wrapper scripts to build/install/test `gh`:
 
 ### script/bootstrap
 
