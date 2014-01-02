@@ -389,7 +389,12 @@ See [Releases](https://github.com/jingweno/gh/releases).
 
 See [Issues](https://github.com/jingweno/gh/issues?labels=feature&page=1&state=open).
 
-## script/bootstrap
+### Development
+
+We're using [godep](https://github.com/kr/godep) to lock down all the
+dependencies. You need to use our wrapper scripts to build/install/test `gh`:
+
+### script/bootstrap
 
 This script will get all the dependencies ready so you can start hacking on gh.
 
@@ -397,7 +402,7 @@ This script will get all the dependencies ready so you can start hacking on gh.
 $ ./script/bootstrap
 ```
 
-## script/build
+### script/build
 
 This script will build gh. It will also perform script/bootstrap, which gets all dependencies and all that jazz.
 
@@ -405,7 +410,15 @@ This script will build gh. It will also perform script/bootstrap, which gets all
 $ ./script/build
 ```
 
-## script/release
+### script/install
+
+This script will build and install gh. It will also perform script/bootstrap, which gets all dependencies and all that jazz.
+
+```
+$ ./script/install
+```
+
+### script/release
 
 This script will cross-compile gh and prepare for release.
 
@@ -413,7 +426,7 @@ This script will cross-compile gh and prepare for release.
 $ ./script/release
 ```
 
-## script/test
+### script/test
 
 For your convenience, there is a script to run the tests.
 
