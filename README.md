@@ -56,7 +56,9 @@ If you're using [boxen](http://boxen.github.com/), there's a [puppet-gh](https:/
 
 To compile gh from source, you need to have a [Go development environment](http://golang.org/doc/install), version 1.1 or better, and run:
 
-    $ go get github.com/jingweno/gh
+    $ git clone https://github.com/jingweno/gh.git
+    $ cd gh
+    $ script/install
 
 Note that `go get` will pull down sources from various VCS.
 Please make sure you have git and hg installed.
@@ -83,7 +85,9 @@ If you installed `gh` with `brew tap jingweno/gh`, you can update it with:
 
 To update gh from source, run:
 
-    $ go get -u github.com/jingweno/gh
+    $ cd GH_SOURCE_DIR
+    $ git pull origin master
+    $ script/install
 
 ## Aliasing
 
@@ -385,7 +389,12 @@ See [Releases](https://github.com/jingweno/gh/releases).
 
 See [Issues](https://github.com/jingweno/gh/issues?labels=feature&page=1&state=open).
 
-## script/bootstrap
+### Development
+
+[Godep](https://github.com/kr/godep) is used to lock down all the
+dependencies. You need to use the wrapper scripts to build/install/test `gh`:
+
+### script/bootstrap
 
 This script will get all the dependencies ready so you can start hacking on gh.
 
@@ -393,7 +402,7 @@ This script will get all the dependencies ready so you can start hacking on gh.
 $ ./script/bootstrap
 ```
 
-## script/build
+### script/build
 
 This script will build gh. It will also perform script/bootstrap, which gets all dependencies and all that jazz.
 
@@ -401,7 +410,15 @@ This script will build gh. It will also perform script/bootstrap, which gets all
 $ ./script/build
 ```
 
-## script/release
+### script/install
+
+This script will build and install gh. It will also perform script/bootstrap, which gets all dependencies and all that jazz.
+
+```
+$ ./script/install
+```
+
+### script/release
 
 This script will cross-compile gh and prepare for release.
 
@@ -409,7 +426,7 @@ This script will cross-compile gh and prepare for release.
 $ ./script/release
 ```
 
-## script/test
+### script/test
 
 For your convenience, there is a script to run the tests.
 

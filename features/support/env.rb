@@ -18,6 +18,8 @@ Before do
   unset_bundler_env_vars
   # have bin/hub load code from the current project
   set_env 'RUBYLIB', lib_dir
+  # speed up load time by skipping RubyGems
+  set_env 'RUBYOPT', '--disable-gems' if RUBY_VERSION > '1.9'
   # put fakebin on the PATH
   set_env 'PATH', "#{gh_dir}:#{bin_dir}:#{ENV['PATH']}"
   # clear out GIT if it happens to be set
@@ -142,9 +144,7 @@ World Module.new {
 
     yield data
     File.open(config, 'w') { |cfg| cfg << YAML.dump(data) }
-    File.open(gh_config, 'w') do |cfg|
-      cfg << JSON.generate(data)
-    end
+    File.open(gh_config, 'w') { |cfg| cfg << JSON.generate(data) }
   end
 
   define_method(:text_editor_script) do |bash_code|

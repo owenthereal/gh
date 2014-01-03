@@ -14,8 +14,8 @@ require 'pathname'
 
 tmpdir = Pathname.new(ENV.fetch('TMPDIR', '/tmp')) + 'hub-test'
 cpldir = tmpdir + 'completion'
-zsh_completion = File.expand_path('../../../etc/hub.zsh_completion', __FILE__)
-bash_completion = File.expand_path('../../../etc/hub.bash_completion.sh', __FILE__)
+zsh_completion = File.expand_path('../../../etc/gh.zsh_completion', __FILE__)
+bash_completion = File.expand_path('../../../etc/gh.bash_completion.sh', __FILE__)
 
 _git_prefix = nil
 

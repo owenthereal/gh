@@ -59,6 +59,7 @@ Feature: hub fork
     Given the GitHub API server:
       """
       get('/repos/mislav/dotfiles') {
+        halt 406 unless request.env['HTTP_ACCEPT'] == 'application/vnd.github.v3+json'
         json :parent => { :html_url => 'https://github.com/unrelated/dotfiles' }
       }
       """
@@ -81,20 +82,13 @@ Scenario: Related fork already exists
     Then the exit status should be 0
     And the url for "mislav" should be "git@github.com:mislav/dotfiles.git"
 
-  @wip
   Scenario: Invalid OAuth token
     Given the GitHub API server:
       """
       before do
         unless request.env['HTTP_AUTHORIZATION'] == 'token OTOKEN'
-          status 401
-          json :message => "I haz fail!"
+          halt 401, json(:message => "I haz fail!")
         end
-      end
-
-      get('/repos/mislav/dotfiles') do
-        status 401
-        json :message => "I haz fail!"
       end
       """
     And I am "mislav" on github.com with OAuth token "WRONGTOKEN"
@@ -102,7 +96,7 @@ Scenario: Related fork already exists
     Then the exit status should be 1
     And the stderr should contain exactly:
       """
-      Error creating fork: Unauthorized (HTTP 401)\n
+      401 - I haz fail!
       """
 
   Scenario: HTTPS is preferred

@@ -1,6 +1,6 @@
 Feature: hub browse
   Background:
-    Given I am in "git://github.com/mislav/dotfiles.git" git repo
+    Given I am "mislav" on github.com with OAuth token "OTOKEN"
 
   Scenario: Project with owner
     When I successfully run `hub browse -p mislav/dotfiles`
@@ -52,6 +52,7 @@ Feature: hub browse
 
   Scenario: Current branch
     Given I am in "git://github.com/mislav/dotfiles.git" git repo
+    And git "push.default" is set to "upstream"
     And I am on the "feature" branch with upstream "origin/experimental"
     When I successfully run `hub browse`
     Then "open https://github.com/mislav/dotfiles/tree/experimental" should be run
@@ -63,14 +64,12 @@ Feature: hub browse
     When I successfully run `hub browse`
     Then "open https://github.com/mislav/dotfiles" should be run
 
-  @wip
   Scenario: Current branch, no tracking
     Given I am in "git://github.com/mislav/dotfiles.git" git repo
     And I am on the "feature" branch
     When I successfully run `hub browse`
     Then "open https://github.com/mislav/dotfiles" should be run
 
-  @wip
   Scenario: Current branch with special chars
     Given I am in "git://github.com/mislav/dotfiles.git" git repo
     And I am on the "fix-bug-#123" branch with upstream "origin/fix-bug-#123"
@@ -79,12 +78,14 @@ Feature: hub browse
 
   Scenario: Commits on current branch
     Given I am in "git://github.com/mislav/dotfiles.git" git repo
+    And git "push.default" is set to "upstream"
     And I am on the "feature" branch with upstream "origin/experimental"
     When I successfully run `hub browse commits`
     Then "open https://github.com/mislav/dotfiles/commits/experimental" should be run
 
   Scenario: Complex branch
     Given I am in "git://github.com/mislav/dotfiles.git" git repo
+    And git "push.default" is set to "upstream"
     And I am on the "foo/bar" branch with upstream "origin/baz/qux/moo"
     When I successfully run `hub browse`
     Then "open https://github.com/mislav/dotfiles/tree/baz/qux/moo" should be run
