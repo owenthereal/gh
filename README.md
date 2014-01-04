@@ -1,15 +1,18 @@
-# g + h = github [![Build Status](https://travis-ci.org/jingweno/gh.png?branch=master)](https://travis-ci.org/jingweno/gh)
+g + h = github [![Build Status](https://travis-ci.org/jingweno/gh.png?branch=master)](https://travis-ci.org/jingweno/gh)
+==============
 
 ![gh](http://owenou.com/gh/images/gangnamtocat.png)
 
 Fast GitHub command line client implemented in Go. Current version is [v1.0.0](https://github.com/jingweno/gh/releases/tag/v1.0.0).
 
-## Overview
+Overview
+--------
 
 gh is a command line client to GitHub. It's designed to run as fast as possible with easy installation across operating systems.
 If you like gh, please also take a look at [hub](https://github.com/github/hub). Hub is a reference implementation to gh.
 
-## Motivation
+Motivation
+----------
 
 **Fast** 
 
@@ -33,7 +36,8 @@ gh is fully implemented in the Go language and is designed to run across operati
 
 There're no pre-requirements to install gh. Download the [binary](https://github.com/jingweno/gh/releases) and go!
 
-## Installation
+Installation
+------------
 
 ### Homebrew
 
@@ -63,7 +67,8 @@ To compile gh from source, you need to have a [Go development environment](http:
 Note that `go get` will pull down sources from various VCS.
 Please make sure you have git and hg installed.
 
-## Update
+Update
+------
 
 `gh` comes with a command to self update:
 
@@ -89,7 +94,8 @@ To update gh from source, run:
     $ git pull origin master
     $ script/install
 
-## Aliasing
+Aliasing
+--------
 
 It's best to use `gh` by aliasing it to `git`.
 All git commands will still work with `gh` adding some sugar.
@@ -104,239 +110,239 @@ script:
 
 For more details, run `gh help alias`.
 
-## Usage
+Commands
+--------
 
-### gh help
-    
-    $ gh help
-    [display help for all commands]
-    $ gh help pull-request
-    [display help for pull-request]
+Assuming you've aliased gh as `git`, the following commands now have:
 
-### gh init
+### git init
 
-    $ gh init -g
+    $ git init -g
     > git init
     > git remote add origin git@github.com:YOUR_USER/REPO.git
 
-### gh push
+### git push
 
-    $ gh push origin,staging,qa bert_timeout
+    $ git push origin,staging,qa bert_timeout
     > git push origin bert_timeout
     > git push staging bert_timeout
     > git push qa bert_timeout
 
-    $ gh push origin
+    $ git push origin
     > git push origin HEAD
 
-### gh checkout
+### git checkout
 
-    $ gh checkout https://github.com/jingweno/gh/pull/35
+    $ git checkout https://github.com/jingweno/gh/pull/35
     > git remote add -f -t feature git://github:com/foo/gh.git
     > git checkout --track -B foo-feature foo/feature
 
-    $ gh checkout https://github.com/jingweno/gh/pull/35 custom-branch-name
+    $ git checkout https://github.com/jingweno/gh/pull/35 custom-branch-name
 
-### gh merge
+### git merge
 
-    $ gh merge https://github.com/jingweno/gh/pull/73
+    $ git merge https://github.com/jingweno/gh/pull/73
     > git fetch git://github.com/jingweno/gh.git +refs/heads/feature:refs/remotes/jingweno/feature
     > git merge jingweno/feature --no-ff -m 'Merge pull request #73 from jingweno/feature...'
 
-### gh clone
+### git clone
 
-    $ gh clone jingweno/gh
+    $ git clone jingweno/gh
     > git clone git://github.com/jingweno/gh
 
-    $ gh clone -p jingweno/gh
+    $ git clone -p jingweno/gh
     > git clone git@github.com:jingweno/gh.git
 
-    $ gh clone jekyll_and_hype
+    $ git clone jekyll_and_hype
     > git clone git://github.com/YOUR_LOGIN/jekyll_and_hype.
 
-    $ gh clone -p jekyll_and_hype
+    $ git clone -p jekyll_and_hype
     > git clone git@github.com:YOUR_LOGIN/jekyll_and_hype.git
 
-### gh fetch
+### git fetch
 
-    $ gh fetch jingweno
+    $ git fetch jingweno
     > git remote add jingweno git://github.com/jingweno/REPO.git
     > git fetch jingweno
 
-    $ gh fetch jingweno,foo
+    $ git fetch jingweno,foo
     > git remote add jingweno ...
     > git remote add foo ...
     > git fetch --multiple jingweno foo
 
-    $ gh fetch --multiple jingweno foo
+    $ git fetch --multiple jingweno foo
     > git remote add jingweno ...
     > git remote add foo ...
     > git fetch --multiple jingweno foo
 
-### gh cherry-pick
+### git cherry-pick
 
-    $ gh cherry-pick https://github.com/jingweno/gh/commit/a319d88#comments
+    $ git cherry-pick https://github.com/jingweno/gh/commit/a319d88#comments
     > git remote add -f jingweno git://github.com/jingweno/gh.git
     > git cherry-pick a319d88
 
-    $ gh cherry-pick jingweno@a319d88
+    $ git cherry-pick jingweno@a319d88
     > git remote add -f jingweno git://github.com/jingweno/gh.git
     > git cherry-pick a319d88
 
-    $ gh cherry-pick jingweno@SHA
+    $ git cherry-pick jingweno@SHA
     > git fetch jingweno
     > git cherry-pick SHA
 
-### gh remote
+### git remote
 
-    $ gh remote add jingweno
+    $ git remote add jingweno
     > git remote add -f jingweno git://github.com/jingweno/CURRENT_REPO.git
 
-    $ gh remote add -p jingweno
+    $ git remote add -p jingweno
     > git remote add -f jingweno git@github.com:jingweno/CURRENT_REPO.git
 
-    $ gh remote add origin
+    $ git remote add origin
     > git remote add -f YOUR_USER git://github.com/YOUR_USER/CURRENT_REPO.git    
 
-### gh submodule
+### git submodule
 
-    $ gh submodule add jingweno/gh vendor/gh
+    $ git submodule add jingweno/gh vendor/gh
     > git submodule add git://github.com/jingweno/gh.git vendor/gh
 
-    $ gh submodule add -p jingweno/gh vendor/gh
+    $ git submodule add -p jingweno/gh vendor/gh
     > git submodule add git@github.com:jingweno/gh.git vendor/gh
 
-    $ gh submodule add -b gh --name gh jingweno/gh vendor/gh
+    $ git submodule add -b gh --name gh jingweno/gh vendor/gh
     > git submodule add -b gh --name gh git://github.com/jingweno/gh.git vendor/gh
 
-### gh pull-request
+### git pull-request
 
     # while on a topic branch called "feature":
-    $ gh pull-request
+    $ git pull-request
     [ opens text editor to edit title & body for the request ]
     [ opened pull request on GitHub for "YOUR_USER:feature" ]
 
     # explicit pull base & head:
-    $ gh pull-request -b jingweno:master -h jingweno:feature
+    $ git pull-request -b jingweno:master -h jingweno:feature
 
-    $ gh pull-request -m "title\n\nbody"
+    $ git pull-request -m "title\n\nbody"
     [ create pull request with title & body  ]
 
-    $ gh pull-request -i 123
+    $ git pull-request -i 123
     [ attached pull request to issue #123 ]
 
-    $ gh pull-request https://github.com/jingweno/gh/pull/123
+    $ git pull-request https://github.com/jingweno/gh/pull/123
     [ attached pull request to issue #123 ]
 
-    $ gh pull-request -F FILE
+    $ git pull-request -F FILE
     [ create pull request with title & body from FILE ]
 
-### gh apply
+### git apply
 
-    $ gh apply https://github.com/jingweno/gh/pull/55
+    $ git apply https://github.com/jingweno/gh/pull/55
     > curl https://github.com/jingweno/gh/pull/55.patch -o /tmp/55.patch
     > git apply /tmp/55.patch
 
-    $ gh apply --ignore-whitespace https://github.com/jingweno/gh/commit/fdb9921
+    $ git apply --ignore-whitespace https://github.com/jingweno/gh/commit/fdb9921
     > curl https://github.com/jingweno/gh/commit/fdb9921.patch -o /tmp/fdb9921.patch
     > git apply --ignore-whitespace /tmp/fdb9921.patch
 
-    $ gh apply https://gist.github.com/8da7fb575debd88c54cf
+    $ git apply https://gist.github.com/8da7fb575debd88c54cf
     > curl https://gist.github.com/8da7fb575debd88c54cf.txt -o /tmp/gist-8da7fb575debd88c54cf.txt
     > git apply /tmp/gist-8da7fb575debd88c54cf.txt
 
-### gh fork
+### git fork
 
-    $ gh fork
+    $ git fork
     [ repo forked on GitHub ]
     > git remote add -f YOUR_USER git@github.com:YOUR_USER/CURRENT_REPO.git
 
-    $ gh fork --no-remote
+    $ git fork --no-remote
     [ repo forked on GitHub ]
 
-### gh create
+### git create
 
-    $ gh create
+    $ git create
     ... create repo on github ...
     > git remote add -f origin git@github.com:YOUR_USER/CURRENT_REPO.git
 
     # with description:
-    $ gh create -d 'It shall be mine, all mine!'
+    $ git create -d 'It shall be mine, all mine!'
 
-    $ gh create recipes
+    $ git create recipes
     [ repo created on GitHub ]
     > git remote add origin git@github.com:YOUR_USER/recipes.git
 
-    $ gh create sinatra/recipes
+    $ git create sinatra/recipes
     [ repo created in GitHub organization ]
     > git remote add origin git@github.com:sinatra/recipes.git
 
-### gh ci-status
+### git ci-status
 
-    $ gh ci-status
+    $ git ci-status
     > (prints CI state of HEAD and exits with appropriate code)
     > One of: success (0), error (1), failure (1), pending (2), no status (3)
 
-    $ gh ci-status -v
+    $ git ci-status -v
     > (prints CI state of HEAD, the URL to the CI build results and exits with appropriate code)
     > One of: success (0), error (1), failure (1), pending (2), no status (3)
 
-    $ gh ci-status BRANCH
+    $ git ci-status BRANCH
     > (prints CI state of BRANCH and exits with appropriate code)
     > One of: success (0), error (1), failure (1), pending (2), no status (3)
 
-    $ gh ci-status SHA
+    $ git ci-status SHA
     > (prints CI state of SHA and exits with appropriate code)
     > One of: success (0), error (1), failure (1), pending (2), no status (3)
     
-### gh browse
+### git browse
 
-    $ gh browse
+    $ git browse
     > open https://github.com/YOUR_USER/CURRENT_REPO
 
-    $ gh browse commit/SHA
+    $ git browse commit/SHA
     > open https://github.com/YOUR_USER/CURRENT_REPO/commit/SHA
 
-    $ gh browse issues
+    $ git browse issues
     > open https://github.com/YOUR_USER/CURRENT_REPO/issues
 
-    $ gh browse -p jingweno/gh
+    $ git browse -p jingweno/gh
     > open https://github.com/jingweno/gh
 
-    $ gh browse -p jingweno/gh commit/SHA
+    $ git browse -p jingweno/gh commit/SHA
     > open https://github.com/jingweno/gh/commit/SHA
 
-    $ gh browse -p resque
+    $ git browse -p resque
     > open https://github.com/YOUR_USER/resque
 
-    $ gh browse -p resque network
+    $ git browse -p resque network
     > open https://github.com/YOUR_USER/resque/network
 
-### gh compare
+### git compare
 
-    $ gh compare refactor
+    $ git compare refactor
     > open https://github.com/CURRENT_REPO/compare/refactor
 
-    $ gh compare 1.0..1.1
+    $ git compare 1.0..1.1
     > open https://github.com/CURRENT_REPO/compare/1.0...1.1
 
-    $ gh compare -u other-user patch
+    $ git compare -u other-user patch
     > open https://github.com/other-user/REPO/compare/patch
 
-### gh release (beta)
+### git release (beta)
 
-    $ gh releases
+    $ git release
     > (prints a list of releases of YOUR_USER/CURRENT_REPO)
 
-    $ gh release TAG
+    $ git release TAG
     > (creates a new release for the given tag)
 
-### gh issues (beta)
+### git issues (beta)
 
-    $ gh issues
+    $ git issue
     > (prints a list of issues for YOUR_USER/CURRENT_REPO)
 
-## Configuration
+    $ git issue create
+    > (creates an issue for the project that "origin" remte points to)
+
+Configuration
+-------------
 
 ### GitHub OAuth authentication
 
@@ -381,15 +387,18 @@ of the git protocol for read and ssh for write, you can set
     $ git clone jingweno/gh
     < https clone >
 
-## Release Notes
+Release Notes
+-------------
 
 See [Releases](https://github.com/jingweno/gh/releases).
 
-## Roadmap
+Roadmap
+-------
 
 See [Issues](https://github.com/jingweno/gh/issues?labels=feature&page=1&state=open).
 
-### Development
+Development
+-----------
 
 [Godep](https://github.com/kr/godep) is used to lock down all the
 dependencies. You need to use the wrapper scripts to build/install/test `gh`:
@@ -434,10 +443,12 @@ For your convenience, there is a script to run the tests.
 $ ./script/test
 ```
 
-## Contributors
+Contributors
+------------
 
 See [Contributors](https://github.com/jingweno/gh/graphs/contributors).
 
-## License
+License
+-------
 
 gh is released under the MIT license. See [LICENSE.md](https://github.com/jingweno/gh/blob/master/LICENSE.md).
