@@ -381,6 +381,15 @@ of the git protocol for read and ssh for write, you can set
     $ git clone jingweno/gh
     < https clone >
 
+## Crash reports
+
+`gh` includes automatic crash reporting in case that something unexpected happens.
+It will ask you if you want to report the error to us if the program terminates suddenly, and
+then it will open an issue on your behalf under [the crash report issues](https://github.com/jingweno/gh/issues?labels=Crash+Report&page=1&state=open).
+
+`gh` doesn't send any information about the command that you ran.
+Check [some examples](https://github.com/jingweno/gh/issues?labels=Crash+Report&state=closed) of the information included by default, you can always modify it before the issue is open.
+
 ## Release Notes
 
 See [Releases](https://github.com/jingweno/gh/releases).
