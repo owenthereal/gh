@@ -362,7 +362,7 @@ This is a list of available settings in `~/.config/gh`:
       "access_token": "ACCESS_TOKEN2"
     }
   ],
-  "autoupdate": false
+  "autoupdate": "yes"
 }
 ```
 
