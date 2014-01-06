@@ -390,6 +390,18 @@ then it will open an issue on your behalf under [the crash report issues](https:
 `gh` doesn't send any information about the command that you ran.
 Check [some examples](https://github.com/jingweno/gh/issues?labels=Crash+Report&state=closed) of the information included by default, you can always modify it before the issue is open.
 
+You can enable to always send crash reports with the default information by answering `always` when a crash error happens, or setting the global git config `gh.reportCrash`:
+
+```
+$ git --global gh.reportCrash always
+```
+
+You can also disable completely crash report notifications by answering `never` when a crash report happens, or setting the global git config `gh.reportCrash`:
+
+```
+$ git --global gh.reportCrash never
+```
+
 ## Release Notes
 
 See [Releases](https://github.com/jingweno/gh/releases).
