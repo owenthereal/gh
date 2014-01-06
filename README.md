@@ -290,7 +290,7 @@ Assuming you've aliased gh as `git`, the following commands now have:
     $ git ci-status SHA
     > (prints CI state of SHA and exits with appropriate code)
     > One of: success (0), error (1), failure (1), pending (2), no status (3)
-    
+
 ### git browse
 
     $ git browse
@@ -386,6 +386,28 @@ of the git protocol for read and ssh for write, you can set
     $ git config --global gh.protocol https
     $ git clone jingweno/gh
     < https clone >
+
+
+### Crash reports
+
+`gh` includes automatic crash reporting in case that something unexpected happens.
+It will ask you if you want to report the error to us if the program terminates suddenly, and
+then it will open an issue on your behalf under [the crash report issues](https://github.com/jingweno/gh/issues?labels=Crash+Report&page=1&state=open).
+
+`gh` doesn't send any information about the command that you ran.
+Check [some examples](https://github.com/jingweno/gh/issues?labels=Crash+Report&state=closed) of the information included by default, you can always modify it before the issue is open.
+
+You can enable to always send crash reports with the default information by answering `always` when a crash error happens, or setting the global git config `gh.reportCrash`:
+
+```
+$ git --global gh.reportCrash always
+```
+
+You can also disable completely crash report notifications by answering `never` when a crash report happens, or setting the global git config `gh.reportCrash`:
+
+```
+$ git --global gh.reportCrash never
+```
 
 Release Notes
 -------------
