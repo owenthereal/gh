@@ -451,7 +451,8 @@ $ ./script/install
 
 ### script/release
 
-This script will cross-compile gh and prepare for release.
+This script will cross-compile gh and package release for current platform.
+It executes the `package` [gotask](https://github.com/jingweno/gotask) [task](https://github.com/jingweno/gh/blob/master/gh_task.go).
 
 ```
 $ ./script/release
