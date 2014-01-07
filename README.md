@@ -78,7 +78,18 @@ Update
 
 `gh` checks every two weeks for newer versions and prompts you for update if there's one.
 A timestamp is stored in `~/.config/gh-update` for the next update time.
-You can turn off the update prompt and allow `gh` to update automatically by setting "autoupdate" to true in [`~/.config/gh`](https://github.com/jingweno/gh#available-settings).
+
+You can enable to always update automatically by answering `always` when a new version is released, or setting the global git config `gh.autoUpdate`:
+
+```
+$ git --global gh.autoUpdate always
+```
+
+You can also disable completely automatic updates by answering `never` when a new version is released, or setting the global git config `gh.autoUpdate`:
+
+```
+$ git --global gh.autoUpdate never
+```
 
 ### Homebrew
 
@@ -367,8 +378,7 @@ This is a list of available settings in `~/.config/gh`:
       "user": "USER_NAME2",
       "access_token": "ACCESS_TOKEN2"
     }
-  ],
-  "autoupdate": false
+  ]
 }
 ```
 
