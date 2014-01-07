@@ -82,13 +82,13 @@ A timestamp is stored in `~/.config/gh-update` for the next update time.
 You can enable to always update automatically by answering `always` when a new version is released, or setting the global git config `gh.autoUpdate`:
 
 ```
-$ git --global gh.autoUpdate always
+$ git config --global gh.autoUpdate always
 ```
 
 You can also disable completely automatic updates by answering `never` when a new version is released, or setting the global git config `gh.autoUpdate`:
 
 ```
-$ git --global gh.autoUpdate never
+$ git config --global gh.autoUpdate never
 ```
 
 ### Homebrew
@@ -410,13 +410,13 @@ Check [some examples](https://github.com/jingweno/gh/issues?labels=Crash+Report&
 You can enable to always send crash reports with the default information by answering `always` when a crash error happens, or setting the global git config `gh.reportCrash`:
 
 ```
-$ git --global gh.reportCrash always
+$ git config --global gh.reportCrash always
 ```
 
 You can also disable completely crash report notifications by answering `never` when a crash report happens, or setting the global git config `gh.reportCrash`:
 
 ```
-$ git --global gh.reportCrash never
+$ git config --global gh.reportCrash never
 ```
 
 Release Notes
