@@ -363,27 +363,6 @@ Configuration
 to access the API and exchange it for an OAuth token, which it saves in
 `~/.config/gh`.
 
-### Available settings
-
-This is a list of available settings in `~/.config/gh`:
-
-```json
-{
-  "credentials": [
-    {
-      "host": "HOST1",
-      "user": "USER_NAME1",
-      "access_token": "ACCESS_TOKEN1"
-    },
-    {
-      "host": "HOST2",
-      "user": "USER_NAME2",
-      "access_token": "ACCESS_TOKEN2"
-    }
-  ]
-}
-```
-
 ### HTTPS instead of git protocol
 
 If you prefer using the HTTPS protocol for GitHub repositories instead
