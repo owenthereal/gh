@@ -1,0 +1,556 @@
+.\" generated with Ronn/v0.7.3
+.\" http://github.com/rtomayko/ronn/tree/0.7.3
+.
+.TH "GH" "1" "January 2014" "GITHUB" "gh Manual"
+.
+.SH "NAME"
+\fBgh\fR \- gh + h = github
+.
+.SH "SYNOPSIS"
+\fBgh\fR [\fB\-\-noop\fR] \fICOMMAND\fR \fIOPTIONS\fR
+.
+.br
+\fBgh alias\fR [\fB\-s\fR] [\fISHELL\fR]
+.
+.SS "Expanded git commands:"
+\fBgit init \-g\fR \fIOPTIONS\fR
+.
+.br
+\fBgit clone\fR [\fB\-p\fR] \fIOPTIONS\fR [\fIUSER\fR/]\fIREPOSITORY\fR \fIDIRECTORY\fR
+.
+.br
+\fBgit remote add\fR [\fB\-p\fR] \fIOPTIONS\fR \fIUSER\fR[/\fIREPOSITORY\fR]
+.
+.br
+\fBgit remote set\-url\fR [\fB\-p\fR] \fIOPTIONS\fR \fIREMOTE\-NAME\fR \fIUSER\fR[/\fIREPOSITORY\fR]
+.
+.br
+\fBgit fetch\fR \fIUSER\-1\fR,[\fIUSER\-2\fR,\.\.\.]
+.
+.br
+\fBgit checkout\fR \fIPULLREQ\-URL\fR [\fIBRANCH\fR]
+.
+.br
+\fBgit merge\fR \fIPULLREQ\-URL\fR
+.
+.br
+\fBgit cherry\-pick\fR \fIGITHUB\-REF\fR
+.
+.br
+\fBgit am\fR \fIGITHUB\-URL\fR
+.
+.br
+\fBgit apply\fR \fIGITHUB\-URL\fR
+.
+.br
+\fBgit push\fR \fIREMOTE\-1\fR,\fIREMOTE\-2\fR,\.\.\.,\fIREMOTE\-N\fR [\fIREF\fR]
+.
+.br
+\fBgit submodule add\fR [\fB\-p\fR] \fIOPTIONS\fR [\fIUSER\fR/]\fIREPOSITORY\fR \fIDIRECTORY\fR
+.
+.SS "Custom git commands:"
+\fBgit create\fR [\fINAME\fR] [\fB\-p\fR] [\fB\-d\fR \fIDESCRIPTION\fR] [\fB\-h\fR \fIHOMEPAGE\fR]
+.
+.br
+\fBgit browse\fR [\fB\-u\fR] [[\fIUSER\fR\fB/\fR]\fIREPOSITORY\fR] [SUBPAGE]
+.
+.br
+\fBgit compare\fR [\fB\-u\fR] [\fIUSER\fR] [[\fISTART\fR\.\.\.]\fIEND\fR]
+.
+.br
+\fBgit fork\fR [\fB\-\-no\-remote\fR]
+.
+.br
+\fBgit pull\-request\fR [\fB\-f\fR] [\fB\-m\fR \fIMESSAGE\fR|\fB\-F\fR \fIFILE\fR|\fB\-i\fR \fIISSUE\fR|\fIISSUE\-URL\fR] [\fB\-b\fR \fIBASE\fR] [\fB\-h\fR \fIHEAD\fR]
+.
+.br
+\fBgit release create\fR [\fB\-d\fR] [\fB\-p\fR] [\fB\-a\fR \fIASSETS\-DIR\fR] [\fB\-m\fR \fIMESSAGE\fR|\fB\-f\fR \fIFILE\fR] \fITAG\fR \fBgit issue create\fR [\fB\-m\fR \fIMESSAGE\fR|\fB\-f\fR \fIFILE\fR] [\fB\-l\fR \fILABEL\-1\fR,\fILABEL\-2\fR,\.\.\.,\fILABEL\-N\fR] \fBgit ci\-status\fR [\fB\-v\fR] [\fICOMMIT\fR]
+.
+.SH "DESCRIPTION"
+gh enhances various git commands to ease most common workflows with GitHub\.
+.
+.TP
+\fBgh \-\-noop\fR \fICOMMAND\fR
+Shows which command(s) would be run as a result of the current command\. Doesn\'t perform anything\.
+.
+.TP
+\fBgh alias\fR [\fB\-s\fR] [\fISHELL\fR]
+Shows shell instructions for wrapping git\. If given, \fISHELL\fR specifies the type of shell; otherwise defaults to the value of SHELL environment variable\. With \fB\-s\fR, outputs shell script suitable for \fBeval\fR\.
+.
+.TP
+\fBgit init\fR \fB\-g\fR \fIOPTIONS\fR
+Create a git repository as with git\-init(1) and add remote \fBorigin\fR at "git@github\.com:\fIUSER\fR/\fIREPOSITORY\fR\.git"; \fIUSER\fR is your GitHub username and \fIREPOSITORY\fR is the current working directory\'s basename\.
+.
+.TP
+\fBgit clone\fR [\fB\-p\fR] \fIOPTIONS\fR [\fIUSER\fR\fB/\fR]\fIREPOSITORY\fR \fIDIRECTORY\fR
+Clone repository "git://github\.com/\fIUSER\fR/\fIREPOSITORY\fR\.git" into \fIDIRECTORY\fR as with git\-clone(1)\. When \fIUSER\fR/ is omitted, assumes your GitHub login\.
+.
+.IP
+If the repository is private or the current user has push access to the repository, gh will use the ssh protocol for cloning\. Use \fB\-p\fR to select the ssh protocol unconditionally\. HTTPS protocol can be used instead by setting "gh\.protocol" (see \fICONFIGURATION\fR)\.
+.
+.TP
+\fBgit remote add\fR [\fB\-p\fR] \fIOPTIONS\fR \fIUSER\fR[\fB/\fR\fIREPOSITORY\fR]
+Add remote "git://github\.com/\fIUSER\fR/\fIREPOSITORY\fR\.git" as with git\-remote(1)\. When /\fIREPOSITORY\fR is omitted, the basename of the current working directory is used\. With \fB\-p\fR, use private remote "git@github\.com:\fIUSER\fR/\fIREPOSITORY\fR\.git"\. If \fIUSER\fR is "origin" then uses your GitHub login\.
+.
+.TP
+\fBgit remote set\-url\fR [\fB\-p\fR] \fIOPTIONS\fR \fIREMOTE\-NAME\fR \fIUSER\fR[/\fIREPOSITORY\fR]
+Sets the url of remote \fIREMOTE\-NAME\fR using the same rules as \fBgit remote add\fR\.
+.
+.TP
+\fBgit fetch\fR \fIUSER\-1\fR,[\fIUSER\-2\fR,\.\.\.]
+Adds missing remote(s) with \fBgit remote add\fR prior to fetching\. New remotes are only added if they correspond to valid forks on GitHub\.
+.
+.TP
+\fBgit checkout\fR \fIPULLREQ\-URL\fR [\fIBRANCH\fR]
+Checks out the head of the pull request as a local branch, to allow for reviewing, rebasing and otherwise cleaning up the commits in the pull request before merging\. The name of the local branch can explicitly be set with \fIBRANCH\fR\.
+.
+.TP
+\fBgit merge\fR \fIPULLREQ\-URL\fR
+Merge the pull request with a commit message that includes the pull request ID and title, similar to the GitHub Merge Button\.
+.
+.TP
+\fBgit cherry\-pick\fR \fIGITHUB\-REF\fR
+Cherry\-pick a commit from a fork using either full URL to the commit or GitHub\-flavored Markdown notation, which is \fBuser@sha\fR\. If the remote doesn\'t yet exist, it will be added\. A \fBgit fetch <user>\fR is issued prior to the cherry\-pick attempt\.
+.
+.TP
+\fBgit [am|apply]\fR \fIGITHUB\-URL\fR
+Downloads the patch file for the pull request or commit at the URL and applies that patch from disk with \fBgit am\fR or \fBgit apply\fR\. Similar to \fBcherry\-pick\fR, but doesn\'t add new remotes\. \fBgit am\fR creates commits while preserving authorship info while \fBapply\fR only applies the patch to the working copy\.
+.
+.TP
+\fBgit push\fR \fIREMOTE\-1\fR,\fIREMOTE\-2\fR,\.\.\.,\fIREMOTE\-N\fR [\fIREF\fR]
+Push \fIREF\fR to each of \fIREMOTE\-1\fR through \fIREMOTE\-N\fR by executing multiple \fBgit push\fR commands\.
+.
+.TP
+\fBgit submodule add\fR [\fB\-p\fR] \fIOPTIONS\fR [\fIUSER\fR/]\fIREPOSITORY\fR \fIDIRECTORY\fR
+Submodule repository "git://github\.com/\fIUSER\fR/\fIREPOSITORY\fR\.git" into \fIDIRECTORY\fR as with git\-submodule(1)\. When \fIUSER\fR/ is omitted, assumes your GitHub login\. With \fB\-p\fR, use private remote "git@github\.com:\fIUSER\fR/\fIREPOSITORY\fR\.git"\.
+.
+.TP
+\fBgit help\fR
+Display enhanced git\-help(1)\.
+.
+.P
+gh also adds some custom commands that are otherwise not present in git:
+.
+.TP
+\fBgit create\fR [\fINAME\fR] [\fB\-p\fR] [\fB\-d\fR \fIDESCRIPTION\fR] [\fB\-h\fR \fIHOMEPAGE\fR]
+Create a new public GitHub repository from the current git repository and add remote \fBorigin\fR at "git@github\.com:\fIUSER\fR/\fIREPOSITORY\fR\.git"; \fIUSER\fR is your GitHub username and \fIREPOSITORY\fR is the current working directory name\. To explicitly name the new repository, pass in \fINAME\fR, optionally in \fIORGANIZATION\fR/\fINAME\fR form to create under an organization you\'re a member of\. With \fB\-p\fR, create a private repository, and with \fB\-d\fR and \fB\-h\fR set the repository\'s description and homepage URL, respectively\.
+.
+.TP
+\fBgit browse\fR [\fB\-u\fR] [[\fIUSER\fR\fB/\fR]\fIREPOSITORY\fR] [SUBPAGE]
+Open repository\'s GitHub page in the system\'s default web browser using \fBopen(1)\fR or the \fBBROWSER\fR env variable\. If the repository isn\'t specified, \fBbrowse\fR opens the page of the repository found in the current directory\. If SUBPAGE is specified, the browser will open on the specified subpage: one of "wiki", "commits", "issues" or other (the default is "tree")\. With \fB\-u\fR, outputs the URL rather than opening the browser\.
+.
+.TP
+\fBgit compare\fR [\fB\-u\fR] [\fIUSER\fR] [[\fISTART\fR\.\.\.]\fIEND\fR]
+Open a GitHub compare view page in the system\'s default web browser\. \fISTART\fR to \fIEND\fR are branch names, tag names, or commit SHA1s specifying the range of history to compare\. If a range with two dots (\fBa\.\.b\fR) is given, it will be transformed into one with three dots\. If \fISTART\fR is omitted, GitHub will compare against the base branch (the default is "master")\. If \fIEND\fR is omitted, GitHub compare view is opened for the current branch\. With \fB\-u\fR, outputs the URL rather than opening the browser\.
+.
+.TP
+\fBgit fork\fR [\fB\-\-no\-remote\fR]
+Forks the original project (referenced by "origin" remote) on GitHub and adds a new remote for it under your username\.
+.
+.TP
+\fBgit pull\-request\fR [\fB\-f\fR] [\fB\-m\fR \fIMESSAGE\fR|\fB\-F\fR \fIFILE\fR|\fB\-i\fR \fIISSUE\fR|\fIISSUE\-URL\fR] [\fB\-b\fR \fIBASE\fR] [\fB\-h\fR \fIHEAD\fR]
+Opens a pull request on GitHub for the project that the "origin" remote points to\. The default head of the pull request is the current branch\. Both base and head of the pull request can be explicitly given in one of the following formats: "branch", "owner:branch", "owner/repo:branch"\. This command will abort operation if it detects that the current topic branch has local commits that are not yet pushed to its upstream branch on the remote\. To skip this check, use \fB\-f\fR\.
+.
+.IP
+Without \fIMESSAGE\fR or \fIFILE\fR, a text editor will open in which title and body of the pull request can be entered in the same manner as git commit message\. Pull request message can also be passed via stdin with \fB\-F \-\fR\.
+.
+.IP
+Issue to pull request conversion via \fB\-i <ISSUE>\fR or \fIISSUE\-URL\fR arguments is deprecated and will likely be removed from the future versions of both hub and GitHub API\.
+.
+.TP
+\fBgit release\fR
+Retrieves releases from GitHub for the project that the "origin" remote points to\.
+.
+.TP
+\fBgit release create\fR [\fB\-d\fR] [\fB\-p\fR] [\fB\-a\fR \fIASSETS\-DIR\fR] [\fB\-m\fR \fIMESSAGE\fR|\fB\-f\fR \fIFILE\fR] \fITAG\fR
+Creates a new release in GitHub for the project that the "origin" remote points to\. It requires the name of the tag to release as a first argument\.
+.
+.IP
+Specify the assets to include in the release from a directory via \fB\-a\fR\. Without \fB\-a\fR, it finds assets from "releases/TAG" of the current directory\.
+.
+.IP
+Without \fIMESSAGE\fR or \fIFILE\fR, a text editor will open in which title and body of the release can be entered in the same manner as git commit message\.
+.
+.IP
+If \fB\-d\fR is given, it creates a draft release\.
+.
+.IP
+If \fB\-p\fR is given, it creates a pre\-release\.
+.
+.TP
+\fBgit issue\fR
+List summary of the open issues for the project that the "origin" remote points to\.
+.
+.TP
+\fBgit issue create\fR [\fB\-m\fR \fIMESSAGE\fR|\fB\-f\fR \fIFILE\fR] [\fB\-l\fR \fILABEL\-1\fR,\fILABEL\-2\fR,\.\.\.,\fILABEL\-N\fR]
+Creates an issue for the project that the "origin" remote points to\.
+.
+.IP
+Without \fIMESSAGE\fR or \fIFILE\fR, a text editor will open in which title and body of the release can be entered in the same manner as git commit message\.
+.
+.IP
+Specify one or more labels via \fB\-a\fR\.
+.
+.TP
+\fBgit ci\-status\fR [\fB\-v\fR] [\fICOMMIT\fR]
+Looks up the SHA for \fICOMMIT\fR in GitHub Status API and displays the latest status\. Exits with one of:
+.
+.br
+success (0), error (1), failure (1), pending (2), no status (3)
+.
+.IP
+If \fB\-v\fR is given, additionally print the URL to CI build results\.
+.
+.SH "CONFIGURATION"
+gh will prompt for GitHub username & password the first time it needs to access the API and exchange it for an OAuth token, which it saves in "~/\.config/gh"\.
+.
+.P
+To avoid being prompted, use \fIGITHUB_USER\fR and \fIGITHUB_PASSWORD\fR environment variables\.
+.
+.P
+If you prefer the HTTPS protocol for GitHub repositories, you can set "gh\.protocol" to "https"\. This will affect \fBclone\fR, \fBfork\fR, \fBremote add\fR and other operations that expand references to GitHub repositories as full URLs that otherwise use git and ssh protocols\.
+.
+.IP "" 4
+.
+.nf
+
+$ git config \-\-global gh\.protocol https
+.
+.fi
+.
+.IP "" 0
+.
+.SS "GitHub Enterprise"
+By default, gh will only work with repositories that have remotes which point to github\.com\. GitHub Enterprise hosts need to be whitelisted to configure hub to treat such remotes same as github\.com:
+.
+.IP "" 4
+.
+.nf
+
+$ git config \-\-global \-\-add gh\.host my\.git\.org
+.
+.fi
+.
+.IP "" 0
+.
+.P
+The default host for commands like \fBinit\fR and \fBclone\fR is still github\.com, but this can be affected with the \fIGITHUB_HOST\fR environment variable:
+.
+.IP "" 4
+.
+.nf
+
+$ GITHUB_HOST=my\.git\.org git clone myproject
+.
+.fi
+.
+.IP "" 0
+.
+.SH "EXAMPLES"
+.
+.SS "git init"
+.
+.nf
+
+$ git init \-g
+> git init
+> git remote add origin git@github\.com:YOUR_USER/REPO\.git
+.
+.fi
+.
+.SS "git push"
+.
+.nf
+
+$ git push origin,staging,qa bert_timeout
+> git push origin bert_timeout
+> git push staging bert_timeout
+> git push qa bert_timeout
+
+$ git push origin
+> git push origin HEAD
+.
+.fi
+.
+.SS "git checkout"
+.
+.nf
+
+$ git checkout https://github\.com/jingweno/gh/pull/35
+> git remote add \-f \-t feature git://github:com/foo/gh\.git
+> git checkout \-\-track \-B foo\-feature foo/feature
+
+$ git checkout https://github\.com/jingweno/gh/pull/35 custom\-branch\-name
+.
+.fi
+.
+.SS "git merge"
+.
+.nf
+
+$ git merge https://github\.com/jingweno/gh/pull/73
+> git fetch git://github\.com/jingweno/gh\.git +refs/heads/feature:refs/remotes/jingweno/feature
+> git merge jingweno/feature \-\-no\-ff \-m \'Merge pull request #73 from jingweno/feature\.\.\.\'
+.
+.fi
+.
+.SS "git clone"
+.
+.nf
+
+$ git clone jingweno/gh
+> git clone git://github\.com/jingweno/gh
+
+$ git clone \-p jingweno/gh
+> git clone git@github\.com:jingweno/gh\.git
+
+$ git clone jekyll_and_hype
+> git clone git://github\.com/YOUR_LOGIN/jekyll_and_hype\.
+
+$ git clone \-p jekyll_and_hype
+> git clone git@github\.com:YOUR_LOGIN/jekyll_and_hype\.git
+.
+.fi
+.
+.SS "git fetch"
+.
+.nf
+
+$ git fetch jingweno
+> git remote add jingweno git://github\.com/jingweno/REPO\.git
+> git fetch jingweno
+
+$ git fetch jingweno,foo
+> git remote add jingweno \.\.\.
+> git remote add foo \.\.\.
+> git fetch \-\-multiple jingweno foo
+
+$ git fetch \-\-multiple jingweno foo
+> git remote add jingweno \.\.\.
+> git remote add foo \.\.\.
+> git fetch \-\-multiple jingweno foo
+.
+.fi
+.
+.SS "git cherry\-pick"
+.
+.nf
+
+$ git cherry\-pick https://github\.com/jingweno/gh/commit/a319d88#comments
+> git remote add \-f jingweno git://github\.com/jingweno/gh\.git
+> git cherry\-pick a319d88
+
+$ git cherry\-pick jingweno@a319d88
+> git remote add \-f jingweno git://github\.com/jingweno/gh\.git
+> git cherry\-pick a319d88
+
+$ git cherry\-pick jingweno@SHA
+> git fetch jingweno
+> git cherry\-pick SHA
+.
+.fi
+.
+.SS "git remote"
+.
+.nf
+
+$ git remote add jingweno
+> git remote add \-f jingweno git://github\.com/jingweno/CURRENT_REPO\.git
+
+$ git remote add \-p jingweno
+> git remote add \-f jingweno git@github\.com:jingweno/CURRENT_REPO\.git
+
+$ git remote add origin
+> git remote add \-f YOUR_USER git://github\.com/YOUR_USER/CURRENT_REPO\.git
+.
+.fi
+.
+.SS "git submodule"
+.
+.nf
+
+$ git submodule add jingweno/gh vendor/gh
+> git submodule add git://github\.com/jingweno/gh\.git vendor/gh
+
+$ git submodule add \-p jingweno/gh vendor/gh
+> git submodule add git@github\.com:jingweno/gh\.git vendor/gh
+
+$ git submodule add \-b gh \-\-name gh jingweno/gh vendor/gh
+> git submodule add \-b gh \-\-name gh git://github\.com/jingweno/gh\.git vendor/gh
+.
+.fi
+.
+.SS "git pull\-request"
+.
+.nf
+
+# while on a topic branch called "feature":
+$ git pull\-request
+[ opens text editor to edit title & body for the request ]
+[ opened pull request on GitHub for "YOUR_USER:feature" ]
+
+# explicit pull base & head:
+$ git pull\-request \-b jingweno:master \-h jingweno:feature
+
+$ git pull\-request \-m "title\en\enbody"
+[ create pull request with title & body  ]
+
+$ git pull\-request \-i 123
+[ attached pull request to issue #123 ]
+
+$ git pull\-request https://github\.com/jingweno/gh/pull/123
+[ attached pull request to issue #123 ]
+
+$ git pull\-request \-F FILE
+[ create pull request with title & body from FILE ]
+.
+.fi
+.
+.SS "git apply"
+.
+.nf
+
+$ git apply https://github\.com/jingweno/gh/pull/55
+> curl https://github\.com/jingweno/gh/pull/55\.patch \-o /tmp/55\.patch
+> git apply /tmp/55\.patch
+
+$ git apply \-\-ignore\-whitespace https://github\.com/jingweno/gh/commit/fdb9921
+> curl https://github\.com/jingweno/gh/commit/fdb9921\.patch \-o /tmp/fdb9921\.patch
+> git apply \-\-ignore\-whitespace /tmp/fdb9921\.patch
+
+$ git apply https://gist\.github\.com/8da7fb575debd88c54cf
+> curl https://gist\.github\.com/8da7fb575debd88c54cf\.txt \-o /tmp/gist\-8da7fb575debd88c54cf\.txt
+> git apply /tmp/gist\-8da7fb575debd88c54cf\.txt
+.
+.fi
+.
+.SS "git fork"
+.
+.nf
+
+$ git fork
+[ repo forked on GitHub ]
+> git remote add \-f YOUR_USER git@github\.com:YOUR_USER/CURRENT_REPO\.git
+
+$ git fork \-\-no\-remote
+[ repo forked on GitHub ]
+.
+.fi
+.
+.SS "git create"
+.
+.nf
+
+$ git create
+\.\.\. create repo on github \.\.\.
+> git remote add \-f origin git@github\.com:YOUR_USER/CURRENT_REPO\.git
+
+# with description:
+$ git create \-d \'It shall be mine, all mine!\'
+
+$ git create recipes
+[ repo created on GitHub ]
+> git remote add origin git@github\.com:YOUR_USER/recipes\.git
+
+$ git create sinatra/recipes
+[ repo created in GitHub organization ]
+> git remote add origin git@github\.com:sinatra/recipes\.git
+.
+.fi
+.
+.SS "git ci\-status"
+.
+.nf
+
+$ git ci\-status
+> (prints CI state of HEAD and exits with appropriate code)
+> One of: success (0), error (1), failure (1), pending (2), no status (3)
+
+$ git ci\-status \-v
+> (prints CI state of HEAD, the URL to the CI build results and exits with appropriate code)
+> One of: success (0), error (1), failure (1), pending (2), no status (3)
+
+$ git ci\-status BRANCH
+> (prints CI state of BRANCH and exits with appropriate code)
+> One of: success (0), error (1), failure (1), pending (2), no status (3)
+
+$ git ci\-status SHA
+> (prints CI state of SHA and exits with appropriate code)
+> One of: success (0), error (1), failure (1), pending (2), no status (3)
+.
+.fi
+.
+.SS "git browse"
+.
+.nf
+
+$ git browse
+> open https://github\.com/YOUR_USER/CURRENT_REPO
+
+$ git browse commit/SHA
+> open https://github\.com/YOUR_USER/CURRENT_REPO/commit/SHA
+
+$ git browse issues
+> open https://github\.com/YOUR_USER/CURRENT_REPO/issues
+
+$ git browse \-p jingweno/gh
+> open https://github\.com/jingweno/gh
+
+$ git browse \-p jingweno/gh commit/SHA
+> open https://github\.com/jingweno/gh/commit/SHA
+
+$ git browse \-p resque
+> open https://github\.com/YOUR_USER/resque
+
+$ git browse \-p resque network
+> open https://github\.com/YOUR_USER/resque/network
+.
+.fi
+.
+.SS "git compare"
+.
+.nf
+
+$ git compare refactor
+> open https://github\.com/CURRENT_REPO/compare/refactor
+
+$ git compare 1\.0\.\.1\.1
+> open https://github\.com/CURRENT_REPO/compare/1\.0\.\.\.1\.1
+
+$ git compare \-u other\-user patch
+> open https://github\.com/other\-user/REPO/compare/patch
+.
+.fi
+.
+.SS "git release (beta)"
+.
+.nf
+
+$ git release
+> (prints a list of releases of YOUR_USER/CURRENT_REPO)
+
+$ git release TAG
+> (creates a new release for the given tag)
+.
+.fi
+.
+.SS "git issues (beta)"
+.
+.nf
+
+$ git issue
+> (prints a list of issues for YOUR_USER/CURRENT_REPO)
+
+$ git issue create
+> (creates an issue for the project that "origin" remte points to)
+.
+.fi
+.
+.SH "BUGS"
+\fIhttps://github\.com/github/gh/issues\fR
+.
+.SH "AUTHORS"
+\fIhttps://github\.com/github/gh/contributors\fR
+.
+.SH "SEE ALSO"
+git(1), git\-clone(1), git\-remote(1), git\-init(1), \fIhttp://github\.com\fR, \fIhttps://github\.com/github/hub\fR
