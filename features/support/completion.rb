@@ -35,6 +35,7 @@ git_distributed_bash_completion = lambda {
     Pathname.new('/etc/bash_completion.d/git'),
     Pathname.new('/usr/share/bash-completion/completions/git'),
     Pathname.new('/usr/share/bash-completion/git'),
+    Pathname.new('~/.git-completion.bash'),
   ].detect {|p| p.exist? }
 }
 
