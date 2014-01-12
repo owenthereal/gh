@@ -6,5 +6,5 @@
 # Author: Jingwen Owen Ou
 
 go get code.google.com/p/go.tools/cmd/cover
-go fmt ./...
+script/bootstrap
 GOPATH="`pwd`/.gopack/vendor" go test -cover -v ./...

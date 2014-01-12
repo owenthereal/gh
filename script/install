@@ -5,4 +5,5 @@
 #
 # Author: Jingwen Owen Ou
 
+script/bootstrap
 GOPATH="`pwd`/.gopack/vendor" go install

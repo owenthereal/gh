@@ -5,4 +5,7 @@
 #
 # Author: Jingwen Owen Ou
 
-GOPATH="`pwd`/.gopack/vendor" gotask package
+GOPACK_PATH="`pwd`/.gopack/vendor"
+
+rm -f $GOPACK_PATH/src/github.com/jingweno/gh
+GOPATH="$GOPACK_PATH:$GOPATH" gotask package

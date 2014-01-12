@@ -4,3 +4,4 @@ location="bin/gopack-darwin-amd64"
 [ -d "/proc" ] && location="bin/gopack-linux-amd64"
 
 $location version
+go fmt ./...

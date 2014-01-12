@@ -5,6 +5,6 @@
 #
 # Author: Jingwen Owen Ou
 
-go fmt ./...
+script/bootstrap
 binary=${1:-gh}
 GOPATH="`pwd`/.gopack/vendor" go build -o $binary
