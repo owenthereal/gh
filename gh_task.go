@@ -67,8 +67,8 @@ func TaskPackage(t *tasking.T) {
 	}
 
 	t.Log("Cross-compiling...")
-	godepPath := filepath.Join(ghPath, "Godeps", "_workspace")
-	gopath = fmt.Sprintf("%s%c%s", gopath, os.PathListSeparator, godepPath)
+	gopackPath := filepath.Join(ghPath, ".gopack", "vendor")
+	gopath = fmt.Sprintf("%s%c%s", gopath, os.PathListSeparator, gopackPath)
 	os.Setenv("GOPATH", gopath)
 	TaskCrossCompile(t)
 

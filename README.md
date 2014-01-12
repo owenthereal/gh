@@ -413,7 +413,7 @@ See [Issues](https://github.com/jingweno/gh/issues?labels=feature&page=1&state=o
 Development
 -----------
 
-[Godep](https://github.com/kr/godep) is used to lock down all the
+[Gopack](https://github.com/d2fn/gopack) is used to lock down all the
 dependencies. You need to use the wrapper scripts to build/install/test `gh`:
 
 ### script/bootstrap
