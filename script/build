@@ -6,4 +6,5 @@
 # Author: Jingwen Owen Ou
 
 go fmt ./...
-GOPATH="`pwd`/.gopack/vendor" go build -o gh && echo "Built gh"
+binary=${1:-gh}
+GOPATH="`pwd`/.gopack/vendor" go build -o $binary

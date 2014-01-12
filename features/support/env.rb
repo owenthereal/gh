@@ -8,7 +8,7 @@ lib_dir = File.expand_path('../../../lib', __FILE__)
 bin_dir = File.expand_path('../fakebin', __FILE__)
 gh_dir = File.expand_path('../../../', __FILE__)
 
-raise 'gh build failed' unless system('godep go build -o hub')
+raise 'gh build failed' unless system('script/build hub')
 at_exit do
   FileUtils.rm_f('hub')
 end
