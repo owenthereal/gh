@@ -3,7 +3,7 @@ package commands
 import (
 	"github.com/jingweno/gh/github"
 	"github.com/jingweno/gh/utils"
-	"github.com/jingweno/go-octokit/octokit"
+	"github.com/octokit/go-octokit/octokit"
 	"io/ioutil"
 	"os"
 	"path/filepath"

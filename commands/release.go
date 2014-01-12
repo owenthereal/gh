@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"github.com/jingweno/gh/github"
 	"github.com/jingweno/gh/utils"
-	"github.com/jingweno/go-octokit/octokit"
+	"github.com/octokit/go-octokit/octokit"
 	"io"
 	"net/http"
 	"os"
@@ -188,7 +188,7 @@ func uploadReleaseAssets(gh *github.Client, release *octokit.Release, assetsDir 
 				utils.Check(err)
 				defer file.Close()
 
-				err = gh.UploadReleaseAsset(uploadUrl, file, contentType)
+				err = gh.UploadReleaseAsset(uploadUrl, file, contentType, fi.Size())
 				utils.Check(err)
 			}()
 		}

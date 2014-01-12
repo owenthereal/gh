@@ -1,8 +1,6 @@
-#!/usr/bin/env bash
-# Usage: bootstrap
-#
-# Install all dependencies
-#
-# Author: Jingwen Owen Ou
+#!/bin/bash
 
-go get github.com/kr/godep
+location="bin/gopack-darwin-amd64"
+[ -d "/proc" ] && location="bin/gopack-linux-amd64"
+
+$location version

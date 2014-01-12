@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 # Usage: build
 #
-# Run go build with godep
+# Run go build with gopack deps
 #
 # Author: Jingwen Owen Ou
 
-script/bootstrap
-godep go build -o gh
+go fmt ./...
+GOPATH="`pwd`/.gopack/vendor" go build -o gh && echo "Built gh"

@@ -3,3 +3,4 @@ gh
 target
 .vagrant
 /tmp
+.gopack
