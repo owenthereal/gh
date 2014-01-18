@@ -457,6 +457,8 @@ For your convenience, there is a script to run the tests.
 $ ./script/test
 ```
 
+See [this guide](https://github.com/jingweno/gh/blob/master/CONTRIBUTING.md) on how to submit a pull request.
+
 Contributors
 ------------
 
