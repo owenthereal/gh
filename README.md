@@ -352,7 +352,7 @@ Assuming you've aliased gh as `git`, the following commands now have:
     > (prints a list of issues for YOUR_USER/CURRENT_REPO)
 
     $ git issue create
-    > (creates an issue for the project that "origin" remte points to)
+    > (creates an issue for the project that "origin" remote points to)
 
 Configuration
 -------------
