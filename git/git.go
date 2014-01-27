@@ -150,6 +150,16 @@ func Config(name string) (string, error) {
 	return gitGetConfig(name)
 }
 
+func SetConfig(name, value string) error {
+	_, err := gitConfig(name, value)
+	return err
+}
+
+func UnsetConfig(name string) error {
+	_, err := gitConfig("--unset", name)
+	return err
+}
+
 func GlobalConfig(name string) (string, error) {
 	return gitGetConfig("--global", name)
 }
