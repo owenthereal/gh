@@ -211,7 +211,7 @@ Assuming you've aliased gh as `git`, the following commands now have:
     > git remote add -f jingweno git@github.com:jingweno/CURRENT_REPO.git
 
     $ git remote add origin
-    > git remote add -f YOUR_USER git://github.com/YOUR_USER/CURRENT_REPO.git    
+    > git remote add -f YOUR_USER git://github.com/YOUR_USER/CURRENT_REPO.git
 
 ### git submodule
 
@@ -343,7 +343,7 @@ Assuming you've aliased gh as `git`, the following commands now have:
     $ git release
     > (prints a list of releases of YOUR_USER/CURRENT_REPO)
 
-    $ git release TAG
+    $ git release create TAG
     > (creates a new release for the given tag)
 
 ### git issues (beta)
@@ -360,8 +360,9 @@ Configuration
 ### GitHub OAuth authentication
 
 `gh` will prompt for GitHub username & password the first time it needs
-to access the API and exchange it for an OAuth token, which it saves in
-`~/.config/gh`.
+to access the API and exchange it for an OAuth token,
+which it saves in `~/.config/gh`.
+You could specify the path to the config by using the `GH_CONFIG` environment variable.
 
 ### HTTPS instead of git protocol
 
@@ -377,7 +378,6 @@ of the git protocol for read and ssh for write, you can set
     $ git config --global gh.protocol https
     $ git clone jingweno/gh
     < https clone >
-
 
 ### Crash reports
 
