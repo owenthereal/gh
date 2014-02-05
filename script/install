@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 # Usage: install
 #
-# Run go install with godep
+# Run go install with gopack
 #
 # Author: Jingwen Owen Ou
 
 script/bootstrap
-godep go install
+GOPATH="`pwd`/.gopack/vendor" go install

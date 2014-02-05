@@ -5,6 +5,7 @@
 #
 # Author: Jingwen Owen Ou
 
-go get github.com/kr/godep
-go get github.com/jingweno/gotask
-GOPATH=`godep path`:$GOPATH gotask package
+GOPACK_PATH="`pwd`/.gopack/vendor"
+
+rm -f $GOPACK_PATH/src/github.com/jingweno/gh
+GOPATH="$GOPACK_PATH:$GOPATH" gotask package

@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 # Usage: build
 #
-# Run go test with godep
+# Run go test with gopack
 #
 # Author: Jingwen Owen Ou
 
 go get code.google.com/p/go.tools/cmd/cover
-script/fmt
-godep go test -cover -v ./...
+script/bootstrap
+GOPATH="`pwd`/.gopack/vendor" go test -cover -v ./...
