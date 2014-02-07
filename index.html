@@ -35,7 +35,7 @@
 <a name="g--h--github-" class="anchor" href="#g--h--github-"><span class="octicon octicon-link"></span></a>g + h = github <a href="https://travis-ci.org/jingweno/gh"><img src="https://travis-ci.org/jingweno/gh.png?branch=master" alt="Build Status"></a>
 </h1>
 
-<p>Fast GitHub command line client implemented in Go. Current version is <a href="https://github.com/jingweno/gh/releases/tag/v1.0.0">v1.0.0</a>.</p>
+<p>Fast GitHub command line client implemented in Go. Current version is <a href="https://github.com/jingweno/gh/releases/tag/v2.0.0">v2.0.0</a>.</p>
 
 <h2>
 <a name="overview" class="anchor" href="#overview"><span class="octicon octicon-link"></span></a>Overview</h2>
@@ -46,21 +46,6 @@ If you like gh, please also take a look at <a href="https://github.com/github/hu
 <h2>
 <a name="motivation" class="anchor" href="#motivation"><span class="octicon octicon-link"></span></a>Motivation</h2>
 
-<p><strong>Fast</strong> </p>
-
-<pre><code>$ time hub version &gt; /dev/null
-hub version &gt; /dev/null  0.03s user 0.01s system 93% cpu 0.047 total
-
-$ time gh version &gt; /dev/null
-gh version &gt; /dev/null  0.01s user 0.01s system 85% cpu 0.022 total
-
-$ time hub browse &gt; /dev/null
-hub browse &gt; /dev/null  0.07s user 0.04s system 87% cpu 0.130 total
-
-$ time gh browse &gt; /dev/null
-gh browse &gt; /dev/null  0.03s user 0.02s system 87% cpu 0.059 total
-</code></pre>
-
 <p><strong>Muti-platforms</strong></p>
 
 <p>gh is fully implemented in the Go language and is designed to run across operating systems.</p>
@@ -68,6 +53,29 @@ gh browse &gt; /dev/null  0.03s user 0.02s system 87% cpu 0.059 total
 <p><strong>Easy installation</strong></p>
 
 <p>There're no pre-requirements to install gh. Download the <a href="https://github.com/jingweno/gh/releases">binary</a> and go!</p>
+
+<p><strong>Fast</strong></p>
+
+<pre><code>$ hub version
+git version 1.8.2.3
+hub version 1.11.1
+
+$ gh version
+git version 1.8.2.3
+gh version 1.0.0
+
+$ time hub version &gt; /dev/null
+hub version &gt; /dev/null  0.03s user 0.01s system 91% cpu 0.042 total
+
+$ time gh version &gt; /dev/null
+gh version &gt; /dev/null  0.00s user 0.01s system 86% cpu 0.014 total
+
+$ time hub browse &gt; /dev/null
+hub browse &gt; /dev/null  0.07s user 0.04s system 87% cpu 0.050 total
+
+$ time gh browse -u &gt;&gt; /dev/null
+gh browse -u &gt;&gt; /dev/null  0.01s user 0.02s system 81% cpu 0.036 total
+</code></pre>
 
 <h2>
 <a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
@@ -80,6 +88,8 @@ You can add the <a href="https://github.com/jingweno/homebrew-gh">gh Homebrew re
 
 <pre><code>$ brew tap jingweno/gh
 $ brew install gh
+$ brew install --build-from-source gh # build gh from source
+$ brew install --build-from-source --HEAD gh # build gh HEAD from source
 </code></pre>
 
 <h3>
@@ -96,9 +106,11 @@ Download the latest <a href="https://github.com/jingweno/gh/releases">compiled b
 <h3>
 <a name="source" class="anchor" href="#source"><span class="octicon octicon-link"></span></a>Source</h3>
 
-<p>To compile gh from source, you need to have a <a href="http://golang.org/doc/install">Go development environment</a>, version 1.1 or better, and run:</p>
+<p>To install gh from source, you need to have a <a href="http://golang.org/doc/install">Go development environment</a>, version 1.1 or better, and run:</p>
 
-<pre><code>$ go get github.com/jingweno/gh
+<pre><code>$ git clone https://github.com/jingweno/gh.git
+$ cd gh
+$ script/install
 </code></pre>
 
 <p>Note that <code>go get</code> will pull down sources from various VCS.
@@ -116,8 +128,17 @@ Please make sure you have git and hg installed.</p>
 <a name="autoupdate" class="anchor" href="#autoupdate"><span class="octicon octicon-link"></span></a>Autoupdate</h3>
 
 <p><code>gh</code> checks every two weeks for newer versions and prompts you for update if there's one.
-A timestamp is stored in <code>~/.config/gh-update</code> for the next update time.
-You can turn off the update prompt and allow <code>gh</code> does it automatically by setting "autoupdate" to true in <a href="https://github.com/jingweno/gh#available-settings"><code>~/.config/gh</code></a>.</p>
+A timestamp is stored in <code>~/.config/gh-update</code> for the next update time.</p>
+
+<p>You can enable to always update automatically by answering <code>always</code> when a new version is released, or setting the global git config <code>gh.autoUpdate</code>:</p>
+
+<pre><code>$ git config --global gh.autoUpdate always
+</code></pre>
+
+<p>You can also disable completely automatic updates by answering <code>never</code> when a new version is released, or setting the global git config <code>gh.autoUpdate</code>:</p>
+
+<pre><code>$ git config --global gh.autoUpdate never
+</code></pre>
 
 <h3>
 <a name="homebrew-1" class="anchor" href="#homebrew-1"><span class="octicon octicon-link"></span></a>Homebrew</h3>
@@ -132,7 +153,9 @@ You can turn off the update prompt and allow <code>gh</code> does it automatical
 
 <p>To update gh from source, run:</p>
 
-<pre><code>$ go get -u github.com/jingweno/gh
+<pre><code>$ cd GH_SOURCE_DIR
+$ git pull origin master
+$ script/install
 </code></pre>
 
 <h2>
@@ -153,271 +176,270 @@ script:</p>
 <p>For more details, run <code>gh help alias</code>.</p>
 
 <h2>
-<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
+<a name="commands" class="anchor" href="#commands"><span class="octicon octicon-link"></span></a>Commands</h2>
+
+<p>Assuming you've aliased gh as <code>git</code>, the following commands now have:</p>
 
 <h3>
-<a name="gh-help" class="anchor" href="#gh-help"><span class="octicon octicon-link"></span></a>gh help</h3>
+<a name="git-init" class="anchor" href="#git-init"><span class="octicon octicon-link"></span></a>git init</h3>
 
-<pre><code>$ gh help
-[display help for all commands]
-$ gh help pull-request
-[display help for pull-request]
-</code></pre>
-
-<h3>
-<a name="gh-init" class="anchor" href="#gh-init"><span class="octicon octicon-link"></span></a>gh init</h3>
-
-<pre><code>$ gh init -g
+<pre><code>$ git init -g
 &gt; git init
 &gt; git remote add origin git@github.com:YOUR_USER/REPO.git
 </code></pre>
 
 <h3>
-<a name="gh-push" class="anchor" href="#gh-push"><span class="octicon octicon-link"></span></a>gh push</h3>
+<a name="git-push" class="anchor" href="#git-push"><span class="octicon octicon-link"></span></a>git push</h3>
 
-<pre><code>$ gh push origin,staging,qa bert_timeout
+<pre><code>$ git push origin,staging,qa bert_timeout
 &gt; git push origin bert_timeout
 &gt; git push staging bert_timeout
 &gt; git push qa bert_timeout
 
-$ gh push origin
+$ git push origin
 &gt; git push origin HEAD
 </code></pre>
 
 <h3>
-<a name="gh-checkout" class="anchor" href="#gh-checkout"><span class="octicon octicon-link"></span></a>gh checkout</h3>
+<a name="git-checkout" class="anchor" href="#git-checkout"><span class="octicon octicon-link"></span></a>git checkout</h3>
 
-<pre><code>$ gh checkout https://github.com/jingweno/gh/pull/35
+<pre><code>$ git checkout https://github.com/jingweno/gh/pull/35
 &gt; git remote add -f -t feature git://github:com/foo/gh.git
 &gt; git checkout --track -B foo-feature foo/feature
 
-$ gh checkout https://github.com/jingweno/gh/pull/35 custom-branch-name
+$ git checkout https://github.com/jingweno/gh/pull/35 custom-branch-name
 </code></pre>
 
 <h3>
-<a name="gh-merge" class="anchor" href="#gh-merge"><span class="octicon octicon-link"></span></a>gh merge</h3>
+<a name="git-merge" class="anchor" href="#git-merge"><span class="octicon octicon-link"></span></a>git merge</h3>
 
-<pre><code>$ gh merge https://github.com/jingweno/gh/pull/73
+<pre><code>$ git merge https://github.com/jingweno/gh/pull/73
 &gt; git fetch git://github.com/jingweno/gh.git +refs/heads/feature:refs/remotes/jingweno/feature
 &gt; git merge jingweno/feature --no-ff -m 'Merge pull request #73 from jingweno/feature...'
 </code></pre>
 
 <h3>
-<a name="gh-clone" class="anchor" href="#gh-clone"><span class="octicon octicon-link"></span></a>gh clone</h3>
+<a name="git-clone" class="anchor" href="#git-clone"><span class="octicon octicon-link"></span></a>git clone</h3>
 
-<pre><code>$ gh clone jingweno/gh
+<pre><code>$ git clone jingweno/gh
 &gt; git clone git://github.com/jingweno/gh
 
-$ gh clone -p jingweno/gh
+$ git clone -p jingweno/gh
 &gt; git clone git@github.com:jingweno/gh.git
 
-$ gh clone jekyll_and_hype
+$ git clone jekyll_and_hype
 &gt; git clone git://github.com/YOUR_LOGIN/jekyll_and_hype.
 
-$ gh clone -p jekyll_and_hype
+$ git clone -p jekyll_and_hype
 &gt; git clone git@github.com:YOUR_LOGIN/jekyll_and_hype.git
 </code></pre>
 
 <h3>
-<a name="gh-fetch" class="anchor" href="#gh-fetch"><span class="octicon octicon-link"></span></a>gh fetch</h3>
+<a name="git-fetch" class="anchor" href="#git-fetch"><span class="octicon octicon-link"></span></a>git fetch</h3>
 
-<pre><code>$ gh fetch jingweno
+<pre><code>$ git fetch jingweno
 &gt; git remote add jingweno git://github.com/jingweno/REPO.git
 &gt; git fetch jingweno
 
-$ gh fetch jingweno,foo
+$ git fetch jingweno,foo
 &gt; git remote add jingweno ...
 &gt; git remote add foo ...
 &gt; git fetch --multiple jingweno foo
 
-$ gh fetch --multiple jingweno foo
+$ git fetch --multiple jingweno foo
 &gt; git remote add jingweno ...
 &gt; git remote add foo ...
 &gt; git fetch --multiple jingweno foo
 </code></pre>
 
 <h3>
-<a name="gh-cherry-pick" class="anchor" href="#gh-cherry-pick"><span class="octicon octicon-link"></span></a>gh cherry-pick</h3>
+<a name="git-cherry-pick" class="anchor" href="#git-cherry-pick"><span class="octicon octicon-link"></span></a>git cherry-pick</h3>
 
-<pre><code>$ gh cherry-pick https://github.com/jingweno/gh/commit/a319d88#comments
+<pre><code>$ git cherry-pick https://github.com/jingweno/gh/commit/a319d88#comments
 &gt; git remote add -f jingweno git://github.com/jingweno/gh.git
 &gt; git cherry-pick a319d88
 
-$ gh cherry-pick jingweno@a319d88
+$ git cherry-pick jingweno@a319d88
 &gt; git remote add -f jingweno git://github.com/jingweno/gh.git
 &gt; git cherry-pick a319d88
 
-$ gh cherry-pick jingweno@SHA
+$ git cherry-pick jingweno@SHA
 &gt; git fetch jingweno
 &gt; git cherry-pick SHA
 </code></pre>
 
 <h3>
-<a name="gh-remote" class="anchor" href="#gh-remote"><span class="octicon octicon-link"></span></a>gh remote</h3>
+<a name="git-remote" class="anchor" href="#git-remote"><span class="octicon octicon-link"></span></a>git remote</h3>
 
-<pre><code>$ gh remote add jingweno
+<pre><code>$ git remote add jingweno
 &gt; git remote add -f jingweno git://github.com/jingweno/CURRENT_REPO.git
 
-$ gh remote add -p jingweno
+$ git remote add -p jingweno
 &gt; git remote add -f jingweno git@github.com:jingweno/CURRENT_REPO.git
 
-$ gh remote add origin
-&gt; git remote add -f YOUR_USER git://github.com/YOUR_USER/CURRENT_REPO.git    
+$ git remote add origin
+&gt; git remote add -f YOUR_USER git://github.com/YOUR_USER/CURRENT_REPO.git
 </code></pre>
 
 <h3>
-<a name="gh-submodule" class="anchor" href="#gh-submodule"><span class="octicon octicon-link"></span></a>gh submodule</h3>
+<a name="git-submodule" class="anchor" href="#git-submodule"><span class="octicon octicon-link"></span></a>git submodule</h3>
 
-<pre><code>$ gh submodule add jingweno/gh vendor/gh
+<pre><code>$ git submodule add jingweno/gh vendor/gh
 &gt; git submodule add git://github.com/jingweno/gh.git vendor/gh
 
-$ gh submodule add -p jingweno/gh vendor/gh
+$ git submodule add -p jingweno/gh vendor/gh
 &gt; git submodule add git@github.com:jingweno/gh.git vendor/gh
 
-$ gh submodule add -b gh --name gh jingweno/gh vendor/gh
+$ git submodule add -b gh --name gh jingweno/gh vendor/gh
 &gt; git submodule add -b gh --name gh git://github.com/jingweno/gh.git vendor/gh
 </code></pre>
 
 <h3>
-<a name="gh-pull-request" class="anchor" href="#gh-pull-request"><span class="octicon octicon-link"></span></a>gh pull-request</h3>
+<a name="git-pull-request" class="anchor" href="#git-pull-request"><span class="octicon octicon-link"></span></a>git pull-request</h3>
 
 <pre><code># while on a topic branch called "feature":
-$ gh pull-request
+$ git pull-request
 [ opens text editor to edit title &amp; body for the request ]
 [ opened pull request on GitHub for "YOUR_USER:feature" ]
 
 # explicit pull base &amp; head:
-$ gh pull-request -b jingweno:master -h jingweno:feature
+$ git pull-request -b jingweno:master -h jingweno:feature
 
-$ gh pull-request -m "title\n\nbody"
+$ git pull-request -m "title\n\nbody"
 [ create pull request with title &amp; body  ]
 
-$ gh pull-request -i 123
+$ git pull-request -i 123
 [ attached pull request to issue #123 ]
 
-$ gh pull-request https://github.com/jingweno/gh/pull/123
+$ git pull-request https://github.com/jingweno/gh/pull/123
 [ attached pull request to issue #123 ]
 
-$ gh pull-request -F FILE
+$ git pull-request -F FILE
 [ create pull request with title &amp; body from FILE ]
 </code></pre>
 
 <h3>
-<a name="gh-apply" class="anchor" href="#gh-apply"><span class="octicon octicon-link"></span></a>gh apply</h3>
+<a name="git-apply" class="anchor" href="#git-apply"><span class="octicon octicon-link"></span></a>git apply</h3>
 
-<pre><code>$ gh apply https://github.com/jingweno/gh/pull/55
+<pre><code>$ git apply https://github.com/jingweno/gh/pull/55
 &gt; curl https://github.com/jingweno/gh/pull/55.patch -o /tmp/55.patch
 &gt; git apply /tmp/55.patch
 
-$ gh apply --ignore-whitespace https://github.com/jingweno/gh/commit/fdb9921
+$ git apply --ignore-whitespace https://github.com/jingweno/gh/commit/fdb9921
 &gt; curl https://github.com/jingweno/gh/commit/fdb9921.patch -o /tmp/fdb9921.patch
 &gt; git apply --ignore-whitespace /tmp/fdb9921.patch
 
-$ gh apply https://gist.github.com/8da7fb575debd88c54cf
+$ git apply https://gist.github.com/8da7fb575debd88c54cf
 &gt; curl https://gist.github.com/8da7fb575debd88c54cf.txt -o /tmp/gist-8da7fb575debd88c54cf.txt
 &gt; git apply /tmp/gist-8da7fb575debd88c54cf.txt
 </code></pre>
 
 <h3>
-<a name="gh-fork" class="anchor" href="#gh-fork"><span class="octicon octicon-link"></span></a>gh fork</h3>
+<a name="git-fork" class="anchor" href="#git-fork"><span class="octicon octicon-link"></span></a>git fork</h3>
 
-<pre><code>$ gh fork
+<pre><code>$ git fork
 [ repo forked on GitHub ]
 &gt; git remote add -f YOUR_USER git@github.com:YOUR_USER/CURRENT_REPO.git
 
-$ gh fork --no-remote
+$ git fork --no-remote
 [ repo forked on GitHub ]
 </code></pre>
 
 <h3>
-<a name="gh-create" class="anchor" href="#gh-create"><span class="octicon octicon-link"></span></a>gh create</h3>
+<a name="git-create" class="anchor" href="#git-create"><span class="octicon octicon-link"></span></a>git create</h3>
 
-<pre><code>$ gh create
+<pre><code>$ git create
 ... create repo on github ...
 &gt; git remote add -f origin git@github.com:YOUR_USER/CURRENT_REPO.git
 
 # with description:
-$ gh create -d 'It shall be mine, all mine!'
+$ git create -d 'It shall be mine, all mine!'
 
-$ gh create recipes
+$ git create recipes
 [ repo created on GitHub ]
 &gt; git remote add origin git@github.com:YOUR_USER/recipes.git
 
-$ gh create sinatra/recipes
+$ git create sinatra/recipes
 [ repo created in GitHub organization ]
 &gt; git remote add origin git@github.com:sinatra/recipes.git
 </code></pre>
 
 <h3>
-<a name="gh-ci-status" class="anchor" href="#gh-ci-status"><span class="octicon octicon-link"></span></a>gh ci-status</h3>
+<a name="git-ci-status" class="anchor" href="#git-ci-status"><span class="octicon octicon-link"></span></a>git ci-status</h3>
 
-<pre><code>$ gh ci-status
+<pre><code>$ git ci-status
 &gt; (prints CI state of HEAD and exits with appropriate code)
 &gt; One of: success (0), error (1), failure (1), pending (2), no status (3)
 
-$ gh ci-status -v
+$ git ci-status -v
 &gt; (prints CI state of HEAD, the URL to the CI build results and exits with appropriate code)
 &gt; One of: success (0), error (1), failure (1), pending (2), no status (3)
 
-$ gh ci-status BRANCH
+$ git ci-status BRANCH
 &gt; (prints CI state of BRANCH and exits with appropriate code)
 &gt; One of: success (0), error (1), failure (1), pending (2), no status (3)
 
-$ gh ci-status SHA
+$ git ci-status SHA
 &gt; (prints CI state of SHA and exits with appropriate code)
 &gt; One of: success (0), error (1), failure (1), pending (2), no status (3)
 </code></pre>
 
 <h3>
-<a name="gh-browse" class="anchor" href="#gh-browse"><span class="octicon octicon-link"></span></a>gh browse</h3>
+<a name="git-browse" class="anchor" href="#git-browse"><span class="octicon octicon-link"></span></a>git browse</h3>
 
-<pre><code>$ gh browse
+<pre><code>$ git browse
 &gt; open https://github.com/YOUR_USER/CURRENT_REPO
 
-$ gh browse commit/SHA
+$ git browse commit/SHA
 &gt; open https://github.com/YOUR_USER/CURRENT_REPO/commit/SHA
 
-$ gh browse issues
+$ git browse issues
 &gt; open https://github.com/YOUR_USER/CURRENT_REPO/issues
 
-$ gh browse -p jingweno/gh
+$ git browse -p jingweno/gh
 &gt; open https://github.com/jingweno/gh
 
-$ gh browse -p jingweno/gh commit/SHA
+$ git browse -p jingweno/gh commit/SHA
 &gt; open https://github.com/jingweno/gh/commit/SHA
 
-$ gh browse -p resque
+$ git browse -p resque
 &gt; open https://github.com/YOUR_USER/resque
 
-$ gh browse -p resque network
+$ git browse -p resque network
 &gt; open https://github.com/YOUR_USER/resque/network
 </code></pre>
 
 <h3>
-<a name="gh-compare" class="anchor" href="#gh-compare"><span class="octicon octicon-link"></span></a>gh compare</h3>
+<a name="git-compare" class="anchor" href="#git-compare"><span class="octicon octicon-link"></span></a>git compare</h3>
 
-<pre><code>$ gh compare refactor
+<pre><code>$ git compare refactor
 &gt; open https://github.com/CURRENT_REPO/compare/refactor
 
-$ gh compare 1.0..1.1
+$ git compare 1.0..1.1
 &gt; open https://github.com/CURRENT_REPO/compare/1.0...1.1
 
-$ gh compare -u other-user patch
+$ git compare -u other-user patch
 &gt; open https://github.com/other-user/REPO/compare/patch
 </code></pre>
 
 <h3>
-<a name="gh-release-beta" class="anchor" href="#gh-release-beta"><span class="octicon octicon-link"></span></a>gh release (beta)</h3>
+<a name="git-release-beta" class="anchor" href="#git-release-beta"><span class="octicon octicon-link"></span></a>git release (beta)</h3>
 
-<pre><code>$ gh release
+<pre><code>$ git release
 &gt; (prints a list of releases of YOUR_USER/CURRENT_REPO)
+
+$ git release create TAG
+&gt; (creates a new release for the given tag)
 </code></pre>
 
 <h3>
-<a name="gh-issues-beta" class="anchor" href="#gh-issues-beta"><span class="octicon octicon-link"></span></a>gh issues (beta)</h3>
+<a name="git-issues-beta" class="anchor" href="#git-issues-beta"><span class="octicon octicon-link"></span></a>git issues (beta)</h3>
 
-<pre><code>$ gh issues
+<pre><code>$ git issue
 &gt; (prints a list of issues for YOUR_USER/CURRENT_REPO)
+
+$ git issue create
+&gt; (creates an issue for the project that "origin" remote points to)
 </code></pre>
 
 <h2>
@@ -427,30 +449,8 @@ $ gh compare -u other-user patch
 <a name="github-oauth-authentication" class="anchor" href="#github-oauth-authentication"><span class="octicon octicon-link"></span></a>GitHub OAuth authentication</h3>
 
 <p><code>gh</code> will prompt for GitHub username &amp; password the first time it needs
-to access the API and exchange it for an OAuth token, which it saves in
-<code>~/.config/gh</code>.</p>
-
-<h3>
-<a name="available-settings" class="anchor" href="#available-settings"><span class="octicon octicon-link"></span></a>Available settings</h3>
-
-<p>This is a list of available settings in <code>~/.config/gh</code>:</p>
-
-<div class="highlight highlight-json"><pre><span class="p">{</span>
-  <span class="nt">"credentials"</span><span class="p">:</span> <span class="p">[</span>
-    <span class="p">{</span>
-      <span class="nt">"host"</span><span class="p">:</span> <span class="s2">"HOST1"</span><span class="p">,</span>
-      <span class="nt">"user"</span><span class="p">:</span> <span class="s2">"USER_NAME1"</span><span class="p">,</span>
-      <span class="nt">"access_token"</span><span class="p">:</span> <span class="s2">"ACCESS_TOKEN1"</span>
-    <span class="p">},</span>
-    <span class="p">{</span>
-      <span class="nt">"host"</span><span class="p">:</span> <span class="s2">"HOST2"</span><span class="p">,</span>
-      <span class="nt">"user"</span><span class="p">:</span> <span class="s2">"USER_NAME2"</span><span class="p">,</span>
-      <span class="nt">"access_token"</span><span class="p">:</span> <span class="s2">"ACCESS_TOKEN2"</span>
-    <span class="p">}</span>
-  <span class="p">],</span>
-  <span class="nt">"autoupdate"</span><span class="p">:</span> <span class="kc">false</span>
-<span class="p">}</span>
-</pre></div>
+to access the API and exchange it for an OAuth token, which it saves in <code>~/.config/gh</code>.
+You could specify the path to the config by setting the <code>GH_CONFIG</code> environment variable.</p>
 
 <h3>
 <a name="https-instead-of-git-protocol" class="anchor" href="#https-instead-of-git-protocol"><span class="octicon octicon-link"></span></a>HTTPS instead of git protocol</h3>
@@ -469,6 +469,26 @@ $ git clone jingweno/gh
 &lt; https clone &gt;
 </code></pre>
 
+<h3>
+<a name="crash-reports" class="anchor" href="#crash-reports"><span class="octicon octicon-link"></span></a>Crash reports</h3>
+
+<p><code>gh</code> includes automatic crash reporting in case that something unexpected happens.
+It will ask you if you want to report the error to us if the program terminates suddenly, and
+then it will open an issue on your behalf under <a href="https://github.com/jingweno/gh/issues?labels=Crash+Report&amp;page=1&amp;state=open">the crash report issues</a>.</p>
+
+<p><code>gh</code> doesn't send any information about the command that you ran.
+Check <a href="https://github.com/jingweno/gh/issues?labels=Crash+Report&amp;state=closed">some examples</a> of the information included by default, you can always modify it before the issue is open.</p>
+
+<p>You can enable to always send crash reports with the default information by answering <code>always</code> when a crash error happens, or setting the global git config <code>gh.reportCrash</code>:</p>
+
+<pre><code>$ git config --global gh.reportCrash always
+</code></pre>
+
+<p>You can also disable completely crash report notifications by answering <code>never</code> when a crash report happens, or setting the global git config <code>gh.reportCrash</code>:</p>
+
+<pre><code>$ git config --global gh.reportCrash never
+</code></pre>
+
 <h2>
 <a name="release-notes" class="anchor" href="#release-notes"><span class="octicon octicon-link"></span></a>Release Notes</h2>
 
@@ -480,36 +500,53 @@ $ git clone jingweno/gh
 <p>See <a href="https://github.com/jingweno/gh/issues?labels=feature&amp;page=1&amp;state=open">Issues</a>.</p>
 
 <h2>
-<a name="scriptbootstrap" class="anchor" href="#scriptbootstrap"><span class="octicon octicon-link"></span></a>script/bootstrap</h2>
+<a name="development" class="anchor" href="#development"><span class="octicon octicon-link"></span></a>Development</h2>
+
+<p><a href="https://github.com/kr/godep">Godep</a> is used to lock down all the
+dependencies. You need to use the wrapper scripts to build/install/test <code>gh</code>:</p>
+
+<h3>
+<a name="scriptbootstrap" class="anchor" href="#scriptbootstrap"><span class="octicon octicon-link"></span></a>script/bootstrap</h3>
 
 <p>This script will get all the dependencies ready so you can start hacking on gh.</p>
 
 <pre><code>$ ./script/bootstrap
 </code></pre>
 
-<h2>
-<a name="scriptbuild" class="anchor" href="#scriptbuild"><span class="octicon octicon-link"></span></a>script/build</h2>
+<h3>
+<a name="scriptbuild" class="anchor" href="#scriptbuild"><span class="octicon octicon-link"></span></a>script/build</h3>
 
 <p>This script will build gh. It will also perform script/bootstrap, which gets all dependencies and all that jazz.</p>
 
 <pre><code>$ ./script/build
 </code></pre>
 
-<h2>
-<a name="scriptrelease" class="anchor" href="#scriptrelease"><span class="octicon octicon-link"></span></a>script/release</h2>
+<h3>
+<a name="scriptinstall" class="anchor" href="#scriptinstall"><span class="octicon octicon-link"></span></a>script/install</h3>
 
-<p>This script will cross-compile gh and prepare for release.</p>
+<p>This script will build and install gh. It will also perform script/bootstrap, which gets all dependencies and all that jazz.</p>
 
-<pre><code>$ ./script/release
+<pre><code>$ ./script/install
 </code></pre>
 
-<h2>
-<a name="scripttest" class="anchor" href="#scripttest"><span class="octicon octicon-link"></span></a>script/test</h2>
+<h3>
+<a name="scriptpackage" class="anchor" href="#scriptpackage"><span class="octicon octicon-link"></span></a>script/package</h3>
+
+<p>This script will cross-compile gh and package release for current platform.
+It executes the <code>package</code> <a href="https://github.com/jingweno/gotask">gotask</a> <a href="https://github.com/jingweno/gh/blob/master/gh_task.go">task</a>.</p>
+
+<pre><code>$ ./script/package
+</code></pre>
+
+<h3>
+<a name="scripttest" class="anchor" href="#scripttest"><span class="octicon octicon-link"></span></a>script/test</h3>
 
 <p>For your convenience, there is a script to run the tests.</p>
 
 <pre><code>$ ./script/test
 </code></pre>
+
+<p>See <a href="https://github.com/jingweno/gh/blob/master/CONTRIBUTING.md">this guide</a> on how to submit a pull request.</p>
 
 <h2>
 <a name="contributors" class="anchor" href="#contributors"><span class="octicon octicon-link"></span></a>Contributors</h2>
