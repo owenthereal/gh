@@ -3,7 +3,7 @@ g + h = github [![Build Status](https://travis-ci.org/jingweno/gh.png?branch=mas
 
 ![gh](http://owenou.com/gh/images/gangnamtocat.png)
 
-Fast GitHub command line client implemented in Go. Current version is [v1.0.0](https://github.com/jingweno/gh/releases/tag/v1.0.0).
+Fast GitHub command line client implemented in Go. Current version is [v2.0.0](https://github.com/jingweno/gh/releases/tag/v2.0.0).
 
 Overview
 --------
