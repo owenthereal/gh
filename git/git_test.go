@@ -18,7 +18,7 @@ func TestGitEditor(t *testing.T) {
 	}
 }
 
-func TestGitLog(t *testing.T) {
+func testGitLog(t *testing.T) {
 	log, err := Log("e357a98a1a580b09d4f1d9bf613a6a51e131ef6e", "49e984e2fe86f68c386aeb133b390d39e4264ec1")
 	assert.Equal(t, nil, err)
 	assert.NotEqual(t, "", log)
@@ -30,7 +30,7 @@ func TestGitRef(t *testing.T) {
 	assert.Equal(t, "1c1077c052d32a83aa13a8afaa4a9630d2f28ef6", gitRef)
 }
 
-func TestGitRefList(t *testing.T) {
+func testGitRefList(t *testing.T) {
 	refList, err := RefList("e357a98a1a580b09d4f1d9bf613a6a51e131ef6e", "49e984e2fe86f68c386aeb133b390d39e4264ec1")
 	assert.Equal(t, nil, err)
 	assert.Equal(t, 1, len(refList))
