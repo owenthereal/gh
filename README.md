@@ -14,20 +14,6 @@ If you like gh, please also take a look at [hub](https://github.com/github/hub).
 Motivation
 ----------
 
-**Fast** 
-
-    $ time hub version > /dev/null
-    hub version > /dev/null  0.03s user 0.01s system 93% cpu 0.047 total
-
-    $ time gh version > /dev/null
-    gh version > /dev/null  0.01s user 0.01s system 85% cpu 0.022 total
-
-    $ time hub browse > /dev/null
-    hub browse > /dev/null  0.07s user 0.04s system 87% cpu 0.130 total
-
-    $ time gh browse > /dev/null
-    gh browse > /dev/null  0.03s user 0.02s system 87% cpu 0.059 total
-
 **Muti-platforms**
 
 gh is fully implemented in the Go language and is designed to run across operating systems.
@@ -35,6 +21,28 @@ gh is fully implemented in the Go language and is designed to run across operati
 **Easy installation**
 
 There're no pre-requirements to install gh. Download the [binary](https://github.com/jingweno/gh/releases) and go!
+
+**Fast**
+
+    $ hub version
+    git version 1.8.2.3
+    hub version 1.11.1
+
+    $ gh version
+    git version 1.8.2.3
+    gh version 1.0.0
+
+    $ time hub version > /dev/null
+    hub version > /dev/null  0.03s user 0.01s system 91% cpu 0.042 total
+
+    $ time gh version > /dev/null
+    gh version > /dev/null  0.00s user 0.01s system 86% cpu 0.014 total
+
+    $ time hub browse > /dev/null
+    hub browse > /dev/null  0.07s user 0.04s system 87% cpu 0.050 total
+
+    $ time gh browse -u >> /dev/null
+    gh browse -u >> /dev/null  0.01s user 0.02s system 81% cpu 0.036 total
 
 Installation
 ------------
@@ -60,7 +68,7 @@ If you're using [boxen](http://boxen.github.com/), there's a [puppet-gh](https:/
 
 ### Source
 
-To compile gh from source, you need to have a [Go development environment](http://golang.org/doc/install), version 1.1 or better, and run:
+To install gh from source, you need to have a [Go development environment](http://golang.org/doc/install), version 1.1 or better, and run:
 
     $ git clone https://github.com/jingweno/gh.git
     $ cd gh
@@ -360,9 +368,8 @@ Configuration
 ### GitHub OAuth authentication
 
 `gh` will prompt for GitHub username & password the first time it needs
-to access the API and exchange it for an OAuth token,
-which it saves in `~/.config/gh`.
-You could specify the path to the config by using the `GH_CONFIG` environment variable.
+to access the API and exchange it for an OAuth token, which it saves in `~/.config/gh`.
+You could specify the path to the config by setting the `GH_CONFIG` environment variable.
 
 ### HTTPS instead of git protocol
 
