@@ -388,6 +388,19 @@ of the git protocol for read and ssh for write, you can set
     $ git clone jingweno/gh
     < https clone >
 
+### GitHub Enterprise
+
+By default, `gh` will only work with repositories that have remotes which
+point to `github.com`. GitHub Enterprise hosts need to be whitelisted to
+configure `gh` to treat such remotes same as `github.com`:
+
+    $ git config --global --add gh.host my.git.org
+
+The default host for commands like `init` and
+`clone` is still `github.com`, but this can be affected with the `GITHUB_HOST` environment variable:</p>
+
+    $ GITHUB_HOST=my.git.org git clone myproject
+
 ### Crash reports
 
 `gh` includes automatic crash reporting in case that something unexpected happens.
