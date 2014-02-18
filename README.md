@@ -84,7 +84,7 @@ Update
 
 `gh` comes with a command to self update:
 
-    $ gh update
+    $ git selfupdate
 
 ### Autoupdate
 
