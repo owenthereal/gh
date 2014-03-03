@@ -8,7 +8,7 @@ before_install:
   - sudo apt-get install -qq tmux zsh git
 language: go
 go:
-  - 1.2
+  - 1.2.1
 install:
   - script/bootstrap
   - export PATH="$HOME/gopath/bin:$PATH"
