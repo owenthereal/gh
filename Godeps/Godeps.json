@@ -1,6 +1,6 @@
 {
 	"ImportPath": "github.com/jingweno/gh",
-	"GoVersion": "go1.2",
+	"GoVersion": "go1.2.1",
 	"Packages": [
 		"./..."
 	],
