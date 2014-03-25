@@ -2,12 +2,13 @@ package commands
 
 import (
 	"fmt"
-	"github.com/jingweno/gh/git"
-	"github.com/jingweno/gh/github"
-	"github.com/jingweno/gh/utils"
 	"reflect"
 	"regexp"
 	"strings"
+
+	"github.com/jingweno/gh/git"
+	"github.com/jingweno/gh/github"
+	"github.com/jingweno/gh/utils"
 )
 
 var cmdPullRequest = &Command{

@@ -1,13 +1,14 @@
 package commands
 
 import (
-	"github.com/jingweno/gh/github"
-	"github.com/jingweno/gh/utils"
-	"github.com/jingweno/go-octokit/octokit"
 	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strings"
+
+	"github.com/jingweno/gh/github"
+	"github.com/jingweno/gh/utils"
+	"github.com/jingweno/go-octokit/octokit"
 )
 
 type listFlag []string
@@ -91,7 +92,7 @@ func getTitleAndBodyFromFlags(messageFlag, fileFlag string) (title, body string,
 }
 
 func readMsg(msg string) (title, body string) {
-	split := strings.SplitN(msg, "\n\n", 2)
+	split := strings.SplitN(msg, "\\n\\n", 2)
 	title = strings.TrimSpace(split[0])
 	if len(split) > 1 {
 		body = strings.TrimSpace(split[1])
