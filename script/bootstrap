@@ -5,4 +5,4 @@
 #
 # Author: Jingwen Owen Ou
 
-go get github.com/kr/godep
+go get github.com/tools/godep
