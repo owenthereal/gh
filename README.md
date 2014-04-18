@@ -54,10 +54,9 @@ Installation
 The easiest way to install `gh` on OSX is through [Homebrew](https://github.com/mxcl/homebrew).
 You can add the [gh Homebrew repository](https://github.com/jingweno/homebrew-gh) with [`brew tap`](https://github.com/mxcl/homebrew/wiki/brew-tap):
 
-    $ brew tap jingweno/gh
-    $ brew install gh
-    $ brew install --build-from-source gh # build gh from source
-    $ brew install --build-from-source --HEAD gh # build gh HEAD from source
+    $ brew install jingweno/gh/gh
+    $ brew install --build-from-source jingweno/gh/gh # build gh from source
+    $ brew install --HEAD jingweno/gh/gh # build gh HEAD from source
 
 ### Standalone
 
