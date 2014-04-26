@@ -10,7 +10,7 @@ Current version is [v2.0.0](https://github.com/jingweno/gh/releases/tag/v2.0.0).
 Overview
 --------
 
-gh is a command line client to GitHub. It's designed to run as fast as possible with easy installation across operating systems.
+`gh` is a command line client to GitHub. It's designed to run as fast as possible with easy installation across operating systems.
 If you like gh, please also take a look at [hub](https://github.com/github/hub). Hub is a reference implementation to gh.
 
 Motivation
