@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-# Usage: make
+# Usage: script/make [--no-update]
 #
-# Build gh without downloading any dependency
+# Builds gh without downloading any dependency. With `--no-update`, builds it with autoupdate disabled.
 #
 # Author: Jingwen Owen Ou
 
@@ -15,4 +15,20 @@ export GOPATH=$BUILD_DIR:$GODEPPATH
 
 mkdir -p $GHSOURCE
 cp -R `pwd`/. $GHSOURCE
-go build -o gh
+
+case "$1" in
+  "" )
+    go build -o gh
+    ;;
+  --no-update )
+    go build -o gh --tags noupdate
+    ;;
+  -h | --help )
+    sed -ne '/^#/!q;s/.\{1,2\}//;1d;p' < "$0"
+    exit
+    ;;
+  * )
+    "$0" --help >&2
+    exit 1
+esac
+
