@@ -5,13 +5,9 @@
 	"ResourcesInclude": "INSTALL*,README*,LICENSE*",
 	"ResourcesExclude": "*.go",
 	"MainDirsExclude": "Godeps",
-	"PackageVersion": "2.0.0",
+	"PackageVersion": "2.1.0",
 	"Verbosity": "v",
 	"TaskSettings": {
-		"downloads-page": {
-			"fileheader": "",
-			"filename": ""
-		},
 		"pkg-build": {
 			"metadata": {
 				"description": "Fast GitHub command line client",
