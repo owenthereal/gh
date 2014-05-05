@@ -100,6 +100,14 @@ You can also disable completely automatic updates by answering `never` when a ne
 $ git config --global gh.autoUpdate never
 ```
 
+**Note**
+
+If you've installed `gh` with Homebrew, please update it with Homebrew instead of the autoupdate or the update command.
+The [`gh` formula has been pushed to the official Homebrew repo](https://github.com/Homebrew/homebrew/blob/master/Library/Formula/gh.rb)
+and you should be able to install/update `gh` without using `brew tap jingweno/gh`.
+Since `v2.1.0`, autoupdate will be disabled if `gh` is installed through a package manager which will take over managing the update of `gh`.
+
+
 ### Homebrew
 
 If you installed `gh` with `brew tap jingweno/gh`, you can update it with:
