@@ -11,6 +11,9 @@ import (
 
 func TestEditor_Edit(t *testing.T) {
 	tempFile, _ := ioutil.TempFile("", "editor-test")
+	// immediately close the file to allow Edit() to remove the file
+	tempFile.Close()
+
 	editor := Editor{
 		Program: "memory",
 		File:    tempFile.Name(),
@@ -33,6 +36,9 @@ func TestEditor_Edit(t *testing.T) {
 
 func TestEditor_EditTitleAndBody(t *testing.T) {
 	tempFile, _ := ioutil.TempFile("", "editor-test")
+	// immediately close the file to allow EditTitleAndBody() to remove the file
+	tempFile.Close()
+
 	editor := Editor{
 		Program: "memory",
 		File:    tempFile.Name(),
