@@ -16,7 +16,9 @@ var (
 )
 
 type Command struct {
-	Run  func(cmd *Command, args *Args)
+	Run       func(cmd *Command, args *Args)
+	PostSpawn func(args *Args)
+
 	Flag flag.FlagSet
 
 	Key          string

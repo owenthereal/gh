@@ -1,6 +1,7 @@
 package commands
 
 import (
+	"github.com/jingweno/gh/git"
 	"github.com/jingweno/gh/github"
 	"regexp"
 	"strings"
@@ -8,6 +9,7 @@ import (
 
 var cmdClone = &Command{
 	Run:          clone,
+	PostSpawn:    saveHost,
 	GitExtension: true,
 	Usage:        "clone [-p] OPTIONS [USER/]REPOSITORY DIRECTORY",
 	Short:        "Clone a remote repository into a new directory",
@@ -38,6 +40,18 @@ func init() {
 func clone(command *Command, args *Args) {
 	if !args.IsParamsEmpty() {
 		transformCloneArgs(args)
+	}
+}
+
+// Save the host from where we're cloned as `gh.host` in the git configuration.
+func saveHost(args *Args) {
+	for i := 0; i < args.ParamsSize(); i++ {
+		a := args.Params[i]
+		gitUrl, err := git.ParseURL(a)
+		if err == nil {
+			git.SetConfig(github.GhHostConfig, gitUrl.Host)
+			break
+		}
 	}
 }
 

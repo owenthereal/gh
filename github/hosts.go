@@ -7,6 +7,8 @@ import (
 	"strings"
 )
 
+const GhHostConfig = "gh.host"
+
 var (
 	GitHubHostEnv = os.Getenv("GITHUB_HOST")
 )
@@ -24,7 +26,7 @@ func (h Hosts) Include(host string) bool {
 }
 
 func knownHosts() (hosts Hosts) {
-	ghHosts, _ := git.Config("gh.host")
+	ghHosts, _ := git.Config(GhHostConfig)
 	for _, ghHost := range strings.Split(ghHosts, "\n") {
 		hosts = append(hosts, ghHost)
 	}

@@ -77,6 +77,10 @@ func (r *Runner) Execute() ExecError {
 	}
 
 	err = git.Spawn(args.Command, args.Params...)
+
+	if err == nil && cmd.PostSpawn != nil {
+		cmd.PostSpawn(args)
+	}
 	return newExecError(err)
 }
 
