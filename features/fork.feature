@@ -25,7 +25,34 @@ Feature: hub fork
       """
     When I successfully run `hub fork`
     Then the output should contain exactly "new remote: mislav\n"
-    And "git remote add -f mislav git@github.com:mislav/dotfiles.git" should be run
+    And "git remote add -f mislav git://github.com/evilchelu/dotfiles.git" should be run
+    And "git remote set-url mislav git@github.com:mislav/dotfiles.git" should be run
+    And the url for "mislav" should be "git@github.com:mislav/dotfiles.git"
+
+  Scenario: Fork the repository when origin URL is private
+    Given the "origin" remote has url "git@github.com:evilchelu/dotfiles.git"
+    Given the GitHub API server:
+      """
+      before do
+        unless request.env['HTTP_AUTHORIZATION'] == 'token OTOKEN'
+          status 401
+          json :message => "I haz fail!"
+        end
+      end
+
+      get('/repos/mislav/dotfiles') do
+        status 404
+        json :message => "I haz fail!"
+      end
+
+      post('/repos/evilchelu/dotfiles/forks') do
+        json :html_url => "https://github.com/mislav/coral/pull/12"
+      end
+      """
+    When I successfully run `hub fork`
+    Then the output should contain exactly "new remote: mislav\n"
+    And "git remote add -f mislav ssh://git@github.com/evilchelu/dotfiles.git" should be run
+    And "git remote set-url mislav git@github.com:mislav/dotfiles.git" should be run
     And the url for "mislav" should be "git@github.com:mislav/dotfiles.git"
 
   Scenario: --no-remote
